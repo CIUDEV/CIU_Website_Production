@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -28,16 +28,16 @@ export default function FeaturedPrograms() {
             <MotionItem key={program.title}>
               <article className={`group h-full overflow-hidden ${homeCardInteractiveClass}`}>
                 <div className="relative aspect-[5/4] overflow-hidden sm:aspect-[4/3]">
-                  <Image
+                  <ZoomableImage
                     src={program.imageSrc}
                     alt={program.imageAlt}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gold-gradient transition-transform duration-500 group-hover:scale-x-100" />
-                  <h3 className="absolute bottom-5 left-5 right-5 text-xl font-semibold text-white drop-shadow-md sm:text-2xl">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-gold-gradient transition-transform duration-500 group-hover:scale-x-100" />
+                  <h3 className="pointer-events-none absolute bottom-5 left-5 right-5 text-xl font-semibold text-white drop-shadow-md sm:text-2xl">
                     {program.title}
                   </h3>
                 </div>

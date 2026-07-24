@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
 import EventDateBlock from "@/components/events/EventDateBlock";
@@ -11,15 +11,15 @@ export default function EventCard({ event }: { event: EventItem }) {
     <article className={`group flex h-full flex-col overflow-hidden ${homeCardInteractiveClass}`}>
       {event.image ? (
         <div className="relative aspect-[16/10] overflow-hidden">
-          <Image
+          <ZoomableImage
             src={event.image}
             alt={`${event.title} event`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="absolute left-4 top-4">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute left-4 top-4">
             <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand shadow-sm">
               {categoryLabels[event.category]}
             </span>

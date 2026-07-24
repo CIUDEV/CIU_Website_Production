@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -49,7 +49,7 @@ export default function CiuProgramsPage() {
               <MotionItem className="relative">
                 <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-xl">
                   <div className="relative aspect-[4/5]">
-                    <Image
+                    <ZoomableImage
                       src={programs[1].imageSrc}
                       alt={programs[1].imageAlt}
                       fill
@@ -74,7 +74,7 @@ export default function CiuProgramsPage() {
               <MotionItem key={program.id}>
                 <article className="overflow-hidden rounded-3xl border border-border/80 bg-background shadow-premium">
                   <div className="relative aspect-[16/10]">
-                    <Image
+                    <ZoomableImage
                       src={program.imageSrc}
                       alt={program.imageAlt}
                       fill
@@ -106,7 +106,7 @@ export default function CiuProgramsPage() {
               <MotionItem key={poster.id}>
                 <article className="overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium">
                   <div className="relative aspect-[3/4] bg-background">
-                    <Image
+                    <ZoomableImage
                       src={poster.imageSrc}
                       alt={poster.imageAlt}
                       fill
@@ -132,7 +132,7 @@ export default function CiuProgramsPage() {
           <MotionStagger className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-6">
             {gallery.map((item) => (
               <MotionItem key={item.id} className="relative aspect-square overflow-hidden rounded-3xl border border-border/80 shadow-premium">
-                <Image
+                <ZoomableImage
                   src={item.imageSrc}
                   alt={item.imageAlt}
                   fill
@@ -174,7 +174,7 @@ export default function CiuProgramsPage() {
               </MotionItem>
               <MotionItem>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg">
-                  <Image
+                  <ZoomableImage
                     src="/media/ciu-general/general/photos/general-03.jpg"
                     alt="CIU weekend classroom session at the Canadian Islamic Centre"
                     fill

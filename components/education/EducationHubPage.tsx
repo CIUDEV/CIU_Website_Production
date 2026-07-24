@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -31,15 +31,15 @@ export default function EducationHubPage() {
               <MotionItem key={card.id}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:-translate-y-1 hover:shadow-premium-xl">
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
+                    <ZoomableImage
                       src={card.imageSrc}
                       alt={card.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover transition duration-700 group-hover:scale-[1.03]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-6">
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6">
                       <h2 className="text-2xl font-semibold text-white sm:text-3xl">{card.title}</h2>
                     </div>
                   </div>

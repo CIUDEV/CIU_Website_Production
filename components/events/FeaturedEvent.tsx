@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
 import EventTag from "@/components/events/EventTag";
@@ -34,14 +34,14 @@ export default function FeaturedEvent() {
       <SectionContainer>
         <MotionStagger className="grid items-center gap-10 overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium-lg lg:grid-cols-2 lg:gap-0">
           <MotionItem className="relative min-h-[280px] lg:min-h-full">
-            <Image
+            <ZoomableImage
               src={imageSrc}
               alt={imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/10" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/10" />
           </MotionItem>
 
           <MotionItem className="p-6 sm:p-8 lg:p-10">

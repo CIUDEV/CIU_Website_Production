@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeBtnOutlineClass, homeBtnPrimaryClass, homeSectionClass } from "@/components/home/homeUi";
@@ -29,14 +29,14 @@ export default function FeaturedProject() {
         <MotionSection className="overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-xl">
           <div className="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
             <div className="relative min-h-[280px] lg:min-h-full">
-              <Image
+              <ZoomableImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/10" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/10" />
             </div>
 
             <div className="p-6 sm:p-8 lg:p-10">

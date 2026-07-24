@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -116,7 +116,7 @@ export default function EducationPage() {
               <MotionItem className="relative">
                 <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-xl">
                   <div className="relative aspect-[3/4] sm:aspect-[4/5]">
-                    <Image
+                    <ZoomableImage
                     src="/media/ciu-general/azhar/azhar-01.jpeg"
                     alt="Azhar Canada Uloom Al-Hadith Hadith Sciences course poster"
                       fill
@@ -184,7 +184,7 @@ export default function EducationPage() {
               <MotionItem key={poster.id}>
                 <article className="group overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:-translate-y-1 hover:shadow-premium-xl">
                   <div className="relative aspect-[3/4] overflow-hidden bg-background">
-                    <Image
+                    <ZoomableImage
                       src={poster.imageSrc}
                       alt={poster.imageAlt}
                       fill
@@ -248,14 +248,14 @@ export default function EducationPage() {
 
               <MotionItem>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg">
-                  <Image
+                  <ZoomableImage
                     src="/media/ciu-general/azhar/azhar-03.jpeg"
                     alt="Azhar Canada college program at the Canadian Islamic Centre"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 </div>
               </MotionItem>
             </MotionStagger>

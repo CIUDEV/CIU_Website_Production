@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeBtnOutlineClass, homeBtnPrimaryClass, homeSectionClass } from "@/components/home/homeUi";
@@ -22,14 +22,14 @@ export default function MediaHubCards() {
             >
               <div className="grid sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
                 <div className="relative min-h-[220px] sm:min-h-full">
-                  <Image
+                  <ZoomableImage
                     src={card.imageSrc}
                     alt={card.imageAlt}
                     fill
                     sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-black/5" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-black/5" />
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:p-8">
                   <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -76,13 +76,12 @@ export function MediaFeaturedStrip() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {highlightPhotos.map((item) => (
-            <Link
+            <article
               key={item.id}
-              href="/Media/images"
               className="group overflow-hidden rounded-2xl border border-border/80 bg-background/70 transition hover:border-brand/20 hover:shadow-premium"
             >
               <div className="relative aspect-[4/3]">
-                <Image
+                <ZoomableImage
                   src={item.imageSrc}
                   alt={item.imageAlt}
                   fill
@@ -90,14 +89,14 @@ export function MediaFeaturedStrip() {
                   className="object-cover transition duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-5">
+              <Link href="/Media/images" className="block p-5">
                 <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
                   {item.album}
                 </p>
                 <p className="mt-2 text-base font-semibold text-foreground">{item.title}</p>
                 <p className="mt-2 text-sm text-muted">{item.dateLabel}</p>
-              </div>
-            </Link>
+              </Link>
+            </article>
           ))}
           <Link
             href="/Media/images"

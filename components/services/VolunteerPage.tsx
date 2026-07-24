@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -57,7 +57,7 @@ export default function VolunteerPage() {
               <MotionItem key={item.id}>
                 <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/80 bg-background shadow-premium">
                   <div className="relative aspect-[4/3]">
-                    <Image
+                    <ZoomableImage
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       fill
@@ -91,7 +91,7 @@ export default function VolunteerPage() {
               <MotionItem key={poster.id}>
                 <article className="overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium">
                   <div className="relative aspect-[3/4] bg-background">
-                    <Image
+                    <ZoomableImage
                       src={poster.imageSrc}
                       alt={poster.imageAlt}
                       fill

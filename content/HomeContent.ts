@@ -42,6 +42,7 @@ export type ImpactStat = {
 export type GalleryItem = {
   imageSrc: string;
   imageAlt: string;
+  title: string;
 };
 
 export const heroSlides: HeroSlide[] = [
@@ -259,33 +260,45 @@ export const homeCtaContent = {
 };
 
 export const galleryContent = {
+  label: "COMMUNITY GALLERY",
   heading: "Our Community in Action",
   subheading:
     "A glimpse into our classes, programs, gatherings, volunteer initiatives, and community events.",
   items: [
     {
+      title: "Prayer Hall",
       imageSrc: "/images/home/gallery-featured.jpg",
       imageAlt: "Ornate mihrab and minbar with Arabic calligraphy in the CIU prayer hall",
     },
     {
+      title: "Islamic Education",
       imageSrc: "/images/home/gallery-1.jpg",
       imageAlt: "Islamic education classroom with students learning at CIU",
     },
     {
+      title: "Community Lectures",
       imageSrc: "/images/home/gallery-2.jpg",
       imageAlt: "Guest speaker delivering a lecture at the Islamic centre",
     },
     {
+      title: "Sisters Gathering",
       imageSrc: "/images/home/gallery-3.jpg",
       imageAlt: "Sisters from the community gathered at the CIU centre",
     },
     {
+      title: "Centre Life",
       imageSrc: "/images/home/gallery-4.jpg",
       imageAlt: "Interior view of the main prayer hall at CIU",
     },
     {
+      title: "Youth & Family",
       imageSrc: "/images/home/gallery-5.jpg",
       imageAlt: "Young student at a festive community event at the Islamic centre",
+    },
+    {
+      title: "Community Events",
+      imageSrc: "/images/home/gallery-6.jpg",
+      imageAlt: "Community members gathered during a CIU program or event",
     },
   ] satisfies GalleryItem[],
   viewAllLabel: "View Full Gallery",

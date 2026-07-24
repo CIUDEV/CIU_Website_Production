@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { ArrowRight, Heart } from "lucide-react";
 import SectionContainer from "@/components/home/SectionContainer";
@@ -53,14 +53,14 @@ export default function FamilyServices() {
 
           <MotionItem className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg lg:aspect-[5/4]">
-              <Image
+              <ZoomableImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand/25 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/25 via-transparent to-transparent" />
             </div>
           </MotionItem>
         </MotionStagger>

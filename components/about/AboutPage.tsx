@@ -162,7 +162,7 @@ function StorySection({
         </div>
 
         <div className="border-t border-border/80 p-4 sm:p-5 lg:border-t-0 lg:border-l lg:p-5 lg:pl-0">
-          <ImagePlaceholder {...image} aspect="wide" className="rounded-2xl border-0 shadow-none" />
+          <ImagePlaceholder {...image} aspect="video" className="rounded-2xl border-0 shadow-none" />
         </div>
       </div>
     </div>

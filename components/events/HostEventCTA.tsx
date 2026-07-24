@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import SectionContainer from "@/components/home/SectionContainer";
@@ -64,7 +64,7 @@ export default function HostEventCTA() {
 
           <MotionItem className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg">
-              <Image
+              <ZoomableImage
                 src={imageSrc}
                 alt={imageAlt}
                 fill

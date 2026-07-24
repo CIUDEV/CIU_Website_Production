@@ -4,6 +4,7 @@ export type ImagePlaceholderContent = {
   imageSrc?: string;
   imageAlt?: string;
   imagePosition?: string;
+  imageFit?: "cover" | "contain";
 };
 
 export type ValueItem = {
@@ -66,8 +67,10 @@ export const aboutContent = {
     image: {
       label: "Our Story",
       caption: "CIU scholars and community leaders serving together.",
-      imageSrc: "/images/about/story.jpg",
-      imageAlt: "Diverse community members attending a learning workshop at CIU",
+      imageSrc: "/images/about/story.png",
+      imageAlt: "CIU poster: Pray to Allah and Be Confident of a Response",
+      imagePosition: "left center",
+      imageFit: "contain" as const,
     },
   },
   vision: {

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { MotionSection } from "@/components/motion";
 import {
@@ -23,9 +23,9 @@ export default function EventsHero() {
 
   return (
     <section className="relative h-[420px] overflow-hidden sm:h-[480px] lg:h-[580px]">
-      <Image src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
-      <div className="absolute inset-0 bg-hero-overlay" />
-      <div className="absolute inset-0 bg-brand/35 mix-blend-multiply" />
+      <ZoomableImage src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
+      <div className="pointer-events-none absolute inset-0 bg-hero-overlay" />
+      <div className="pointer-events-none absolute inset-0 bg-brand/35 mix-blend-multiply" />
 
       <div className="relative mx-auto flex h-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
         <MotionSection className="max-w-3xl">

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeSectionClass } from "@/components/home/homeUi";
@@ -48,15 +48,15 @@ export default function MediaLectureList() {
             >
               <div className="grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
                 <div className="relative min-h-[220px] sm:min-h-full">
-                  <Image
+                  <ZoomableImage
                     src={lecture.imageSrc}
                     alt={lecture.imageAlt}
                     fill
                     sizes="(max-width: 640px) 100vw, 40vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-black/25" />
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="pointer-events-none absolute inset-0 bg-black/25" />
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                     <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-brand shadow-premium-lg transition group-hover:scale-105">
                       <Play className="ml-0.5 h-6 w-6 fill-current" aria-hidden="true" />
                     </span>

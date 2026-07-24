@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import {
   useCallback,
@@ -510,7 +510,7 @@ export default function HeroCarousel() {
             index === activeIndex ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
         >
-          <Image
+          <ZoomableImage
             src={slide.imageSrc}
             alt={slide.imageAlt}
             fill
@@ -522,8 +522,8 @@ export default function HeroCarousel() {
                 : ""
             }`}
           />
-          <div className="absolute inset-0 bg-hero-carousel-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-hero-carousel-overlay" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
         </div>
       ))}
 

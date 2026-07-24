@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeSectionClass } from "@/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@/components/motion";
@@ -57,7 +57,7 @@ function GalleryCard({
             : "aspect-square"
       }`}
     >
-      <Image
+      <ZoomableImage
         src={item.imageSrc}
         alt={item.imageAlt}
         fill
@@ -71,20 +71,20 @@ function GalleryCard({
         }`}
       />
       <div
-        className={`absolute inset-0 ${
+        className={`pointer-events-none absolute inset-0 ${
           isPoster
             ? "bg-gradient-to-t from-black/55 via-transparent to-transparent"
             : "bg-gradient-to-t from-black/65 via-black/10 to-transparent"
         }`}
       />
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 sm:p-5">
         <p className="text-[0.65rem] font-semibold tracking-[0.14em] text-brand-light uppercase sm:text-xs">
           {item.album}
         </p>
         <h3 className="mt-1 text-base font-semibold text-white sm:text-lg">{item.title}</h3>
         <p className="mt-1 text-xs text-white/80 sm:text-sm">{item.dateLabel}</p>
       </div>
-      <div className="absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
+      <div className="pointer-events-none absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
         <Images className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
       </div>
     </MotionItem>

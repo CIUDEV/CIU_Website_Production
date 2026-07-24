@@ -22,7 +22,7 @@ export const teamContent = {
   members: [
     {
       id: "ashref",
-      name: "Sheikh Ashref",
+      name: "Sheikh Ashraf",
       role: "Islamic Scholar",
       featuredOnHome: true,
     },
@@ -42,11 +42,6 @@ export const teamContent = {
       id: "mona",
       name: "Dr. Mona",
       role: "Islamic Scholar",
-    },
-    {
-      id: "makdoom",
-      name: "Sheikh Makdoom",
-      role: "Founder & COO",
     },
   ] satisfies TeamMember[],
 };

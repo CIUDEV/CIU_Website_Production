@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -35,16 +35,16 @@ export default function ProjectsGrid() {
               className="group overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:-translate-y-1.5 hover:border-brand/20 hover:shadow-premium-xl"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
+                <ZoomableImage
                   src={project.imageSrc}
                   alt={project.imageAlt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-cover transition duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
                 <span
-                  className={`absolute left-4 top-4 rounded-full border px-3 py-1 text-[0.65rem] font-semibold tracking-wide uppercase ${statusClassName(project.status)}`}
+                  className={`pointer-events-none absolute left-4 top-4 rounded-full border px-3 py-1 text-[0.65rem] font-semibold tracking-wide uppercase ${statusClassName(project.status)}`}
                 >
                   {project.status}
                 </span>

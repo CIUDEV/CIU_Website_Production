@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { Images } from "lucide-react";
 import SectionContainer from "@/components/home/SectionContainer";
@@ -27,16 +27,16 @@ export default function PastEvents() {
               className="group relative overflow-hidden rounded-2xl border border-border/80 shadow-premium transition hover:shadow-premium-lg"
             >
               <div className="relative aspect-[4/3]">
-                <Image
+                <ZoomableImage
                   src={item.imageSrc}
                   alt={item.imageAlt}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover transition duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               </div>
-              <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 text-white">
                 <p className="text-xs font-semibold tracking-wide text-brand-light uppercase">
                   {item.category}
                 </p>

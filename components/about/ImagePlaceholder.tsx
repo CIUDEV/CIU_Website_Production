@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import type { ImagePlaceholderContent } from "@/content/AboutContent";
 
 type ImagePlaceholderProps = ImagePlaceholderContent & {
@@ -38,6 +38,7 @@ export default function ImagePlaceholder({
   imageSrc,
   imageAlt,
   imagePosition = "center",
+  imageFit = "cover",
   aspect = "video",
   className = "",
 }: ImagePlaceholderProps) {
@@ -47,12 +48,12 @@ export default function ImagePlaceholder({
         className={`relative overflow-hidden rounded-2xl border border-border/80 bg-background shadow-premium ${aspectClasses[aspect]} ${className}`}
       >
         <div className="relative h-full w-full">
-          <Image
+          <ZoomableImage
             src={imageSrc}
             alt={imageAlt ?? caption}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className={imageFit === "contain" ? "object-contain" : "object-cover"}
             style={{ objectPosition: imagePosition }}
           />
         </div>

@@ -2,7 +2,7 @@ import { CheckIcon } from "@/components/about/icons";
 import { MotionSection } from "@/components/motion";
 import { aboutContent } from "@/content/AboutContent";
 import { ShieldCheck } from "lucide-react";
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 
 export default function CharityRegistrationBanner() {
   const { label, title, registrationLabel, registrationNumber, description, highlights } =
@@ -66,7 +66,7 @@ export default function CharityRegistrationBanner() {
               </div>
 
               <div className="relative min-h-[320px] overflow-hidden lg:min-h-full">
-                <Image
+                <ZoomableImage
                   src="/media/pictures/azhar_canada_14.jpg"
                   alt=""
                   fill
@@ -74,9 +74,9 @@ export default function CharityRegistrationBanner() {
                   className="object-cover"
                   aria-hidden="true"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/88 via-brand/78 to-brand-dark/92" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-dark/88 via-brand/78 to-brand-dark/92" />
                 <div
-                  className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,173,74,0.22),transparent_55%)]"
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,173,74,0.22),transparent_55%)]"
                   aria-hidden="true"
                 />
 

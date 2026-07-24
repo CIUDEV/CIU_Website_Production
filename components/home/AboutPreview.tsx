@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
@@ -23,15 +23,15 @@ export default function AboutPreview() {
               aria-hidden="true"
             />
             <div className="relative aspect-[5/4] overflow-hidden rounded-[2rem] border border-border/80 shadow-premium-xl sm:aspect-[4/3]">
-              <div className="absolute left-0 top-0 z-10 h-16 w-16 border-l-4 border-t-4 border-gold/80 rounded-tl-3xl" aria-hidden="true" />
-              <Image
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-16 w-16 border-l-4 border-t-4 border-gold/80 rounded-tl-3xl" aria-hidden="true" />
+              <ZoomableImage
                 src={aboutPreviewContent.imageSrc}
                 alt={aboutPreviewContent.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition duration-700 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
             </div>
           </MotionItem>
 
