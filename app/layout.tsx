@@ -28,11 +28,6 @@ export const metadata: Metadata = {
   title: siteContent.title,
   description: siteContent.description,
   applicationName: siteContent.shortName,
-  icons: {
-    icon: siteContent.logoSrc,
-    shortcut: siteContent.logoSrc,
-    apple: siteContent.logoSrc,
-  },
   openGraph: {
     type: "website",
     locale: "en_CA",
