@@ -22,7 +22,7 @@ const lectureVideoIds: Partial<Record<number, string>> = {
 };
 
 export function youtubeShortEmbed(videoId: string) {
-  return `https://www.youtube.com/embed/${videoId}`;
+  return `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&modestbranding=1`;
 }
 
 export function youtubeShortWatchHref(videoId: string) {

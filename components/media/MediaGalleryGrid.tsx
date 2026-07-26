@@ -3,7 +3,6 @@
 import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeSectionClass } from "@/components/home/homeUi";
-import { MotionItem, MotionStagger } from "@/components/motion";
 import {
   mediaGalleryItems,
   mediaImagesPageContent,
@@ -28,7 +27,7 @@ function GalleryCard({ item }: { item: MediaGalleryItem }) {
   const isPoster = item.variant === "poster";
 
   return (
-    <MotionItem
+    <article
       className={`group relative overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl ${
         isPoster ? "aspect-[3/4]" : "aspect-square"
       }`}
@@ -49,18 +48,19 @@ function GalleryCard({ item }: { item: MediaGalleryItem }) {
         </p>
         <h3 className="mt-1 text-base font-semibold text-white sm:text-lg">{item.title}</h3>
       </div>
-    </MotionItem>
+    </article>
   );
 }
 
 function ShortCard({ item }: { item: MediaVideoItem }) {
   return (
-    <MotionItem className="group overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl">
-      <div className="relative aspect-[9/16] bg-black sm:aspect-video">
+    <article className="group overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl">
+      <div className="relative aspect-[9/16] w-full max-w-sm bg-black sm:max-w-none">
         <iframe
           src={item.embedSrc}
           title={item.title}
-          className="h-full w-full"
+          className="absolute inset-0 h-full w-full"
+          loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
@@ -78,7 +78,7 @@ function ShortCard({ item }: { item: MediaVideoItem }) {
           <ExternalLink className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
         </Link>
       </div>
-    </MotionItem>
+    </article>
   );
 }
 
@@ -91,6 +91,11 @@ export default function MediaGalleryGrid() {
     if (photoFilter === "all") return mediaGalleryItems;
     return mediaGalleryItems.filter((item) => item.category === photoFilter);
   }, [photoFilter]);
+
+  const photoCountLabel =
+    mediaView === "photos"
+      ? `${filteredPhotos.length} photo${filteredPhotos.length === 1 ? "" : "s"}`
+      : `${mediaVideoItems.length} short${mediaVideoItems.length === 1 ? "" : "s"}`;
 
   return (
     <section className={`${homeSectionClass} bg-section-warm`}>
@@ -136,20 +141,35 @@ export default function MediaGalleryGrid() {
           </div>
         ) : null}
 
-        <p className="mt-5 text-sm text-muted sm:text-base">{note}</p>
+        <p className="mt-5 text-sm text-muted sm:text-base">
+          {note} <span className="text-foreground/70">({photoCountLabel})</span>
+        </p>
 
         {mediaView === "photos" ? (
-          <MotionStagger className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-            {filteredPhotos.map((item) => (
-              <GalleryCard key={item.id} item={item} />
-            ))}
-          </MotionStagger>
-        ) : (
-          <MotionStagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          filteredPhotos.length > 0 ? (
+            <div
+              key={photoFilter}
+              className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6"
+            >
+              {filteredPhotos.map((item) => (
+                <GalleryCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-10 rounded-2xl border border-border/80 bg-surface px-5 py-8 text-center text-sm text-muted sm:text-base">
+              No photos match this filter yet.
+            </p>
+          )
+        ) : mediaVideoItems.length > 0 ? (
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {mediaVideoItems.map((item) => (
               <ShortCard key={item.id} item={item} />
             ))}
-          </MotionStagger>
+          </div>
+        ) : (
+          <p className="mt-10 rounded-2xl border border-border/80 bg-surface px-5 py-8 text-center text-sm text-muted sm:text-base">
+            Shorts will appear here once added.
+          </p>
         )}
       </SectionContainer>
     </section>

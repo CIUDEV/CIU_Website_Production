@@ -2,9 +2,10 @@
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { aosDefaults } from "@/components/aos/config";
+import { refreshAos, scheduleAosRefreshes } from "@/lib/aosRefresh";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { aosDefaults } from "@/components/aos/config";
 
 function shouldDisableAos() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -26,42 +27,38 @@ function initAos() {
     mirror: false,
     disableMutationObserver: false,
   });
-  AOS.refresh();
-}
-
-function scheduleAosInit() {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => initAos());
-  });
+  refreshAos();
 }
 
 export default function AosInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    scheduleAosInit();
+    initAos();
 
     const refreshSoon = window.setTimeout(() => initAos(), 120);
-    const refreshLater = window.setTimeout(() => initAos(), 450);
+    const refreshLater = window.setTimeout(() => scheduleAosRefreshes(), 450);
 
     const handleResize = () => initAos();
-    const handleOrientation = () => window.setTimeout(() => initAos(), 100);
+    const handleOrientation = () => window.setTimeout(() => scheduleAosRefreshes(), 100);
 
-    window.addEventListener("load", initAos);
+    const onLoad = () => scheduleAosRefreshes();
+
+    window.addEventListener("load", onLoad);
     window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleOrientation);
 
     return () => {
       window.clearTimeout(refreshSoon);
       window.clearTimeout(refreshLater);
-      window.removeEventListener("load", initAos);
+      window.removeEventListener("load", onLoad);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleOrientation);
     };
   }, []);
 
   useEffect(() => {
-    scheduleAosInit();
+    scheduleAosRefreshes();
   }, [pathname]);
 
   return null;

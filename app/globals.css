@@ -44,6 +44,12 @@ body {
   pointer-events: auto;
 }
 
+/* Prevent blank content if AOS misses in-view elements on first paint */
+[data-aos].aos-init:not(.aos-animate) {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-aos] {
     opacity: 1 !important;
