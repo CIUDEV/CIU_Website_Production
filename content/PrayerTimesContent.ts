@@ -6,7 +6,7 @@ export type PrayerTime = {
 export const prayerTimesContent = {
   heading: "Today's Prayer Times",
   location: "Mississauga, Ontario",
-  note: "Iqamah times from the CIU yearly calendar. Maghrib is calculated at sunset.",
+  note: "Prayer times from the published CIU yearly calendar for Mississauga.",
   scheduleHref: "/Services/prayer-times",
   scheduleLabel: "View Full Schedule",
 };
@@ -24,23 +24,27 @@ export const prayerTimesPageContent = {
     label: "Schedule",
     heading: "Prayer Times",
     location: "Mississauga, Ontario",
-    note: "Maghrib iqamah follows sunset for each date. Jumu'ah times shift one hour earlier during winter schedule.",
+    note: "Times follow the published CIU yearly prayer calendar for Mississauga.",
   },
   jumuah: {
     label: "Jumu'ah",
     heading: "Friday Prayer",
-    intro:
-      "CIU offers two Jumu'ah sessions each Friday. Times move one hour earlier when the winter iqamah schedule begins.",
-    note: "Summer schedule: 1:30 / 2:00 and 2:30 / 3:00. Winter schedule: 12:30 / 1:00 and 1:30 / 2:00.",
+    intro: "CIU holds one Jumu'ah each Friday at the masjid.",
+    note: "Khutbah begins at 1:45 PM. Salah is at 2:05 PM. These times apply year-round.",
   },
   guidance: {
     label: "Important Notes",
     heading: "Schedule Information",
     items: [
       {
+        title: "Jumu'ah Prayer",
+        description:
+          "One Jumu'ah is held each Friday. Khutbah begins at 1:45 PM and Salah is at 2:05 PM year-round.",
+      },
+      {
         title: "Iqamah Calendar",
         description:
-          "Fajr, Dhuhr, Asr, and Isha follow the CIU yearly iqamah calendar. Maghrib follows sunset for Mississauga.",
+          "Fajr, Dhuhr, Asr, Maghrib, and Isha follow the published CIU yearly prayer calendar for Mississauga.",
       },
       {
         title: "Seasonal Adjustments",

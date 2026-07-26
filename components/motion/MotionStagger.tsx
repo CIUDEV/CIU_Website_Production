@@ -3,10 +3,13 @@
 import { Children, createContext, useContext, type ReactNode } from "react";
 import {
   aosDefaults,
+  getAosDuration,
+  getAosStaggerStep,
   pickScrollAnimation,
   type AosScrollAnimation,
 } from "@/components/aos/config";
 import { useAosReady } from "@/components/aos/useAosReady";
+import { useIsMobile } from "@/components/motion/useSubtleMotion";
 import { useReducedScrollMotion } from "@/components/motion/useReducedScrollMotion";
 import { useAosRefresh } from "@/components/aos/useAosRefresh";
 
@@ -50,10 +53,11 @@ export function MotionItem({
   delay?: number;
 }) {
   const reduceMotion = useReducedScrollMotion();
+  const isMobile = useIsMobile();
   const aosReady = useAosReady();
   const staggerIndex = useContext(StaggerIndexContext);
-  const resolvedAnimation = animation ?? pickScrollAnimation(staggerIndex);
-  const resolvedDelay = delay ?? staggerIndex * aosDefaults.staggerStep;
+  const resolvedAnimation = animation ?? pickScrollAnimation(staggerIndex, isMobile);
+  const resolvedDelay = delay ?? staggerIndex * getAosStaggerStep(isMobile);
   const animate = aosReady && !reduceMotion;
 
   if (!animate) {
@@ -64,7 +68,7 @@ export function MotionItem({
     <div
       className={className}
       data-aos={resolvedAnimation}
-      data-aos-duration={aosDefaults.duration}
+      data-aos-duration={getAosDuration(isMobile)}
       data-aos-delay={resolvedDelay}
       data-aos-easing={aosDefaults.easing}
       data-aos-once="true"

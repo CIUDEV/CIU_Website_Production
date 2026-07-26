@@ -137,42 +137,26 @@ export default function HomePrayerSummary({
           ) : null}
         </div>
 
-        <div className="hidden grid-cols-[minmax(0,1.15fr)_1fr_1fr] gap-3 px-4 py-2.5 sm:grid sm:px-5">
-          <span aria-hidden="true" />
-          <p className="text-center text-[0.65rem] font-semibold tracking-[0.14em] text-muted uppercase">
-            Khutbah
-          </p>
-          <p className="text-center text-[0.65rem] font-semibold tracking-[0.14em] text-muted uppercase">
-            Iqamah
-          </p>
-        </div>
-
-        <div className="divide-y divide-border/60">
-          {jumuahSessions.map((session, index) => (
-            <div
-              key={session.label}
-              className="grid grid-cols-1 gap-3 px-4 py-3.5 sm:grid-cols-[minmax(0,1.15fr)_1fr_1fr] sm:items-center sm:gap-3 sm:px-5 sm:py-3.5"
-            >
-              <p className="text-xs font-semibold text-brand sm:text-sm">
-                {index === 0 ? "1st Session" : "2nd Session"}
+        {jumuahSessions[0] ? (
+          <div className="grid grid-cols-2 gap-3 px-4 py-4 sm:gap-4 sm:px-5 sm:py-5">
+            <div className="rounded-xl bg-background/70 px-3 py-3 text-center sm:px-4 sm:py-4">
+              <p className="text-[0.65rem] font-semibold tracking-[0.14em] text-muted uppercase sm:text-xs">
+                Khutbah
               </p>
-
-              <div className="flex items-center justify-between gap-3 rounded-xl bg-background/70 px-3 py-2.5 sm:block sm:rounded-none sm:bg-transparent sm:p-0 sm:text-center">
-                <p className="text-[0.65rem] font-semibold tracking-wide text-muted uppercase sm:hidden">
-                  Khutbah
-                </p>
-                <p className="text-sm font-semibold text-foreground sm:text-base">{session.khutbah}</p>
-              </div>
-
-              <div className="flex items-center justify-between gap-3 rounded-xl bg-background/70 px-3 py-2.5 sm:block sm:rounded-none sm:bg-transparent sm:p-0 sm:text-center">
-                <p className="text-[0.65rem] font-semibold tracking-wide text-muted uppercase sm:hidden">
-                  Iqamah
-                </p>
-                <p className="text-sm font-semibold text-gold-dark sm:text-base">{session.iqamah}</p>
-              </div>
+              <p className="mt-1.5 text-sm font-semibold text-foreground sm:text-base">
+                {jumuahSessions[0].khutbah}
+              </p>
             </div>
-          ))}
-        </div>
+            <div className="rounded-xl bg-background/70 px-3 py-3 text-center sm:px-4 sm:py-4">
+              <p className="text-[0.65rem] font-semibold tracking-[0.14em] text-muted uppercase sm:text-xs">
+                Salah
+              </p>
+              <p className="mt-1.5 text-sm font-semibold text-gold-dark sm:text-base">
+                {jumuahSessions[0].iqamah}
+              </p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

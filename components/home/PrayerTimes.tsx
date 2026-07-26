@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import HomePrayerSummary from "@/components/home/HomePrayerSummary";
 import SectionContainer from "@/components/home/SectionContainer";
+import { MotionSection } from "@/components/motion";
 import { homeSectionClass } from "@/components/home/homeUi";
 import { getDailySchedule, getJumuahSessions } from "@/lib/prayerSchedule";
 import { prayerTimesContent } from "@/content/PrayerTimesContent";
@@ -15,7 +16,8 @@ export default function PrayerTimes() {
   return (
     <section className={`relative z-20 ${homeSectionClass} -mt-8 pt-2 pb-0 sm:-mt-10 sm:pt-4 lg:-mt-12 lg:pt-6`}>
       <SectionContainer>
-        <div className="card-premium overflow-hidden rounded-[2rem] shadow-premium-xl sm:rounded-[2.25rem]">
+        <MotionSection animation="fade-up">
+          <div className="card-premium overflow-hidden rounded-[2rem] shadow-premium-xl sm:rounded-[2.25rem]">
           <div className="h-2 bg-brand-gradient" />
           <div className="p-5 sm:p-8 lg:p-10">
             <HomePrayerSummary
@@ -28,7 +30,8 @@ export default function PrayerTimes() {
               scheduleLabel={prayerTimesContent.scheduleLabel}
             />
           </div>
-        </div>
+          </div>
+        </MotionSection>
       </SectionContainer>
     </section>
   );

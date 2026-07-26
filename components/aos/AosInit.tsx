@@ -2,8 +2,13 @@
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { aosDefaults } from "@/components/aos/config";
-import { refreshAos, scheduleAosRefreshes } from "@/lib/aosRefresh";
+import { aosDefaults, getAosDuration, getAosOffset } from "@/components/aos/config";
+import {
+  clearAosFallback,
+  markAosFallback,
+  refreshAos,
+  scheduleAosRefreshes,
+} from "@/lib/aosRefresh";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
@@ -11,22 +16,25 @@ function shouldDisableAos() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function getAosOffset() {
-  return window.innerWidth < 768 ? 32 : aosDefaults.offset;
+function isMobileViewport() {
+  return window.innerWidth < 768;
 }
 
 function initAos() {
   if (shouldDisableAos()) return;
 
   AOS.init({
-    duration: aosDefaults.duration,
+    duration: getAosDuration(isMobileViewport()),
     easing: aosDefaults.easing,
-    offset: getAosOffset(),
+    offset: getAosOffset(isMobileViewport()),
     once: aosDefaults.once,
     disable: false,
     mirror: false,
     disableMutationObserver: false,
+    anchorPlacement: "top-bottom",
   });
+
+  document.documentElement.classList.add("aos-ready");
   refreshAos();
 }
 
@@ -38,6 +46,7 @@ export default function AosInit() {
 
     const refreshSoon = window.setTimeout(() => initAos(), 120);
     const refreshLater = window.setTimeout(() => scheduleAosRefreshes(), 450);
+    const fallbackTimer = window.setTimeout(() => markAosFallback(), 2000);
 
     const handleResize = () => initAos();
     const handleOrientation = () => window.setTimeout(() => scheduleAosRefreshes(), 100);
@@ -51,6 +60,7 @@ export default function AosInit() {
     return () => {
       window.clearTimeout(refreshSoon);
       window.clearTimeout(refreshLater);
+      window.clearTimeout(fallbackTimer);
       window.removeEventListener("load", onLoad);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleOrientation);
@@ -58,7 +68,13 @@ export default function AosInit() {
   }, []);
 
   useEffect(() => {
+    clearAosFallback();
     scheduleAosRefreshes();
+    const fallbackTimer = window.setTimeout(() => markAosFallback(), 2000);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+    };
   }, [pathname]);
 
   return null;

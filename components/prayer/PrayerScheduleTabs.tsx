@@ -14,6 +14,7 @@ import {
   getYearlyCalendarTable,
   PRAYER_NAMES,
 } from "@/lib/prayerSchedule";
+import { formInputClassName } from "@/lib/formStyles";
 
 const tabs = [
   { id: "today", label: "Today" },
@@ -24,8 +25,7 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
-const selectClassName =
-  "rounded-xl border border-border bg-surface px-4 py-3 text-sm font-medium text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15 sm:text-base";
+const selectClassName = formInputClassName;
 
 function ScheduleTable({
   rows,
@@ -146,7 +146,7 @@ export default function PrayerScheduleTabs() {
           <div className="mt-6 rounded-2xl border border-border/80 bg-background/80 p-5 sm:p-6">
             <p className="text-sm font-semibold text-foreground sm:text-base">Choose a month</p>
             <p className="mt-1 text-sm text-muted sm:text-base">
-              View daily iqamah times for any month. Maghrib follows sunset for each date.
+              View daily prayer times for any month from the published CIU calendar.
             </p>
 
             <div className="mt-5 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
@@ -264,8 +264,8 @@ export default function PrayerScheduleTabs() {
               </tbody>
             </table>
             <p className="border-t border-border/70 bg-background px-4 py-3 text-sm text-muted sm:text-base">
-              Maghrib iqamah is at sunset for each date. Daily views calculate sunset for Mississauga
-              automatically.
+              Sample times shown for each date range. Daily and monthly views use the full published
+              calendar for each date.
             </p>
           </div>
         </div>

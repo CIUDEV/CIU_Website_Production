@@ -22,7 +22,7 @@ export const teamContent = {
   members: [
     {
       id: "ashref",
-      name: "Sheikh Ashraf",
+      name: "Sheikh Dr. Ashraf",
       role: "Islamic Scholar",
       featuredOnHome: true,
     },

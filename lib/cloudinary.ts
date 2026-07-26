@@ -22,9 +22,14 @@ export function withCloudinaryTransform(src: string, transforms: string): string
   return `${prefix}${transforms}/${suffix}`;
 }
 
-/** Full-width lightbox / zoom preview from Cloudinary CDN. */
+/** Medium preview for lightbox placeholder while the full image loads. */
+export function cloudinaryLightboxPreview(src: string): string {
+  return withCloudinaryTransform(src, "f_auto,q_auto:good,w_960,c_limit");
+}
+
+/** Lightbox zoom preview — large enough for retina, optimized for faster delivery. */
 export function cloudinaryFullSize(src: string): string {
-  return withCloudinaryTransform(src, "f_auto,q_auto:best,w_2560,c_limit");
+  return withCloudinaryTransform(src, "f_auto,q_auto:good,w_1920,c_limit");
 }
 
 type LoaderParams = {

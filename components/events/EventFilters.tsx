@@ -7,6 +7,7 @@ import {
   type EventDateFilterId,
   type EventFilterCategoryId,
 } from "@/content/EventsContent";
+import { formInputClassName } from "@/lib/formStyles";
 
 type EventFiltersProps = {
   category: EventFilterCategoryId;
@@ -53,7 +54,7 @@ export default function EventFilters({
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Search events"
-            className="w-full rounded-xl border border-border bg-background py-3 pl-10 pr-4 text-sm text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15 sm:text-base"
+            className={`${formInputClassName} py-3 pl-10 pr-4`}
           />
         </div>
       </div>

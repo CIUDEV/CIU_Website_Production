@@ -2,6 +2,7 @@
 
 import CopyButton from "@/components/donate/CopyButton";
 import { donateContent } from "@/content/DonateContent";
+import { formInputClassName } from "@/lib/formStyles";
 import { Mail } from "lucide-react";
 import { useMemo, useState } from "react";
 
@@ -110,7 +111,7 @@ export default function ETransferPanel() {
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   placeholder={eTransfer.namePlaceholder}
-                  className="mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground shadow-sm outline-none transition focus:border-brand/40 focus:ring-2 focus:ring-brand/15 sm:text-base"
+                  className={`mt-2 ${formInputClassName}`}
                 />
               </div>
 
@@ -122,7 +123,7 @@ export default function ETransferPanel() {
                   id="donation-fund"
                   value={fundId}
                   onChange={(event) => setFundId(event.target.value)}
-                  className="mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-sm text-foreground shadow-sm outline-none transition focus:border-brand/40 focus:ring-2 focus:ring-brand/15 sm:text-base"
+                  className={`mt-2 ${formInputClassName}`}
                 >
                   {eTransfer.funds.map((fund) => (
                     <option key={fund.id} value={fund.id}>

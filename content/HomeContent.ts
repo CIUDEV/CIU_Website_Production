@@ -173,7 +173,7 @@ export const featuredProgramsContent = {
       description:
         "Al-Azhar accredited Islamic education for children, youth, adults, and families — online and in person.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020773/IMG_5023_qukbdo.jpg",
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785025487/azharposter_ytmxei.png",
       imageAlt: "Teacher instructing students in an Arabic language and Islamic studies session",
       href: "/Education",
     },
@@ -200,7 +200,7 @@ export const featuredProgramsContent = {
       description:
         "Bringing people together through charitable activities, outreach, volunteering, and collaborative initiatives.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020773/IMG_5023_qukbdo.jpg",
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
       imageAlt: "Guest speaker addressing the community at a CIU lecture event",
       href: "/Projects",
     },
