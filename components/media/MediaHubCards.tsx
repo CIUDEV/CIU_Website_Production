@@ -57,12 +57,9 @@ export default function MediaHubCards() {
 
 export function MediaFeaturedStrip() {
   const { featuredHeading, featuredSubheading } = mediaHubContent;
-  const seenAlbums = new Set<string>();
-  const highlightPhotos = mediaGalleryItems.filter((item) => {
-    if (seenAlbums.has(item.album)) return false;
-    seenAlbums.add(item.album);
-    return true;
-  }).slice(0, 3);
+  const highlightPhotos = mediaGalleryItems
+    .filter((item) => item.category === "ciu-community")
+    .slice(0, 3);
 
   return (
     <section className={`${homeSectionClass} bg-surface`}>
@@ -91,10 +88,9 @@ export function MediaFeaturedStrip() {
               </div>
               <Link href="/Media/images" className="block p-5">
                 <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
-                  {item.album}
+                  CIU & Masjid
                 </p>
                 <p className="mt-2 text-base font-semibold text-foreground">{item.title}</p>
-                <p className="mt-2 text-sm text-muted">{item.dateLabel}</p>
               </Link>
             </article>
           ))}
@@ -105,8 +101,8 @@ export function MediaFeaturedStrip() {
             <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
               View All
             </p>
-            <p className="mt-2 text-base font-semibold text-foreground">Browse Photo Galleries</p>
-            <p className="mt-2 text-sm text-muted">See all {mediaGalleryItems.length} photos from CIU</p>
+            <p className="mt-2 text-base font-semibold text-foreground">Browse All Photos</p>
+            <p className="mt-2 text-sm text-muted">See all {mediaGalleryItems.length} gallery images</p>
           </Link>
         </div>
 

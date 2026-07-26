@@ -14,11 +14,15 @@ import { MotionItem, MotionSection, MotionStagger } from "@/components/motion";
 import { azharCanadaLinks, educationContent } from "@/content/EducationContent";
 import {
   ArrowUpRight,
+  Award,
   Check,
   ExternalLink,
   GraduationCap,
+  HandHeart,
   LogIn,
   MapPin,
+  Monitor,
+  Users,
 } from "lucide-react";
 
 function ExternalButton({
@@ -71,6 +75,95 @@ function MissionVisionCard({ title, body }: { title: string; body: string }) {
   );
 }
 
+const whyChooseHighlightIcons = [Award, Users, Monitor, HandHeart] as const;
+
+function WhyChooseUsSection({
+  title,
+  paragraphs,
+  highlights,
+  imageSrc,
+  imageAlt,
+}: {
+  title: string;
+  paragraphs: string[];
+  highlights: string[];
+  imageSrc: string;
+  imageAlt: string;
+}) {
+  return (
+    <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-lg">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand/[0.07] via-gold/[0.04] to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute left-0 top-0 h-20 w-20 rounded-tl-[2rem] border-l-[3px] border-t-[3px] border-gold/70"
+        aria-hidden="true"
+      />
+
+      <div className="relative grid items-stretch lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="p-7 sm:p-9 lg:p-10">
+          <p className="text-xs font-semibold tracking-[0.18em] text-brand uppercase sm:text-sm">
+            Our Difference
+          </p>
+          <div className="gold-accent-bar mt-4 w-10" aria-hidden="true" />
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+            {title}
+          </h2>
+          <p className="mt-5 text-base font-medium leading-relaxed text-foreground sm:text-lg">
+            {paragraphs[0]}
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base lg:leading-7">
+            {paragraphs[1]}
+          </p>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {highlights.map((item, index) => {
+              const Icon = whyChooseHighlightIcons[index] ?? Check;
+              return (
+                <div
+                  key={item}
+                  className="group flex gap-3 rounded-2xl border border-border/70 bg-background/80 p-4 transition duration-300 hover:border-gold/30 hover:bg-section-warm/80 hover:shadow-premium"
+                >
+                  <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand transition group-hover:bg-brand/15">
+                    <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted sm:text-[0.9375rem]">{item}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="relative min-h-[280px] border-t border-border/70 p-5 sm:min-h-[320px] sm:p-6 lg:min-h-0 lg:border-t-0 lg:border-l lg:p-6">
+          <div
+            className="pointer-events-none absolute -inset-y-4 -right-4 w-2/3 rounded-full bg-gold/10 blur-3xl"
+            aria-hidden="true"
+          />
+          <div className="relative h-full min-h-[260px] overflow-hidden rounded-2xl shadow-[0_24px_48px_-20px_rgba(26,67,52,0.35)] ring-1 ring-black/[0.06] sm:min-h-[300px] lg:min-h-full">
+            <ZoomableImage
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/50 via-transparent to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+              <p className="text-xs font-semibold tracking-[0.16em] text-white/80 uppercase">
+                Al-Azhar Accredited
+              </p>
+              <p className="mt-1 max-w-xs text-lg font-semibold leading-snug text-white sm:text-xl">
+                Authentic scholarship for learners across Canada
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function EducationPage() {
   const { hero, welcome, mission, vision, whyChooseUs, location, posters, cta } =
     educationContent;
@@ -117,8 +210,8 @@ export default function EducationPage() {
                 <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-xl">
                   <div className="relative aspect-[3/4] sm:aspect-[4/5]">
                     <ZoomableImage
-                    src="/media/ciu-general/azhar/azhar-01.jpeg"
-                    alt="Azhar Canada Uloom Al-Hadith Hadith Sciences course poster"
+                    src={hero.imageSrc}
+                    alt={hero.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-contain bg-background p-3"
@@ -146,26 +239,16 @@ export default function EducationPage() {
         </SectionContainer>
       </section>
 
-      <section className={homeSectionClass}>
+      <section className={`${homeSectionClass} bg-section-warm`}>
         <SectionContainer>
           <MotionSection>
-            <SectionHeading heading={whyChooseUs.title} />
-            <div className="mx-auto mt-8 max-w-4xl space-y-5 text-base leading-relaxed text-muted sm:text-lg">
-              {whyChooseUs.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-              ))}
-            </div>
-            <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
-              {whyChooseUs.highlights.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 rounded-xl border border-border/70 bg-surface px-4 py-3.5 text-sm leading-relaxed text-muted sm:text-base"
-                >
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} />
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <WhyChooseUsSection
+              title={whyChooseUs.title}
+              paragraphs={whyChooseUs.paragraphs}
+              highlights={whyChooseUs.highlights}
+              imageSrc={hero.imageSrc}
+              imageAlt={hero.imageAlt}
+            />
           </MotionSection>
         </SectionContainer>
       </section>
@@ -249,8 +332,8 @@ export default function EducationPage() {
               <MotionItem>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg">
                   <ZoomableImage
-                    src="/media/ciu-general/azhar/azhar-03.jpeg"
-                    alt="Azhar Canada college program at the Canadian Islamic Centre"
+                    src={hero.imageSrc}
+                    alt={hero.imageAlt}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"

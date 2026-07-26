@@ -1,5 +1,6 @@
 import { socialLinks } from "./socialLinks";
 import type { ContentLink } from "./types";
+import { siteContent } from "./SiteContent";
 
 export const exploreLinks: ContentLink[] = [
   { label: "Home", href: "/" },
@@ -11,9 +12,8 @@ export const exploreLinks: ContentLink[] = [
 ];
 
 export const affiliateLinks: ContentLink[] = [
-  { label: "Azhar Canada", href: "https://azharcanada.ca/" },
-  { label: "Free Quran Canada", href: "#" },
-  { label: "Future Islamic Cultural Centre", href: "#" },
+  { label: "Azhar Canada College", href: "https://azharcanada.ca/" },
+  { label: "Free Quran Canada", href: "https://www.freequran.ca/" },
 ];
 
 export const footerContent = {
@@ -36,8 +36,8 @@ export const footerContent = {
     name: "CIU",
     tagline: "The One Big Family",
     description:
-      "Canadian Islamic Union is a nonprofit organization serving families across the GTA through faith, education, and community support.",
-    logoSrc: "/images/logo.png",
+      "Canadian Islamic Union is a registered charity organization serving families across the GTA through faith, education, and community support.",
+    logoSrc: siteContent.logoSrc,
     logoAlt: "Canadian Islamic Union logo",
   },
   sections: {

@@ -175,8 +175,8 @@ export default function CiuProgramsPage() {
               <MotionItem>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 shadow-premium-lg">
                   <ZoomableImage
-                    src="/media/ciu-general/general/photos/general-03.jpg"
-                    alt="CIU weekend classroom session at the Canadian Islamic Centre"
+                    src={location.imageSrc}
+                    alt={location.imageAlt}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"

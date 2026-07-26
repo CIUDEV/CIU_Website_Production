@@ -5,19 +5,21 @@ import { Send } from "lucide-react";
 import { useToast } from "@/components/ui/ToastProvider";
 import { formPlaceholderMessages } from "@/content/FormContent";
 import {
-  membershipContent,
-  type MembershipEmailTopic,
-  type MembershipType,
-} from "@/content/MembershipContent";
+  volunteerContent,
+  type VolunteerAgeGroup,
+  type VolunteerAvailability,
+  type VolunteerRole,
+} from "@/content/VolunteerContent";
 import { formInputClassName, formShellClassName } from "@/lib/formStyles";
 
 type FormState = {
   fullName: string;
   email: string;
   phone: string;
-  city: string;
-  membershipType: MembershipType;
-  emailTopics: MembershipEmailTopic[];
+  ageGroup: VolunteerAgeGroup;
+  roles: VolunteerRole[];
+  availability: VolunteerAvailability;
+  volunteerHours: "yes" | "no" | "";
   message: string;
   agreement: boolean;
 };
@@ -26,37 +28,38 @@ const initialFormState: FormState = {
   fullName: "",
   email: "",
   phone: "",
-  city: "",
-  membershipType: "individual",
-  emailTopics: [],
+  ageGroup: "adult",
+  roles: [],
+  availability: "flexible",
+  volunteerHours: "",
   message: "",
   agreement: false,
 };
 
-export default function MembershipForm({ className = "" }: { className?: string }) {
-  const { form } = membershipContent;
+export default function VolunteerForm({ className = "" }: { className?: string }) {
+  const { form } = volunteerContent;
   const showToast = useToast();
   const [formState, setFormState] = useState<FormState>(initialFormState);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    showToast(formPlaceholderMessages.membership);
+    showToast(formPlaceholderMessages.volunteer);
   };
 
-  const toggleTopic = (topic: MembershipEmailTopic) => {
+  const toggleRole = (role: VolunteerRole) => {
     setFormState((current) => ({
       ...current,
-      emailTopics: current.emailTopics.includes(topic)
-        ? current.emailTopics.filter((item) => item !== topic)
-        : [...current.emailTopics, topic],
+      roles: current.roles.includes(role)
+        ? current.roles.filter((item) => item !== role)
+        : [...current.roles, role],
     }));
   };
 
   return (
-    <div className={`${formShellClassName} ${className}`}>
+    <div id={form.id} className={`${formShellClassName} ${className}`}>
       <div className="h-1 bg-brand" />
       <div className="p-6 sm:p-8 lg:p-10">
-        <p className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">Stay Connected</p>
+        <p className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">Serve With CIU</p>
         <h2 className="mt-2 text-2xl font-semibold text-foreground sm:text-3xl">{form.heading}</h2>
         <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">{form.description}</p>
 
@@ -98,12 +101,12 @@ export default function MembershipForm({ className = "" }: { className?: string 
 
             <label className="block">
               <span className="mb-1.5 block text-sm font-medium text-foreground">
-                {form.fields.phone.label}{" "}
-                <span className="font-normal text-muted">{form.fields.phone.optionalLabel}</span>
+                {form.fields.phone.label}
               </span>
               <input
                 type="tel"
                 name="phone"
+                required
                 value={formState.phone}
                 onChange={(event) =>
                   setFormState((current) => ({ ...current, phone: event.target.value }))
@@ -115,54 +118,88 @@ export default function MembershipForm({ className = "" }: { className?: string 
 
             <label className="block">
               <span className="mb-1.5 block text-sm font-medium text-foreground">
-                {form.fields.city.label}{" "}
-                <span className="font-normal text-muted">{form.fields.city.optionalLabel}</span>
-              </span>
-              <input
-                type="text"
-                name="city"
-                value={formState.city}
-                onChange={(event) =>
-                  setFormState((current) => ({ ...current, city: event.target.value }))
-                }
-                placeholder={form.fields.city.placeholder}
-                className={formInputClassName}
-              />
-            </label>
-
-            <label className="block">
-              <span className="mb-1.5 block text-sm font-medium text-foreground">
-                {form.fields.membershipType.label}
+                {form.fields.ageGroup.label}
               </span>
               <select
-                name="membershipType"
+                name="ageGroup"
                 required
-                value={formState.membershipType}
+                value={formState.ageGroup}
                 onChange={(event) =>
                   setFormState((current) => ({
                     ...current,
-                    membershipType: event.target.value as MembershipType,
+                    ageGroup: event.target.value as VolunteerAgeGroup,
                   }))
                 }
                 className={formInputClassName}
               >
-                {form.fields.membershipType.options.map((option) => (
+                {form.fields.ageGroup.options.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </select>
             </label>
+
+            <label className="block">
+              <span className="mb-1.5 block text-sm font-medium text-foreground">
+                {form.fields.availability.label}
+              </span>
+              <select
+                name="availability"
+                required
+                value={formState.availability}
+                onChange={(event) =>
+                  setFormState((current) => ({
+                    ...current,
+                    availability: event.target.value as VolunteerAvailability,
+                  }))
+                }
+                className={formInputClassName}
+              >
+                {form.fields.availability.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {formState.ageGroup === "high-school" ? (
+              <label className="block sm:col-span-2">
+                <span className="mb-1.5 block text-sm font-medium text-foreground">
+                  {form.fields.volunteerHours.label}{" "}
+                  <span className="font-normal text-muted">
+                    {form.fields.volunteerHours.optionalLabel}
+                  </span>
+                </span>
+                <select
+                  name="volunteerHours"
+                  value={formState.volunteerHours}
+                  onChange={(event) =>
+                    setFormState((current) => ({
+                      ...current,
+                      volunteerHours: event.target.value as FormState["volunteerHours"],
+                    }))
+                  }
+                  className={formInputClassName}
+                >
+                  <option value="">Select one</option>
+                  {form.fields.volunteerHours.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
           </div>
 
           <fieldset>
-            <legend className="text-sm font-medium text-foreground">
-              {form.fields.emailTopics.label}
-            </legend>
-            <p className="mt-1 text-sm text-muted">{form.fields.emailTopics.description}</p>
+            <legend className="text-sm font-medium text-foreground">{form.fields.roles.label}</legend>
+            <p className="mt-1 text-sm text-muted">{form.fields.roles.description}</p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {form.fields.emailTopics.options.map((option) => {
-                const checked = formState.emailTopics.includes(option.value);
+              {form.fields.roles.options.map((option) => {
+                const checked = formState.roles.includes(option.value);
                 return (
                   <label
                     key={option.value}
@@ -174,10 +211,10 @@ export default function MembershipForm({ className = "" }: { className?: string 
                   >
                     <input
                       type="checkbox"
-                      name="emailTopics"
+                      name="roles"
                       value={option.value}
                       checked={checked}
-                      onChange={() => toggleTopic(option.value)}
+                      onChange={() => toggleRole(option.value)}
                       className="h-4 w-4 rounded border-border text-brand focus:ring-brand/30"
                     />
                     {option.label}

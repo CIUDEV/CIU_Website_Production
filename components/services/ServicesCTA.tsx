@@ -4,7 +4,7 @@ import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import {
   homeBtnOutlineClass,
-  homeBtnPrimaryClass,
+  homeBtnOnDarkPrimaryClass,
   homeSectionClass,
 } from "@/components/home/homeUi";
 import { MotionSection } from "@/components/motion";
@@ -19,7 +19,7 @@ function ctaButtonClass(variant: "primary" | "outline" | "gold") {
     return `${homeBtnOutlineClass} border-white/25 bg-white/10 text-white hover:border-white/40 hover:bg-white/15`;
   }
 
-  return `${homeBtnPrimaryClass} bg-white text-brand hover:bg-brand-light`;
+  return homeBtnOnDarkPrimaryClass;
 }
 
 export default function ServicesCTA() {

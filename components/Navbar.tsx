@@ -24,14 +24,41 @@ function isLinkActive(pathname: string, href: string) {
   return path === "/" ? pathname === "/" : pathname.startsWith(path);
 }
 
-function isNavItemActive(pathname: string, item: NavItem) {
-  if (isLinkActive(pathname, item.href)) return true;
+function getPrimaryNavOwner(pathname: string, items: NavItem[]) {
+  let owner: NavItem | undefined;
+  let longestMatch = -1;
 
-  return item.children?.some((child) => isLinkActive(pathname, child.href)) ?? false;
+  for (const item of items) {
+    const path = stripHash(item.href);
+    const matches =
+      path === "/"
+        ? pathname === "/"
+        : pathname === path || pathname.startsWith(`${path}/`);
+
+    if (matches && path.length > longestMatch) {
+      longestMatch = path.length;
+      owner = item;
+    }
+  }
+
+  return owner;
 }
 
-function isDropdownChildActive(pathname: string, childHref: string) {
+function isNavItemActive(pathname: string, item: NavItem) {
+  return getPrimaryNavOwner(pathname, navLinks)?.href === item.href;
+}
+
+function isDropdownChildActive(pathname: string, childHref: string, parentItem: NavItem) {
   const childPath = stripHash(childHref);
+  const owner = getPrimaryNavOwner(pathname, navLinks);
+
+  if (
+    owner &&
+    childPath === stripHash(owner.href) &&
+    owner.href !== parentItem.href
+  ) {
+    return false;
+  }
 
   if (childHref.includes("#")) {
     return pathname === childPath || pathname.startsWith(`${childPath}/`);
@@ -153,7 +180,7 @@ function DesktopDropdown({
         <div className="relative overflow-hidden rounded-md border border-stone-200 bg-white shadow-[0_8px_30px_rgba(28,25,23,0.12)]">
           <div className="absolute -top-[6px] left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-stone-200 bg-white" />
           {item.children.map((child, index) => {
-            const childActive = isDropdownChildActive(pathname, child.href);
+            const childActive = isDropdownChildActive(pathname, child.href, item);
 
             return (
               <Link
@@ -244,7 +271,7 @@ function MobileNavItem({
                 href={child.href}
                 onClick={onNavigate}
                 className={`block rounded-md px-2 py-2.5 text-sm transition-colors sm:text-base ${
-                  isDropdownChildActive(pathname, child.href)
+                  isDropdownChildActive(pathname, child.href, item)
                     ? "text-brand"
                     : "text-stone-600 hover:text-brand"
                 }`}

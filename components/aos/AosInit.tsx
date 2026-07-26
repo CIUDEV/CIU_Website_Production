@@ -29,11 +29,17 @@ function initAos() {
   AOS.refresh();
 }
 
+function scheduleAosInit() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => initAos());
+  });
+}
+
 export default function AosInit() {
   const pathname = usePathname();
 
   useEffect(() => {
-    initAos();
+    scheduleAosInit();
 
     const refreshSoon = window.setTimeout(() => initAos(), 120);
     const refreshLater = window.setTimeout(() => initAos(), 450);
@@ -55,7 +61,7 @@ export default function AosInit() {
   }, []);
 
   useEffect(() => {
-    initAos();
+    scheduleAosInit();
   }, [pathname]);
 
   return null;

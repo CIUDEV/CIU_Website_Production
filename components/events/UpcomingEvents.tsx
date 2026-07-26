@@ -11,6 +11,7 @@ import { homeBtnOutlineClass, homeSectionClass } from "@/components/home/homeUi"
 import { MotionItem, MotionStagger } from "@/components/motion";
 import {
   categoryLabels,
+  eventFilterCategories,
   upcomingEvents,
   upcomingEventsSection,
   type EventDateFilterId,
@@ -20,14 +21,9 @@ import {
 
 const INITIAL_VISIBLE = 6;
 
-function isThisMonth(date?: string) {
-  if (!date) return false;
-  const parsed = new Date(`${date}T12:00:00`);
-  const now = new Date();
-  return (
-    parsed.getFullYear() === now.getFullYear() && parsed.getMonth() === now.getMonth()
-  );
-}
+const validCategoryIds = new Set(
+  eventFilterCategories.map((item) => item.id)
+);
 
 function matchesSearch(event: EventItem, query: string) {
   if (!query.trim()) return true;
@@ -54,9 +50,6 @@ function filterEvents(
   return events.filter((event) => {
     if (category !== "all" && event.category !== category) return false;
     if (dateFilter === "recurring" && !event.recurring) return false;
-    if (dateFilter === "this-month" && !event.recurring && !isThisMonth(event.date)) {
-      return false;
-    }
     if (!matchesSearch(event, search)) return false;
     return true;
   });
@@ -72,10 +65,7 @@ export default function UpcomingEvents() {
 
   useEffect(() => {
     const param = searchParams.get("category");
-    if (
-      param &&
-      ["education", "youth", "family", "community", "spiritual", "volunteer"].includes(param)
-    ) {
+    if (param && validCategoryIds.has(param as EventFilterCategoryId)) {
       setCategory(param as EventFilterCategoryId);
     }
   }, [searchParams]);

@@ -8,7 +8,7 @@ import MediaHero from "@/components/media/MediaHero";
 import MembershipForm from "@/components/membership/MembershipForm";
 import { MotionItem, MotionSection, MotionStagger } from "@/components/motion";
 import { membershipContent } from "@/content/MembershipContent";
-import { ArrowUpRight, UserPlus } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 export default function MembershipPage() {
   const { hero, overview, benefits, process, sidebar } = membershipContent;
@@ -32,7 +32,7 @@ export default function MembershipPage() {
               <MotionItem key={benefit.title}>
                 <article className="h-full rounded-3xl border border-border/80 bg-surface p-6 shadow-premium">
                   <div className="inline-flex rounded-2xl bg-brand/10 p-3 text-brand">
-                    <UserPlus className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                    <Mail className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
                   </div>
                   <h3 className="mt-4 text-base font-semibold text-foreground sm:text-lg">
                     {benefit.title}

@@ -86,6 +86,8 @@ export default function TopBar({ compact = false }: { compact?: boolean }) {
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={social.label}
                       className="inline-flex transition-opacity hover:opacity-80"
                     >

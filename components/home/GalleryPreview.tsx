@@ -17,6 +17,9 @@ const layoutByIndex = [
   "min-h-[160px] sm:min-h-[180px] lg:col-span-3 lg:row-span-1 lg:min-h-0",
   "min-h-[160px] sm:min-h-[180px] lg:col-span-3 lg:row-span-1 lg:min-h-0",
   "min-h-[160px] sm:min-h-[180px] lg:col-span-3 lg:row-span-1 lg:min-h-0",
+  "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
+  "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
+  "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
 ];
 
 function GalleryTile({
@@ -48,8 +51,8 @@ function GalleryTile({
         fill
         sizes={
           featured
-            ? "(max-width: 1024px) 100vw, 58vw"
-            : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            ? "(max-width: 1024px) 100vw, 60vw"
+            : "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         }
         className="object-cover transition duration-700 group-hover:scale-[1.06]"
       />
@@ -63,10 +66,10 @@ function GalleryTile({
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] p-4 sm:p-5">
         <p className="text-[0.65rem] font-semibold tracking-[0.16em] text-gold-light uppercase sm:text-xs">
-          Community Moment
+          {item.label ?? "Community Moment"}
         </p>
         <h3
-          className={`mt-1 font-semibold text-white ${featured ? "text-lg sm:text-xl lg:text-2xl" : "text-sm sm:text-base"}`}
+          className={`mt-1 font-semibold tracking-tight text-white ${featured ? "text-lg sm:text-xl lg:text-2xl" : "text-sm sm:text-base"}`}
         >
           {item.title}
         </h3>
@@ -107,7 +110,7 @@ export default function GalleryPreview() {
 
         <MotionStagger className="mt-12 grid auto-rows-fr grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-12 lg:gap-5">
           {items.map((item, index) => (
-            <GalleryTile key={item.imageSrc} item={item} index={index} featured={index === 0} />
+            <GalleryTile key={`${item.title}-${index}`} item={item} index={index} featured={index === 0} />
           ))}
         </MotionStagger>
 

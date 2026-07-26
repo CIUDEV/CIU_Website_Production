@@ -1,49 +1,50 @@
+import { servicesImages } from "@/content/ServicesContent";
+
 export type MembershipType = "individual" | "family";
 
-export type MembershipInterest =
-  | "education"
+export type MembershipEmailTopic =
   | "events"
-  | "volunteer"
-  | "family-services"
-  | "spiritual-guidance";
+  | "education"
+  | "family-programs"
+  | "community-news"
+  | "charitable-projects";
 
 export const membershipContent = {
   hero: {
     label: "CIU MEMBERSHIP",
-    heading: "Join the CIU Family",
+    heading: "Stay Connected With CIU",
     intro:
-      "Become a member of the Canadian Islamic Union to access community programs, educational opportunities, family support, and a network of families across the GTA.",
-    imageSrc: "/images/home/about-community.jpg",
-    imageAlt: "Community members gathered at the Canadian Islamic Centre",
+      "CIU membership is our community mailing list — join to receive ongoing emails about programs, events, family services, and important announcements from the Canadian Islamic Union.",
+    imageSrc: servicesImages.familyServices,
+    imageAlt: "Families and children gathered in the CIU community centre",
   },
   overview: {
     label: "Why Join",
-    heading: "Membership Benefits",
+    heading: "Community Updates in Your Inbox",
     intro:
-      "CIU membership helps families stay connected to programs, services, and community life at the Canadian Islamic Centre.",
-    note: "Membership terms, eligibility, fees, benefits, and approval requirements are subject to CIU's official membership policies.",
+      "Members stay informed about what is happening at the centre — from classes and gatherings to service updates and seasonal programs across the GTA.",
+    note: "Membership is free. You may unsubscribe from CIU emails at any time. Membership details and policies may be updated as CIU programs evolve.",
   },
   benefits: [
     {
-      title: "Spiritual Support",
-      description: "Access to mentorship and spiritual development opportunities.",
+      title: "Program Announcements",
+      description: "Be first to hear about classes, workshops, and seasonal community programs.",
     },
     {
-      title: "Family Programs",
-      description: "Participation in family-oriented programs, gatherings, and support services.",
+      title: "Event Invitations",
+      description: "Receive updates for family gatherings, picnics, lectures, and special events.",
     },
     {
-      title: "Education Access",
-      description: "Connection to CIU and Azhar Canada learning programs and registration support.",
+      title: "Family & Service News",
+      description: "Learn about family services, education pathways, and centre announcements.",
     },
     {
-      title: "Community Network",
-      description:
-        "Opportunities to connect with families, professionals, teachers, volunteers, and community leaders.",
+      title: "Community Highlights",
+      description: "Stay connected to CIU projects, outreach efforts, and charitable initiatives.",
     },
     {
-      title: "Events & Activities",
-      description: "Priority awareness of classes, gatherings, workshops, and seasonal programs.",
+      title: "Important Reminders",
+      description: "Get timely notices about schedule changes, Ramadan programs, and centre updates.",
     },
   ],
   process: {
@@ -51,29 +52,33 @@ export const membershipContent = {
     steps: [
       {
         step: 1,
-        title: "Submit Application",
-        description: "Complete the membership form with your contact and household details.",
+        title: "Sign Up Below",
+        description: "Share your contact details and choose the topics you want to hear about.",
       },
       {
         step: 2,
-        title: "Team Review",
-        description: "Our team reviews your application and may follow up with any questions.",
+        title: "Join the Mailing List",
+        description: "CIU adds you to our member email list for ongoing community updates.",
       },
       {
         step: 3,
-        title: "Welcome to CIU",
-        description: "Approved members receive guidance on programs, services, and next steps.",
+        title: "Stay Informed",
+        description: "Receive emails about programs, events, and announcements that matter to you.",
       },
     ],
   },
   form: {
-    heading: "Membership Application",
+    heading: "Membership Sign-Up",
     description:
-      "Fill out the form below to apply for CIU membership. We will contact you to confirm details and next steps.",
+      "Join the CIU mailing list to receive ongoing emails about community life, programs, and announcements. This form is for staying connected — not for volunteer registration.",
     fields: {
       fullName: { label: "Full Name", placeholder: "Your full name" },
       email: { label: "Email Address", placeholder: "you@example.com" },
-      phone: { label: "Phone Number", placeholder: "905-555-0123" },
+      phone: {
+        label: "Phone Number",
+        placeholder: "905-555-0123",
+        optionalLabel: "(optional)",
+      },
       city: {
         label: "City",
         placeholder: "Mississauga",
@@ -86,44 +91,35 @@ export const membershipContent = {
           { value: "family", label: "Family" },
         ] as const,
       },
-      householdSize: {
-        label: "Household Size",
-        placeholder: "e.g. 4",
-        optionalLabel: "(optional, for family membership)",
-      },
-      interests: {
-        label: "Areas of Interest",
-        description: "Select all that apply.",
+      emailTopics: {
+        label: "Email Me About",
+        description: "Select the updates you would like to receive.",
         options: [
-          { value: "education", label: "Islamic Education" },
-          { value: "events", label: "Community Events" },
-          { value: "volunteer", label: "Volunteering" },
-          { value: "family-services", label: "Family Services" },
-          { value: "spiritual-guidance", label: "Spiritual Guidance" },
+          { value: "events", label: "Events & Gatherings" },
+          { value: "education", label: "Education & Classes" },
+          { value: "family-programs", label: "Family Programs" },
+          { value: "community-news", label: "Community News" },
+          { value: "charitable-projects", label: "Projects & Outreach" },
         ] as const,
       },
       message: {
         label: "Additional Notes",
-        placeholder: "Share anything else that would help us process your application...",
+        placeholder: "Tell us about your household or anything else we should know...",
         optionalLabel: "(optional)",
       },
       agreement: {
         label:
-          "I confirm that the information provided is accurate and I agree to be contacted by CIU regarding my membership application.",
+          "I agree to receive ongoing emails from CIU about community programs, events, and announcements. I understand I may unsubscribe at any time.",
       },
     },
-    submitLabel: "Submit Application",
-    successTitle: "Application received",
-    successMessage:
-      "Thank you for applying to become a CIU member. Our team has received your application and will contact you soon with next steps.",
-    resetLabel: "Submit another application",
+    submitLabel: "Join the Mailing List",
   },
   sidebar: {
-    heading: "Questions?",
-    body: "If you need help with your application or want to learn more before applying, contact our team.",
+    heading: "Want to Serve at the Centre?",
+    body: "Membership is for email updates. If you want to volunteer for masjid and community work, use the volunteer registration form instead.",
     contactLabel: "Contact CIU",
     contactHref: "/Contact",
-    volunteerLabel: "Interested in volunteering?",
-    volunteerHref: "/Services/volunteer",
+    volunteerLabel: "Register to Volunteer",
+    volunteerHref: "/Services/volunteer#volunteer-form",
   },
 };

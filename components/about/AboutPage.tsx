@@ -131,7 +131,7 @@ function StorySection({
         aria-hidden="true"
       />
 
-      <div className="relative grid items-center lg:grid-cols-2">
+      <div className="relative grid items-stretch lg:grid-cols-2">
         <div className="p-7 sm:p-9 lg:py-10">
           <div className="inline-flex rounded-2xl bg-brand-gradient p-[2px] shadow-premium">
             <div className="rounded-[14px] bg-surface p-3">
@@ -161,8 +161,12 @@ function StorySection({
           </ul>
         </div>
 
-        <div className="border-t border-border/80 p-4 sm:p-5 lg:border-t-0 lg:border-l lg:p-5 lg:pl-0">
-          <ImagePlaceholder {...image} aspect="video" className="rounded-2xl border-0 shadow-none" />
+        <div className="flex min-h-[300px] border-t border-border/80 p-4 sm:min-h-[360px] sm:p-5 lg:min-h-[480px] lg:border-t-0 lg:border-l lg:p-5 lg:pl-0">
+          <ImagePlaceholder
+            {...image}
+            aspect="fill"
+            className="h-full w-full rounded-2xl border-0 shadow-none"
+          />
         </div>
       </div>
     </div>
@@ -285,8 +289,12 @@ export default function AboutPage() {
               />
             </MotionItem>
           </MotionStagger>
-          <div className="mx-auto mt-10 max-w-3xl">
-            <ImagePlaceholder {...mission.image} />
+          <div className="mx-auto mt-10 w-full max-w-5xl">
+            <ImagePlaceholder
+              {...mission.image}
+              aspect="banner"
+              className="min-h-[260px] sm:min-h-[320px] lg:min-h-[380px]"
+            />
           </div>
           </MotionSection>
         </div>
@@ -302,8 +310,12 @@ export default function AboutPage() {
             </MotionItem>
           ))}
         </MotionStagger>
-        <div className="mx-auto mt-10 max-w-3xl">
-          <ImagePlaceholder {...values.image} />
+        <div className="mx-auto mt-10 w-full max-w-5xl">
+          <ImagePlaceholder
+            {...values.image}
+            aspect="banner"
+            className="min-h-[260px] sm:min-h-[320px] lg:min-h-[360px]"
+          />
         </div>
         </MotionSection>
       </section>
@@ -319,8 +331,8 @@ export default function AboutPage() {
               </MotionItem>
             ))}
           </MotionStagger>
-          <div className="mx-auto mt-10 max-w-4xl">
-            <ImagePlaceholder {...whatWeDo.image} aspect="wide" />
+          <div className="mx-auto mt-10 max-w-5xl">
+            <ImagePlaceholder {...whatWeDo.image} aspect="collage" graphic />
           </div>
           </MotionSection>
         </div>
@@ -328,69 +340,70 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <MotionSection>
-        <MotionStagger className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <MotionItem>
-            <SectionTitle icon={<AcademyIcon />} title={alAzhar.title} />
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
-              {alAzhar.intro}
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
-              {alAzhar.description}
-            </p>
-            <h3 className="mt-6 text-base font-semibold text-foreground sm:text-lg">
-              {alAzhar.goalsTitle}
-            </h3>
-            <ul className="mt-3 space-y-2">
-              {alAzhar.goals.map((goal) => (
-                <li
-                  key={goal}
-                  className="flex gap-2 text-sm leading-relaxed text-muted sm:text-base"
+          <MotionStagger className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <MotionItem>
+              <SectionTitle icon={<AcademyIcon />} title={alAzhar.title} />
+              <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
+                {alAzhar.intro}
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
+                {alAzhar.description}
+              </p>
+              <h3 className="mt-6 text-base font-semibold text-foreground sm:text-lg">
+                {alAzhar.goalsTitle}
+              </h3>
+              <ul className="mt-3 space-y-2">
+                {alAzhar.goals.map((goal) => (
+                  <li
+                    key={goal}
+                    className="flex gap-2 text-sm leading-relaxed text-muted sm:text-base"
+                  >
+                    <CheckIcon className="mt-0.5 shrink-0 text-gold" />
+                    {goal}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href={alAzhar.portalHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={homeBtnPrimaryClass}
                 >
-                  <CheckIcon className="mt-0.5 shrink-0 text-gold" />
-                  {goal}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a
-                href={alAzhar.portalHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={homeBtnPrimaryClass}
-              >
-                Student Portal — Log In
-              </a>
-              <Link href="/Education" className={homeBtnOutlineClass}>
-                Explore Azhar Canada
-              </Link>
-            </div>
-          </MotionItem>
-          <MotionItem>
-          <ImagePlaceholder {...alAzhar.image} aspect="wide" />
-          </MotionItem>
-        </MotionStagger>
+                  Student Portal — Log In
+                </a>
+                <Link href="/Education" className={homeBtnOutlineClass}>
+                  Explore Azhar Canada College
+                </Link>
+              </div>
+            </MotionItem>
+            <MotionItem>
+              <ImagePlaceholder {...alAzhar.image} aspect="landscape" graphic />
+            </MotionItem>
+          </MotionStagger>
         </MotionSection>
       </section>
 
       <section className="border-y border-border bg-surface">
         <div className="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <MotionSection>
-          <MotionStagger className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <MotionItem>
-            <ImagePlaceholder {...community.image} aspect="wide" />
-            </MotionItem>
-            <MotionItem>
-              <SectionTitle
-                icon={<CommunitySectionIcon />}
-                title={community.title}
-              />
-              <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
-                {community.paragraphs.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-            </MotionItem>
-          </MotionStagger>
+            <MotionStagger className="grid items-stretch gap-10 lg:grid-cols-2 lg:gap-14">
+              <MotionItem>
+                <ImagePlaceholder
+                  {...community.image}
+                  aspect="wide"
+                  className="min-h-[280px] sm:min-h-[340px] lg:min-h-[420px]"
+                />
+              </MotionItem>
+              <MotionItem className="flex flex-col justify-center">
+                <SectionTitle icon={<CommunitySectionIcon />} title={community.title} />
+                <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
+                  {community.paragraphs.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              </MotionItem>
+            </MotionStagger>
           </MotionSection>
         </div>
       </section>
@@ -409,31 +422,66 @@ export default function AboutPage() {
             </MotionItem>
           ))}
         </MotionStagger>
-        <div className="mx-auto mt-10 max-w-4xl">
-          <ImagePlaceholder {...impact.image} aspect="wide" />
+        <div className="relative mx-auto mt-12 max-w-5xl">
+          <div
+            className="pointer-events-none absolute -inset-x-6 -inset-y-8 rounded-[2.5rem] bg-gradient-to-b from-gold/10 via-brand/[0.04] to-transparent blur-2xl"
+            aria-hidden="true"
+          />
+          <ImagePlaceholder
+            {...impact.image}
+            aspect="collage"
+            bare
+            className="shadow-[0_28px_56px_-18px_rgba(26,67,52,0.28)] ring-1 ring-black/[0.06]"
+          />
         </div>
         </MotionSection>
       </section>
 
-      <section className="border-y border-border bg-surface">
+      <section className="border-y border-border/80 bg-section-warm">
         <div className="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <MotionSection>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto inline-flex rounded-xl bg-brand/10 p-3">
-              <LookingAheadIcon />
+            <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium-lg">
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand/[0.06] to-transparent"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute left-0 top-0 h-16 w-16 rounded-tl-3xl border-l-[3px] border-t-[3px] border-gold/70"
+                aria-hidden="true"
+              />
+
+              <div className="relative grid items-stretch lg:grid-cols-2">
+                <div className="flex min-h-[300px] border-b border-border/80 p-4 sm:min-h-[360px] sm:p-5 lg:min-h-[480px] lg:border-b-0 lg:border-r lg:p-5 lg:pr-0">
+                  <ImagePlaceholder
+                    {...lookingAhead.image}
+                    aspect="fill"
+                    className="h-full w-full rounded-2xl border-0 shadow-none"
+                  />
+                </div>
+
+                <div className="p-7 sm:p-9 lg:py-10 lg:pl-10 lg:pr-9">
+                  <div className="inline-flex rounded-2xl bg-brand-gradient p-[2px] shadow-premium">
+                    <div className="rounded-[14px] bg-surface p-3">
+                      <LookingAheadIcon />
+                    </div>
+                  </div>
+                  <div className="gold-accent-bar mt-5 w-10" aria-hidden="true" />
+                  <h2 className="mt-4 text-xl font-semibold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
+                    {lookingAhead.title}
+                  </h2>
+                  <div className="mt-6 space-y-4">
+                    {lookingAhead.paragraphs.map((paragraph, index) => (
+                      <p
+                        key={index}
+                        className="rounded-xl border border-border/60 bg-background/80 px-4 py-3.5 text-sm leading-relaxed text-muted sm:text-base lg:leading-7"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-              {lookingAhead.title}
-            </h2>
-          </div>
-          <div className="mx-auto mt-8 max-w-3xl space-y-4 text-center text-sm leading-relaxed text-muted sm:text-base lg:text-lg">
-            {lookingAhead.paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-          <div className="mx-auto mt-10 max-w-5xl">
-            <ImagePlaceholder {...lookingAhead.image} aspect="banner" />
-          </div>
           </MotionSection>
         </div>
       </section>

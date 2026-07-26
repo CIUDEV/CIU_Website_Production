@@ -1,9 +1,13 @@
-export default function FamilyCounselingPage() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-12">
-      <h1 className="text-3xl font-semibold text-zinc-900">
-        Family Counseling
-      </h1>
-    </div>
-  );
+import type { Metadata } from "next";
+import FamilyCounselingPage from "@/components/services/FamilyCounselingPage";
+import { siteContent } from "@/content/SiteContent";
+
+export const metadata: Metadata = {
+  title: `Family Services | ${siteContent.shortName}`,
+  description:
+    "Faith-based family guidance from CIU — marriage counseling, family dispute support, inheritance guidance, and religious consultation with Sheikh Ashraf.",
+};
+
+export default function Page() {
+  return <FamilyCounselingPage />;
 }

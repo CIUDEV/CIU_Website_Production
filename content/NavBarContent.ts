@@ -1,4 +1,5 @@
 import type { NavItem } from "./types";
+import { siteContent } from "./SiteContent";
 
 export const navLinks: NavItem[] = [
   { href: "/", label: "Home" },
@@ -7,7 +8,7 @@ export const navLinks: NavItem[] = [
     href: "/Education",
     label: "Education",
     children: [
-      { href: "/Education/azhar", label: "Azhar Programs" },
+      { href: "/Education/azhar", label: "Azhar Canada College" },
       { href: "/Education/ciu", label: "CIU Programs" },
     ],
   },
@@ -58,7 +59,7 @@ export const donateLink = { href: "/Donate", label: "Donate" };
 export const navBarContent = {
   brand: {
     name: "CIU",
-    logoSrc: "/images/logo.png",
+    logoSrc: siteContent.logoSrc,
     logoAlt: "CIU logo",
   },
   mobile: {

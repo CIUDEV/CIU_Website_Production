@@ -6,6 +6,7 @@ import {
   pickScrollAnimation,
   type AosScrollAnimation,
 } from "@/components/aos/config";
+import { useAosReady } from "@/components/aos/useAosReady";
 import { useReducedScrollMotion } from "@/components/motion/useReducedScrollMotion";
 import { useAosRefresh } from "@/components/aos/useAosRefresh";
 
@@ -19,20 +20,20 @@ export function MotionStagger({
   className?: string;
 }) {
   const reduceMotion = useReducedScrollMotion();
-  useAosRefresh();
+  const aosReady = useAosReady();
+  const animate = aosReady && !reduceMotion;
+  useAosRefresh(animate);
   const items = Children.toArray(children);
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
 
   return (
     <div className={className}>
-      {items.map((child, index) => (
-        <StaggerIndexContext.Provider key={index} value={index}>
-          {child}
-        </StaggerIndexContext.Provider>
-      ))}
+      {animate
+        ? items.map((child, index) => (
+            <StaggerIndexContext.Provider key={index} value={index}>
+              {child}
+            </StaggerIndexContext.Provider>
+          ))
+        : children}
     </div>
   );
 }
@@ -49,11 +50,13 @@ export function MotionItem({
   delay?: number;
 }) {
   const reduceMotion = useReducedScrollMotion();
+  const aosReady = useAosReady();
   const staggerIndex = useContext(StaggerIndexContext);
   const resolvedAnimation = animation ?? pickScrollAnimation(staggerIndex);
   const resolvedDelay = delay ?? staggerIndex * aosDefaults.staggerStep;
+  const animate = aosReady && !reduceMotion;
 
-  if (reduceMotion) {
+  if (!animate) {
     return <div className={className}>{children}</div>;
   }
 

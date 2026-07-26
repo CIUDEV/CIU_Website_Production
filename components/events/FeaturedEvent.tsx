@@ -39,7 +39,7 @@ export default function FeaturedEvent() {
               alt={imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="object-contain bg-section-warm p-4 sm:object-cover sm:p-0"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-black/10" />
           </MotionItem>

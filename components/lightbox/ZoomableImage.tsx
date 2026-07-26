@@ -1,6 +1,7 @@
 "use client";
 
 import LightboxTrigger from "@/components/lightbox/LightboxTrigger";
+import { cloudinaryFullSize, isCloudinaryUrl } from "@/lib/cloudinary";
 import Image, { type ImageProps, type StaticImageData } from "next/image";
 
 export type ZoomableImageProps = ImageProps & {
@@ -13,6 +14,11 @@ function resolveSrc(src: ImageProps["src"]): string {
   return (src as StaticImageData).src;
 }
 
+function resolveLightboxSrc(src: ImageProps["src"]): string {
+  const resolved = resolveSrc(src);
+  return isCloudinaryUrl(resolved) ? cloudinaryFullSize(resolved) : resolved;
+}
+
 export default function ZoomableImage({
   zoomable = true,
   caption,
@@ -20,10 +26,13 @@ export default function ZoomableImage({
   alt = "",
   src,
   fill,
+  quality = 90,
   ...props
 }: ZoomableImageProps) {
   if (!zoomable || !src) {
-    return <Image className={className} alt={alt} src={src} fill={fill} {...props} />;
+    return (
+      <Image className={className} alt={alt} src={src} fill={fill} quality={quality} {...props} />
+    );
   }
 
   const image = (
@@ -32,6 +41,7 @@ export default function ZoomableImage({
       alt={alt}
       src={src}
       fill={fill}
+      quality={quality}
       {...props}
     />
   );
@@ -39,7 +49,7 @@ export default function ZoomableImage({
   if (fill) {
     return (
       <LightboxTrigger
-        src={resolveSrc(src)}
+        src={resolveLightboxSrc(src)}
         alt={typeof alt === "string" ? alt : ""}
         caption={caption}
         className="absolute inset-0"
@@ -51,7 +61,7 @@ export default function ZoomableImage({
 
   return (
     <LightboxTrigger
-      src={resolveSrc(src)}
+      src={resolveLightboxSrc(src)}
       alt={typeof alt === "string" ? alt : ""}
       caption={caption}
       className="relative inline-block"

@@ -22,7 +22,10 @@ export const donateContent = {
     heading: "Give With Intention. Grow With Community.",
     intro:
       "Your generosity helps CIU deliver Islamic education, family support, community programs, and charitable outreach across the GTA. Every gift, large or small, strengthens the work we do together as one community.",
-    badge: "Registered Nonprofit Organization",
+    badge: "Registered Charity Organization",
+    imageSrc:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024097/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
+    imageAlt: "Interior view of domes and arches in the Blue Mosque, Istanbul",
   },
   impact: {
     heading: "Where Your Gift Goes",
@@ -127,7 +130,7 @@ export const donateContent = {
   receipt: {
     heading: "Receipts & Questions",
     body:
-      "Canadian Islamic Union is a registered nonprofit organization. Tax receipts may be available for eligible donations. Contact us after giving if you need a receipt or have questions about your gift.",
+      "Canadian Islamic Union is a registered charity organization. Tax receipts may be available for eligible donations. Contact us after giving if you need a receipt or have questions about your gift.",
     contactLabel: "Contact our team",
     contactHref: "/Contact",
   },

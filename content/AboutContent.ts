@@ -1,3 +1,10 @@
+import { imagePlaceholder } from "./imagePlaceholder";
+
+/** @deprecated Use imagePlaceholder from ./imagePlaceholder */
+export function aboutImagePlaceholder(slot: string, width = 1200, height = 800): string {
+  return imagePlaceholder(slot, width, height);
+}
+
 export type ImagePlaceholderContent = {
   label: string;
   caption: string;
@@ -33,9 +40,10 @@ export const aboutContent = {
     headline: "Faith, Families, and Community",
     badge: "CRA Registered Charity",
     intro:
-      "The Canadian Islamic Union is a registered nonprofit charity organization serving Muslim families across Canada through education, mentorship, and community support. Our work is guided by faith and dedicated to the benefit of our community.",
-    imageSrc: "/images/about/about-hero.png",
-    imageAlt: "Community members gathered at tables in the CIU hall for an educational event",
+      "The Canadian Islamic Union is a registered charity organization serving Muslim families across Canada through education, mentorship, and community support. Our work is guided by faith and dedicated to the benefit of our community.",
+    imageSrc:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024097/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
+    imageAlt: "Interior view of ornate mosque domes with Islamic architecture",
     image: {
       label: "CIU Community",
       caption: "A welcoming community gathering at the Canadian Islamic Union.",
@@ -43,13 +51,17 @@ export const aboutContent = {
   },
   charityRegistration: {
     label: "CRA Registered Charity",
-    title: "Officially Registered with the Canada Revenue Agency",
+    title: "Officially Registered Charity Organization",
     registrationLabel: "Charity Registration Number",
     registrationNumber: "752892877RR0001",
+    /** Cloudinary slot: about-charity-registration-bg */
+    backgroundImageSrc:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785026130/gallery-featured_x9katl.jpg",
+    backgroundImageAlt: "Prayer hall mihrab and minbar at the Canadian Islamic Centre",
     description:
-      "The Canadian Islamic Union is a registered nonprofit charity organization. Your support helps us deliver education, family services, and community programs with transparency and accountability.",
+      "The Canadian Islamic Union is a registered charity organization. Your support helps us deliver education, family services, and community programs with transparency and accountability.",
     highlights: [
-      "Registered charity with the Canada Revenue Agency (CRA)",
+      "Registered charity organization",
       "Eligible donations may qualify for official tax receipts",
       "Committed to transparent, accountable charitable service",
     ],
@@ -58,7 +70,7 @@ export const aboutContent = {
     title: "Our Story",
     lead: "Every thriving community begins with a shared vision.",
     intro:
-      "The Canadian Islamic Union was established as a registered nonprofit charity to provide a welcoming environment where individuals and families can grow in faith, knowledge, and connection.",
+      "The Canadian Islamic Union was established as a registered charity organization to provide a welcoming environment where individuals and families can grow in faith, knowledge, and connection.",
     highlights: [
       "We combine sincere worship, strong character, and community service.",
       "Education, mentorship, and support come together under one shared mission.",
@@ -67,16 +79,17 @@ export const aboutContent = {
     image: {
       label: "Our Story",
       caption: "CIU scholars and community leaders serving together.",
-      imageSrc: "/images/about/story.png",
-      imageAlt: "CIU poster: Pray to Allah and Be Confident of a Response",
-      imagePosition: "left center",
-      imageFit: "contain" as const,
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024113/Mosque_silhouette_at_sunset_rcvswj.avif",
+      imageAlt: "Mosque silhouette at sunset",
+      imagePosition: "center center",
+      imageFit: "cover" as const,
     },
   },
   vision: {
     title: "Our Vision",
     intro:
-      "To cultivate a united and well-organized Muslim community striving for personal excellence, collective growth, and meaningful service. We serve as a registered nonprofit charity for the benefit of all.",
+      "To cultivate a united and well-organized Muslim community striving for personal excellence, collective growth, and meaningful service. We serve as a registered charity organization for the benefit of all.",
     highlights: [
       "A community united in faith, purpose, and cooperation.",
       "Personal excellence rooted in Islamic values and character.",
@@ -88,7 +101,7 @@ export const aboutContent = {
   mission: {
     title: "Our Mission",
     intro:
-      "As a registered nonprofit charity organization, we strengthen individuals, families, and communities through accessible Islamic education, spiritual mentorship, and community-focused services.",
+      "As a registered charity organization, we strengthen individuals, families, and communities through accessible Islamic education, spiritual mentorship, and community-focused services.",
     commitments: [
       "Authentic Islamic education for all age groups.",
       "Leadership and character development through mentorship.",
@@ -97,11 +110,13 @@ export const aboutContent = {
       "Active participation in building stronger communities.",
     ],
     image: {
-      label: "Community Service",
-      caption: "Volunteers serving the community.",
-      imageSrc: "/images/about/about-story.jpg",
-      imageAlt: "Speaker presenting from a podium during a community event at CIU",
-      imagePosition: "right center",
+      label: "Faith & Service",
+      caption: "Spiritual devotion and compassionate service at the heart of our mission.",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024118/muslim-woman-prayer-having-worship-praying-with-hands-open-doing-dua-allah-sunset_606562-445_aj3yif.avif",
+      imageAlt: "Muslim woman in dua with hands raised at sunset",
+      imagePosition: "center center",
+      imageFit: "cover" as const,
     },
   },
   values: {
@@ -148,9 +163,12 @@ export const aboutContent = {
     ] satisfies ValueItem[],
     image: {
       label: "Our Values",
-      caption: "Sisters from the community gathered at the CIU centre.",
-      imageSrc: "/images/about/values.jpg",
-      imageAlt: "Group of women sitting together in front of a world map at the community centre",
+      caption: "Faith and devotion at the heart of our community.",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024101/devout-muslim-man-in-traditional-attire-praying-with-tasbih-beads-on-a-red-mat-inside-a-mosque-photo_woaih2.jpg",
+      imageAlt: "Muslim man in traditional attire praying inside a mosque",
+      imagePosition: "center center",
+      imageFit: "cover" as const,
     },
   },
   whatWeDo: {
@@ -192,16 +210,18 @@ export const aboutContent = {
     image: {
       label: "What We Do",
       caption: "Islamic education, youth programs, and community service in action.",
-      imageSrc: "/images/about/what-we-do.jpg",
-      imageAlt: "Teacher instructing students in an Arabic language and Islamic studies class",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020530/home_hero2_mgconp.png",
+      imageAlt: "Collage of CIU students, teachers, and community education programs",
+      imageFit: "cover" as const,
     },
   },
   alAzhar: {
-    title: "Azhar Canada",
+    title: "Azhar Canada College",
     intro:
-      "CIU offers Islamic education through Azhar Canada — an institute accredited by Al-Azhar University in Egypt, dedicated to delivering quality learning for individuals and families across Canada.",
+      "CIU offers Islamic education through Azhar Canada College — an institute accredited by Al-Azhar University in Egypt, dedicated to delivering quality learning for individuals and families across Canada.",
     description:
-      "Azhar Canada combines authentic Al-Azhar scholarship with modern technology and creative teaching methods, offering programs for children, youth, adults, and families both in person and online.",
+      "Azhar Canada College combines authentic Al-Azhar scholarship with modern technology and creative teaching methods, offering programs for children, youth, adults, and families both in person and online.",
     goalsTitle: "Our Goals",
     goals: [
       "Make Al-Azhar accredited Islamic education accessible across Canada.",
@@ -210,13 +230,15 @@ export const aboutContent = {
       "Encourage critical thinking and practical application.",
       "Foster a lifelong love of learning within a supportive community.",
     ],
-    websiteHref: "https://azharcanada.ca/",
+    websiteHref: "https://azharcanada.groovemember.net/login",
     portalHref: "https://azharcanada.groovemember.net/home",
     image: {
-      label: "Azhar Canada",
+      label: "Azhar Canada College",
       caption: "Al-Azhar accredited programs at the Canadian Islamic Centre.",
-      imageSrc: "/media/pictures/posters/azhar-programs-overview.jpg",
-      imageAlt: "Azhar Canada educational programs overview poster",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785025487/azharposter_ytmxei.png",
+      imageAlt: "Azhar Canada College educational programs overview poster",
+      imageFit: "cover" as const,
     },
   },
   community: {
@@ -228,9 +250,12 @@ export const aboutContent = {
     ],
     image: {
       label: "Our Community",
-      caption: "Women from the CIU community gathered together.",
-      imageSrc: "/images/about/community.jpg",
-      imageAlt: "Group portrait of women from the community seated in front of a world map",
+      caption: "Community members gathered at the CIU centre for learning and fellowship.",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+      imageAlt: "Community members gathered at tables in the CIU hall for an educational event",
+      imagePosition: "center center",
+      imageFit: "cover" as const,
     },
   },
   impact: {
@@ -267,9 +292,11 @@ export const aboutContent = {
     ] satisfies StatItem[],
     image: {
       label: "Our Impact",
-      caption: "Students learning in an Islamic education classroom at CIU.",
-      imageSrc: "/images/about/impact.jpg",
-      imageAlt: "Teacher leading students in an Islamic education classroom",
+      caption: "Learning rooted in the Qur'an and authentic Islamic education.",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024120/Open_Qur_an_on_wooden_stand_zsb2h8.png",
+      imageAlt: "Open Qur'an on a wooden stand",
+      imageFit: "cover" as const,
     },
   },
   lookingAhead: {
@@ -281,9 +308,12 @@ export const aboutContent = {
     ],
     image: {
       label: "Looking Ahead",
-      caption: "The mihrab and prayer hall at the Canadian Islamic Centre.",
-      imageSrc: "/images/about/looking-ahead.jpg",
-      imageAlt: "Ornate mihrab and minbar with Arabic calligraphy in the prayer hall",
+      caption: "Muslim families and community members gathered outdoors for prayer and fellowship.",
+      imageSrc:
+        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020567/home_hero3_p38cwf.png",
+      imageAlt: "Community members gathered outdoors for prayer in a park setting",
+      imagePosition: "center center",
+      imageFit: "cover" as const,
     },
   },
 };

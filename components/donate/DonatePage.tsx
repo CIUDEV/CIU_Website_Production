@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CopyButton from "@/components/donate/CopyButton";
 import ETransferPanel from "@/components/donate/ETransferPanel";
+import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import { homeBtnOutlineClass } from "@/components/home/homeUi";
 import { MotionItem, MotionSection, MotionStagger } from "@/components/motion";
 import { donateContent } from "@/content/DonateContent";
@@ -17,38 +18,33 @@ function DonateHero() {
   const { hero } = donateContent;
 
   return (
-    <section className="relative overflow-hidden border-b border-brand/10 bg-brand-gradient text-white">
-      <div
-        className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"
-        aria-hidden="true"
+    <section className="relative min-h-[480px] overflow-hidden sm:min-h-[520px] lg:min-h-[580px]">
+      <ZoomableImage
+        src={hero.imageSrc}
+        alt={hero.imageAlt}
+        fill
+        priority
+        sizes="100vw"
+        quality={90}
+        className="object-cover object-center"
       />
-      <div
-        className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-gold/15 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, white 0, transparent 42%), radial-gradient(circle at 80% 0%, #d4ad4a 0, transparent 36%)",
-        }}
-        aria-hidden="true"
-      />
+      <div className="pointer-events-none absolute inset-0 bg-hero-overlay" />
+      <div className="pointer-events-none absolute inset-0 bg-brand/40 mix-blend-multiply" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <div className="relative mx-auto flex min-h-[480px] max-w-7xl items-center px-4 py-12 sm:min-h-[520px] sm:px-6 sm:py-16 lg:min-h-[580px] lg:px-8 lg:py-20">
         <MotionSection className="max-w-3xl">
           <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-brand-light uppercase sm:text-sm">
             <HeartHandshake className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
             {hero.label}
           </p>
           <div className="gold-accent-bar mt-4" aria-hidden="true" />
-          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
             {hero.heading}
           </h1>
           {hero.badge ? (
             <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-gold/35 bg-white/10 px-4 py-1.5 backdrop-blur-sm">
               <ShieldCheck className="h-4 w-4 text-gold-light" strokeWidth={1.75} aria-hidden="true" />
-              <span className="text-[11px] font-medium tracking-[0.16em] uppercase sm:text-xs">
+              <span className="text-[11px] font-medium tracking-[0.16em] text-white uppercase sm:text-xs">
                 {hero.badge}
               </span>
             </p>

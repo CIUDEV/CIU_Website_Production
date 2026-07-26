@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
+import MediaHero from "@/components/media/MediaHero";
 import { MotionItem, MotionSection, MotionStagger } from "@/components/motion";
 import SocialIcon from "@/components/SocialIcon";
 import { contactContent } from "@/content/ContactContent";
@@ -38,24 +39,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-background">
-      <section className="border-b border-brand/10 bg-brand text-white">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-          <MotionSection>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-[0.14em] text-brand-light uppercase sm:text-base">
-              <Mail className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
-              {hero.label}
-            </p>
-            <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-              {hero.heading}
-            </h1>
-            <p className="mt-4 text-sm leading-relaxed text-white/92 sm:text-base lg:text-lg">
-              {hero.intro}
-            </p>
-          </div>
-          </MotionSection>
-        </div>
-      </section>
+      <MediaHero {...hero} />
 
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <MotionSection>
@@ -133,6 +117,8 @@ export default function ContactPage() {
                     <a
                       key={link.label}
                       href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={link.label}
                       className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand/15 bg-brand/5 text-brand transition hover:border-brand hover:bg-brand hover:text-white"
                     >

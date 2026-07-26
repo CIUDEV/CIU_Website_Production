@@ -4,6 +4,7 @@ import {
   aosDefaults,
   type AosScrollAnimation,
 } from "@/components/aos/config";
+import { useAosReady } from "@/components/aos/useAosReady";
 import { useReducedScrollMotion } from "@/components/motion/useReducedScrollMotion";
 import { useAosRefresh } from "@/components/aos/useAosRefresh";
 
@@ -19,10 +20,12 @@ export default function MotionSection({
   animation?: AosScrollAnimation;
 }) {
   const reduceMotion = useReducedScrollMotion();
-  useAosRefresh();
+  const aosReady = useAosReady();
+  const animate = aosReady && !reduceMotion;
+  useAosRefresh(animate);
 
-  if (reduceMotion) {
-    return className ? <div className={className}>{children}</div> : children;
+  if (!animate) {
+    return className ? <div className={className}>{children}</div> : <>{children}</>;
   }
 
   return (

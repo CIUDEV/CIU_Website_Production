@@ -1,3 +1,5 @@
+import { ciuProgramKidsImages } from "@/content/CiuProgramsContent";
+
 export type EventCategory =
   | "education"
   | "youth"
@@ -55,11 +57,29 @@ export type CalendarDemoEvent = {
   time: string;
 };
 
-// TODO: Replace all placeholder dates, times, locations, and images with confirmed event data before publishing.
+// TODO: Replace placeholder dates, times, and locations with confirmed event data before publishing.
 export const eventsImages = {
-  hero: "/images/events/events-hero.png",
-  featured: "/images/events/featured-event.jpg",
-  partnership: "/images/events/community-partnership.jpg",
+  hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024108/Islamic_geometric_pattern_xws7o5.jpg",
+  featured:
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785030702/WhatsApp_Image_2026-07-25_at_08.02.11_o9kgwz.jpg",
+  quranClass:
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024120/Open_Qur_an_on_wooden_stand_zsb2h8.png",
+  partnership:
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021386/about-community_peqwp7.jpg",
+  pastEvents: {
+    communityWelcome:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+    youthLeadership:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028168/kids-01_oldgl7.jpg",
+    familyLearningDay:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020761/IMG_4982_ate0hm.jpg",
+    educationWorkshop:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020773/IMG_5023_qukbdo.jpg",
+    volunteerOutreach:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785031535/volunteer-02_ajvbvq.jpg",
+    communityHalaqah:
+      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020764/IMG_7460_doasia.jpg",
+  },
 } as const;
 
 export const eventsHeroContent = {
@@ -75,42 +95,37 @@ export const eventsHeroContent = {
 };
 
 export const eventAnnouncementContent = {
-  message: "Registration is now open for selected upcoming programs.",
-  buttonLabel: "View Registrations",
-  buttonHref: "#upcoming-events",
+  message: "One Big Family Picnic — Sunday, August 23 at Chinguacousy Park. Join us for potluck & BBQ!",
+  buttonLabel: "View Event",
+  buttonHref: "/Events/family-picnic",
 };
 
 export const featuredEventContent = {
   label: "FEATURED EVENT",
-  title: "CIU Family Community Gathering",
-  dateLabel: "Saturday, August 24",
-  time: "1:00 PM – 5:00 PM",
-  location: "Location to be confirmed",
+  title: "One Big Family Picnic",
+  dateLabel: "Sunday, August 23, 2026",
+  time: "11:00 AM",
+  location: "Chinguacousy Park — Brampton",
   description:
-    "Join CIU families and community members for an afternoon of learning, connection, activities, and meaningful conversation in a welcoming family environment.",
-  chips: ["Family Friendly", "Registration Required", "In Person"],
-  primaryButton: { label: "Register Now", href: "/Contact" },
+    "Join the Canadian Islamic Union for our One Big Family Picnic — a potluck and BBQ for families and community members to connect, share a meal, and enjoy a day outdoors together.",
+  chips: ["Family Friendly", "Potluck & BBQ", "In Person"],
+  primaryButton: { label: "Contact Us to Register", href: "/Contact" },
   secondaryButton: { label: "View Details", href: "/Events/family-picnic" },
-  note: "Date, location, and registration information are placeholders until confirmed.",
+  note: "Bring a dish to share for the potluck. More details will be shared closer to the event date.",
   imageSrc: eventsImages.featured,
-  imageAlt: "Families and children gathered at the CIU community centre",
+  imageAlt: "One Big Family Picnic event poster for August 23 at Chinguacousy Park",
 };
 
 export const eventFilterCategories = [
   { id: "all", label: "All Events" },
   { id: "education", label: "Education" },
-  { id: "youth", label: "Youth" },
   { id: "family", label: "Family" },
-  { id: "community", label: "Community" },
-  { id: "spiritual", label: "Spiritual" },
-  { id: "volunteer", label: "Volunteer" },
 ] as const;
 
 export type EventFilterCategoryId = (typeof eventFilterCategories)[number]["id"];
 
 export const eventDateFilters = [
   { id: "upcoming", label: "Upcoming" },
-  { id: "this-month", label: "This Month" },
   { id: "recurring", label: "Recurring" },
 ] as const;
 
@@ -120,132 +135,57 @@ export const upcomingEventsSection = {
   id: "upcoming-events",
   heading: "Upcoming Events",
   subheading:
-    "Discover upcoming learning opportunities, gatherings, and community programs.",
+    "Our featured gathering, recurring Quran classes, and weekend kids program.",
   loadMoreLabel: "Load More Events",
-  loadMoreNote:
-    "Additional events will be published here once dates and details are confirmed.",
+  loadMoreNote: "Additional events will be published here as they are announced.",
 };
 
 export const upcomingEvents: EventItem[] = [
   {
-    id: "weekly-halaqah",
-    title: "Weekly Community Halaqah",
-    category: "spiritual",
-    dateLabel: "Every Friday",
-    time: "7:00 PM",
-    location: "CIU Community Space",
-    description:
-      "A weekly gathering focused on Islamic reminders, reflection, discussion, and community connection.",
-    tags: ["Recurring", "All Adults"],
-    href: "/Events",
-    buttonLabel: "View Event",
-    image: "/images/events/card-halaqah.jpg",
-    recurring: true,
-  },
-  {
-    id: "ciu-kids-program-weekend",
-    title: "CIU Kids Program",
-    category: "education",
-    dateLabel: "Saturday & Sunday",
-    date: "2026-08-15",
-    time: "11:00 AM – 2:00 PM",
-    location: "Canadian Islamic Centre — Mississauga",
-    description:
-      "Weekend Quran classes and kids learning sessions hosted by CIU for grades 1 through 12.",
-    tags: ["Kids", "Registration Required"],
-    href: "/Education/ciu",
-    buttonLabel: "Learn More",
-    image: "/media/ciu-general/ciu-programs/kids/kids-01.jpeg",
-  },
-  {
-    id: "family-community-gathering",
-    title: "Family Community Gathering",
+    id: "one-big-family-picnic",
+    title: "One Big Family Picnic",
     category: "family",
-    dateLabel: "Sunday, August 24",
-    date: "2026-08-24",
-    time: "1:00 PM",
-    location: "Location to be confirmed",
+    dateLabel: "Sunday, August 23, 2026",
+    date: "2026-08-23",
+    time: "11:00 AM",
+    location: "Chinguacousy Park — Brampton",
     description:
-      "A welcoming event for families to learn, connect, and participate in community activities.",
-    tags: ["Family Friendly", "In Person"],
+      "Join CIU families and community members for a potluck and BBQ — connect, share a meal, and enjoy fellowship outdoors.",
+    tags: ["Family Friendly", "Potluck & BBQ", "In Person"],
     href: "/Events/family-picnic",
     buttonLabel: "View Details",
-    image: "/images/events/card-family.jpg",
+    image: eventsImages.featured,
+    featured: true,
   },
   {
-    id: "parenting-workshop",
-    title: "Islamic Parenting Workshop",
+    id: "quran-class",
+    title: "Quran Class",
     category: "education",
-    dateLabel: "Saturday, September 6",
-    date: "2026-09-06",
-    time: "11:00 AM",
-    location: "Online",
+    dateLabel: "Every Tuesday & Thursday",
+    time: "7:00 PM",
+    location: "CIU Community Centre — Mississauga",
     description:
-      "A practical workshop exploring faith-centred parenting, communication, character development, and family routines.",
-    tags: ["Online", "Parents"],
-    href: "/Contact",
-    buttonLabel: "Register",
-    image: "/images/events/event-parenting-workshop.jpg",
-  },
-  {
-    id: "volunteer-day",
-    title: "Community Volunteer Day",
-    category: "volunteer",
-    dateLabel: "Saturday, September 13",
-    date: "2026-09-13",
-    time: "10:00 AM",
-    location: "Meeting point to be confirmed",
-    description:
-      "Join CIU volunteers in supporting a local community initiative through service and teamwork.",
-    tags: ["Volunteer", "Community Service"],
-    href: "/Services/volunteer",
-    buttonLabel: "Volunteer",
-    image: "/images/events/event-volunteer-day.jpg",
-  },
-  {
-    id: "academy-open-house",
-    title: "Azhar Canada Open House",
-    category: "education",
-    dateLabel: "Sunday, September 21",
-    date: "2026-09-21",
-    time: "2:00 PM",
-    location: "Online",
-    description:
-      "Learn about Azhar Canada, its Al-Azhar accredited approach, available classes, and registration process.",
-    tags: ["Online", "Education"],
-    href: "/Education",
-    buttonLabel: "Learn More",
-    image: "/images/events/event-academy-open-house.jpg",
-  },
-  {
-    id: "community-iftar-preview",
-    title: "Community Information Session",
-    category: "community",
-    dateLabel: "Saturday, October 4",
-    date: "2026-10-04",
-    time: "3:00 PM",
-    location: "Location to be confirmed",
-    description:
-      "An informational session about upcoming community programs, volunteer opportunities, and seasonal planning.",
-    tags: ["Community", "In Person"],
-    href: "/Contact",
-    buttonLabel: "View Event",
-    image: "/images/events/event-community-session.jpg",
-  },
-  {
-    id: "sisters-study-circle",
-    title: "Sisters Study Circle",
-    category: "spiritual",
-    dateLabel: "Every second Wednesday",
-    time: "7:30 PM",
-    location: "Online",
-    description:
-      "A recurring online study circle focused on reflection, discussion, and spiritual growth.",
-    tags: ["Recurring", "Online"],
-    href: "/Events",
+      "Recurring evening Quran classes focused on recitation, tajweed, and guided study for learners of all levels.",
+    tags: ["Recurring", "Education", "Evenings"],
+    href: "/Events#upcoming-events",
     buttonLabel: "View Schedule",
+    image: eventsImages.quranClass,
     recurring: true,
-    image: "/images/events/event-sisters-circle.jpg",
+  },
+  {
+    id: "ciu-kids-weekend",
+    title: "CIU Kids Program",
+    category: "education",
+    dateLabel: "Every Weekend",
+    time: "10:00 AM – 2:00 PM",
+    location: "Canadian Islamic Centre — Mississauga",
+    description:
+      "Recurring weekend Quran classes and kids learning sessions hosted by CIU for grades 1 through 12.",
+    tags: ["Recurring", "Kids", "Weekends"],
+    href: "/Education/ciu",
+    buttonLabel: "Learn More",
+    image: ciuProgramKidsImages.kids01,
+    recurring: true,
   },
 ];
 
@@ -253,41 +193,24 @@ export const recurringProgramsContent = {
   id: "recurring-programs",
   label: "EVERY WEEK",
   heading: "Recurring Programs",
-  subheading:
-    "Stay connected through ongoing educational, spiritual, youth, and family programming.",
-  note: "Recurring schedules may change during holidays, Ramadan, or special community periods.",
+  subheading: "Join us for ongoing Quran classes and weekend kids programming.",
+  note: "Schedules may change during holidays, Ramadan, or special community periods.",
   programs: [
     {
-      id: "weekly-halaqah",
-      title: "Weekly Halaqah",
-      frequency: "Every Friday",
+      id: "quran-class",
+      title: "Quran Class",
+      frequency: "Every Tuesday & Thursday",
       time: "7:00 PM",
-      audience: "All adults",
+      audience: "All learners",
       href: "/Events#upcoming-events",
-    },
-    {
-      id: "sunday-school",
-      title: "Sunday School",
-      frequency: "Every Sunday",
-      time: "11:00 AM",
-      audience: "Children and youth",
-      href: "/Education",
     },
     {
       id: "ciu-kids-weekend",
       title: "CIU Kids Program",
-      frequency: "Saturday or Sunday",
-      time: "11:00 AM – 2:00 PM",
+      frequency: "Every weekend",
+      time: "10:00 AM – 2:00 PM",
       audience: "Grades 1 – 12",
       href: "/Education/ciu",
-    },
-    {
-      id: "family-learning",
-      title: "Family Learning Session",
-      frequency: "Last Sunday of each month",
-      time: "1:00 PM",
-      audience: "Families",
-      href: "/Events/family-picnic",
     },
   ] satisfies RecurringProgram[],
 };
@@ -298,58 +221,30 @@ export const eventCalendarContent = {
   viewFullLabel: "View Full Calendar",
   viewFullHref: "#event-calendar",
   demoEvents: [
-    { date: "2026-08-15", title: "CIU Kids Program", time: "11:00 AM" },
-    { date: "2026-08-24", title: "Family Community Gathering", time: "1:00 PM" },
-    { date: "2026-09-06", title: "Islamic Parenting Workshop", time: "11:00 AM" },
-    { date: "2026-09-13", title: "Community Volunteer Day", time: "10:00 AM" },
-    { date: "2026-09-21", title: "Azhar Canada Open House", time: "2:00 PM" },
+    { date: "2026-08-23", title: "One Big Family Picnic", time: "11:00 AM" },
+    { date: "2026-08-25", title: "Quran Class", time: "7:00 PM" },
+    { date: "2026-08-27", title: "Quran Class", time: "7:00 PM" },
+    { date: "2026-08-29", title: "CIU Kids Program", time: "10:00 AM" },
+    { date: "2026-08-30", title: "CIU Kids Program", time: "10:00 AM" },
   ] satisfies CalendarDemoEvent[],
 };
 
 export const eventCategoriesContent = {
-  heading: "Events for Every Stage of Life",
+  heading: "Browse by Category",
   categories: [
     {
       id: "education",
       title: "Islamic Education",
-      description: "Classes, workshops, seminars, and learning opportunities.",
+      description: "Quran classes, kids programs, and learning opportunities at CIU.",
       filterCategory: "education",
       href: "/Events?category=education",
     },
     {
-      id: "youth",
-      title: "Youth Programs",
-      description: "Faith, identity, mentorship, leadership, and social activities.",
-      filterCategory: "youth",
-      href: "/Events?category=youth",
-    },
-    {
       id: "family",
       title: "Family Events",
-      description: "Gatherings, parenting workshops, and family-focused programs.",
+      description: "Gatherings and family-focused programs for the community.",
       filterCategory: "family",
       href: "/Events?category=family",
-    },
-    {
-      id: "spiritual",
-      title: "Spiritual Gatherings",
-      description: "Halaqahs, reminders, lectures, and opportunities for reflection.",
-      filterCategory: "spiritual",
-      href: "/Events?category=spiritual",
-    },
-    {
-      id: "community-initiatives",
-      title: "Community Initiatives",
-      description: "Outreach activities, charitable programs, and community partnerships.",
-      filterCategory: "community",
-      href: "/Events?category=community",
-    },
-    {
-      id: "volunteer",
-      title: "Volunteer Opportunities",
-      description: "Meaningful ways to serve and contribute your skills.",
-      filterCategory: "volunteer",
-      href: "/Events?category=volunteer",
     },
   ] satisfies EventCategoryCard[],
 };
@@ -367,7 +262,7 @@ export const pastEventsContent = {
       title: "Community Welcome Gathering",
       dateLabel: "Spring 2026",
       category: "Community",
-      imageSrc: "/images/events/past-event-1.jpg",
+      imageSrc: eventsImages.pastEvents.communityWelcome,
       imageAlt: "Community members seated during a seminar at CIU",
     },
     {
@@ -375,7 +270,7 @@ export const pastEventsContent = {
       title: "Youth Leadership Session",
       dateLabel: "Summer 2026",
       category: "Youth",
-      imageSrc: "/images/events/past-event-2.jpg",
+      imageSrc: eventsImages.pastEvents.youthLeadership,
       imageAlt: "Young student at a CIU community celebration",
     },
     {
@@ -383,7 +278,7 @@ export const pastEventsContent = {
       title: "Family Learning Day",
       dateLabel: "Summer 2026",
       category: "Family",
-      imageSrc: "/images/events/past-event-3.jpg",
+      imageSrc: eventsImages.pastEvents.familyLearningDay,
       imageAlt: "Families gathered in the community centre multipurpose hall",
     },
     {
@@ -391,7 +286,7 @@ export const pastEventsContent = {
       title: "Islamic Education Workshop",
       dateLabel: "2026",
       category: "Education",
-      imageSrc: "/images/events/past-event-4.jpg",
+      imageSrc: eventsImages.pastEvents.educationWorkshop,
       imageAlt: "Community learning workshop with students taking notes",
     },
     {
@@ -399,15 +294,15 @@ export const pastEventsContent = {
       title: "Volunteer Outreach Initiative",
       dateLabel: "2026",
       category: "Volunteer",
-      imageSrc: "/images/events/past-event-5.jpg",
-      imageAlt: "Azhar Canada volunteers needed outreach poster",
+      imageSrc: eventsImages.pastEvents.volunteerOutreach,
+      imageAlt: "Azhar Canada College volunteers needed outreach poster",
     },
     {
       id: "past-6",
       title: "Community Halaqah Series",
       dateLabel: "2026",
       category: "Spiritual",
-      imageSrc: "/images/events/past-event-6.jpg",
+      imageSrc: eventsImages.pastEvents.communityHalaqah,
       imageAlt: "Guest speaker addressing the community at a lecture event",
     },
   ] satisfies PastEventItem[],
@@ -417,7 +312,7 @@ export const hostEventContent = {
   id: "host-event",
   label: "COLLABORATE WITH US",
   heading: "Host or Support a Community Event",
-  body: "CIU welcomes opportunities to collaborate with educators, scholars, volunteers, nonprofit organizations, community groups, and service providers on initiatives that align with its mission and values.",
+  body: "CIU welcomes opportunities to collaborate with educators, scholars, volunteers, charity organizations, community groups, and service providers on initiatives that align with its mission and values.",
   areas: [
     "Educational workshops",
     "Family programming",

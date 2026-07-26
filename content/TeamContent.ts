@@ -28,20 +28,16 @@ export const teamContent = {
     },
     {
       id: "umar",
-      name: "Imam Umar",
+      name: "Umar Farooq",
       role: "Imam",
       featuredOnHome: true,
     },
-    {
-      id: "sharuf",
-      name: "Sharuf Hamnam",
-      role: "Islamic Scholar",
-      featuredOnHome: true,
-    },
+    
     {
       id: "mona",
       name: "Dr. Mona",
       role: "Islamic Scholar",
+      featuredOnHome: true,
     },
   ] satisfies TeamMember[],
 };

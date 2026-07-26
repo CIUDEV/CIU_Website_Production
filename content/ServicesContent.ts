@@ -1,3 +1,5 @@
+import { azharCanadaPosterImage } from "@/content/EducationContent";
+
 export type ServiceIconName =
   | "compass"
   | "users-round"
@@ -35,11 +37,10 @@ export type ProcessStep = {
 
 // TODO: Replace placeholder image paths with approved CIU community photography (.jpg) when available.
 export const servicesImages = {
-  hero: "/images/services/services-hero.jpg",
-  communitySupport: "/images/services/community-support.jpg",
-  familyServices: "/images/services/family-services.jpg",
-  youthProgram: "/images/services/youth-program.jpg",
-  alAzharAcademy: "/media/pictures/posters/azhar-programs-overview.jpg",
+  hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785030221/808x539_cmsv2_2883e9de-478d-5d08-a5a5-3d972b40d482-8858204_swh0kh.webp",
+  communitySupport: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
+  familyServices: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020761/IMG_4982_ate0hm.jpg",
+  alAzharAcademy: azharCanadaPosterImage,
 } as const;
 
 export const servicesHeroContent = {
@@ -137,7 +138,7 @@ export const coreServicesContent = {
         "Online and in-person learning",
         "Family learning programs",
         "Critical thinking and open discussion",
-        "Al-Azhar accredited programs through Azhar Canada — a CIU educational initiative",
+        "Al-Azhar accredited programs through Azhar Canada College — a CIU educational initiative",
       ],
       buttonLabel: "Explore Education",
       href: "/Education",
@@ -172,13 +173,13 @@ export const coreServicesContent = {
         "Outreach projects",
         "Support for families in need",
         "Educational sponsorships",
-        "Collaborative nonprofit programs",
+        "Collaborative charitable programs",
       ],
       buttonLabel: "Support an Initiative",
       href: "/Projects",
       icon: "hand-heart",
       disclaimer:
-        "Donation and tax-receipt information will be published only after CIU confirms its legal nonprofit and registered charity status.",
+        "Donation and tax-receipt information will be published once CIU confirms registered charity status and receipt procedures.",
     },
   ] satisfies CoreService[],
 };
@@ -208,7 +209,7 @@ export const familyServicesContent = {
       description: "Inclusive events that bring together men, women, children, and families.",
     },
   ] satisfies FeatureBlock[],
-  button: { label: "Contact Family Services", href: "/Contact" },
+  button: { label: "Explore Family Services", href: "/Services/family-counseling" },
   imageSrc: servicesImages.familyServices,
   imageAlt: "Families and children gathered in the CIU community centre",
 };
@@ -216,10 +217,10 @@ export const familyServicesContent = {
 export const educationServicesContent = {
   heading: "Education Rooted in Knowledge and Character",
   intro:
-    "CIU delivers Islamic education through Azhar Canada — the only institute in Canada following the Al-Azhar University curriculum, with programs for children, youth, adults, and families.",
+    "CIU delivers Islamic education through Azhar Canada College — the only institute in Canada following the Al-Azhar University curriculum, with programs for children, youth, adults, and families.",
   academy: {
-    title: "Azhar Canada",
-    body: "Azhar Canada is a proud CIU initiative making high-quality, Al-Azhar accredited Islamic education accessible across Canada through in-person and online learning.",
+    title: "Azhar Canada College",
+    body: "Azhar Canada College is a proud CIU initiative making high-quality, Al-Azhar accredited Islamic education accessible across Canada through in-person and online learning.",
     description:
       "Programs are inspired by the educational legacy of Al-Azhar University in Egypt, combining authentic scholarship, modern technology, mentorship, and community-rooted learning for every age group.",
     goals: [
@@ -242,13 +243,13 @@ export const educationServicesContent = {
       external: true,
     },
     secondaryButton: {
-      label: "Explore Azhar Canada",
+      label: "Explore Azhar Canada College",
       href: "/Education",
       external: false,
     },
   },
   imageSrc: servicesImages.alAzharAcademy,
-  imageAlt: "Azhar Canada programs overview for the Canadian Islamic Centre",
+  imageAlt: "Azhar Canada College programs overview for the Canadian Islamic Centre",
 };
 
 export const membershipPreviewContent = {

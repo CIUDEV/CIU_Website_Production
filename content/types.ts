@@ -14,7 +14,7 @@ export type ContentLink = {
   label: string;
 };
 
-export type SocialPlatform = "x" | "facebook" | "instagram" | "youtube";
+export type SocialPlatform = "facebook" | "instagram" | "tiktok" | "youtube";
 
 export type SocialLink = {
   label: string;

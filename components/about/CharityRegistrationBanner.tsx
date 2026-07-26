@@ -5,8 +5,16 @@ import { ShieldCheck } from "lucide-react";
 import ZoomableImage from "@/components/lightbox/ZoomableImage";
 
 export default function CharityRegistrationBanner() {
-  const { label, title, registrationLabel, registrationNumber, description, highlights } =
-    aboutContent.charityRegistration;
+  const {
+    label,
+    title,
+    registrationLabel,
+    registrationNumber,
+    backgroundImageSrc,
+    backgroundImageAlt,
+    description,
+    highlights,
+  } = aboutContent.charityRegistration;
 
   return (
     <section className="relative overflow-hidden border-y border-border/80 bg-section-warm">
@@ -67,12 +75,11 @@ export default function CharityRegistrationBanner() {
 
               <div className="relative min-h-[320px] overflow-hidden lg:min-h-full">
                 <ZoomableImage
-                  src="/media/pictures/azhar_canada_14.jpg"
-                  alt=""
+                  src={backgroundImageSrc}
+                  alt={backgroundImageAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
-                  aria-hidden="true"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-dark/88 via-brand/78 to-brand-dark/92" />
                 <div
@@ -104,9 +111,6 @@ export default function CharityRegistrationBanner() {
                         </p>
                         <p className="mt-4 font-mono text-2xl font-semibold tracking-[0.08em] text-white sm:text-3xl">
                           {registrationNumber}
-                        </p>
-                        <p className="mt-5 text-sm leading-relaxed text-white/78">
-                          Canada Revenue Agency
                         </p>
                       </div>
                     </div>

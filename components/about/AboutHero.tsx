@@ -10,7 +10,15 @@ export default function AboutHero() {
 
   return (
     <section className="relative h-[420px] overflow-hidden sm:h-[480px] lg:h-[580px]">
-      <ZoomableImage src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover object-center" />
+          <ZoomableImage
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            priority
+            sizes="100vw"
+            quality={90}
+            className="object-cover object-center"
+          />
       <div className="pointer-events-none absolute inset-0 bg-hero-overlay" />
       <div className="pointer-events-none absolute inset-0 bg-brand/35 mix-blend-multiply" />
 

@@ -22,7 +22,7 @@ export default function EducationHubPage() {
           <MotionSection>
             <SectionHeading
               heading="Choose Your Learning Path"
-              subheading="Azhar Canada college programs and CIU-hosted weekend Quran and kids classes."
+              subheading="Azhar Canada College programs and CIU-hosted weekend Quran and kids classes."
             />
           </MotionSection>
 
@@ -64,14 +64,14 @@ export default function EducationHubPage() {
           <MotionSection className="mx-auto max-w-3xl text-center">
             <SectionHeading
               heading="Questions About Registration?"
-              subheading="Contact CIU for CIU weekend programs, or visit Azhar Canada for diploma and course registration."
+              subheading="Contact CIU for CIU weekend programs, or visit Azhar Canada College for diploma and course registration."
             />
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/Contact" className={homeBtnPrimaryClass}>
                 Contact CIU
               </Link>
               <Link href="/Education/azhar" className={homeBtnOutlineClass}>
-                Azhar Programs
+                Azhar Canada College
               </Link>
               <Link href="/Education/ciu" className={homeBtnOutlineClass}>
                 CIU Programs

@@ -1,3 +1,10 @@
+import { imagePlaceholder } from "./imagePlaceholder";
+import { azharCanadaPosterImage } from "@/content/EducationContent";
+import {
+  ciuProgramKidsImages,
+  ciuProgramPosterImages,
+} from "@/content/CiuProgramsContent";
+
 type PhotoSeed = {
   id: string;
   title: string;
@@ -46,9 +53,9 @@ const azharCollegePhotos: PhotoSeed[] = [
     title: "Uloom Al-Hadith (Hadith Sciences)",
     album: "Azhar Canada College",
     category: "azhar",
-    dateLabel: "UH101 · Azhar Canada",
-    imageSrc: "/media/ciu-general/azhar/azhar-01.jpeg",
-    imageAlt: "Azhar Canada poster for Uloom Al-Hadith Hadith Sciences course UH101",
+    dateLabel: "UH101 · Azhar Canada College",
+    imageSrc: azharCanadaPosterImage,
+    imageAlt: "Azhar Canada College poster for Uloom Al-Hadith Hadith Sciences course UH101",
     variant: "poster",
   },
   {
@@ -56,39 +63,39 @@ const azharCollegePhotos: PhotoSeed[] = [
     title: "Aqeedah 101 – Foundations",
     album: "Azhar Canada College",
     category: "azhar",
-    dateLabel: "Azhar Canada",
-    imageSrc: "/media/ciu-general/azhar/azhar-02.jpeg",
-    imageAlt: "Azhar Canada poster for Aqeedah 101 Foundations introductory course",
+    dateLabel: "Azhar Canada College",
+    imageSrc: azharCanadaPosterImage,
+    imageAlt: "Azhar Canada College poster for Aqeedah 101 Foundations introductory course",
     variant: "poster",
   },
   {
     id: "azhar-course-poster-03",
-    title: "Azhar Canada Course Offering",
+    title: "Azhar Canada College Course Offering",
     album: "Azhar Canada College",
     category: "azhar",
-    dateLabel: "Azhar Canada",
-    imageSrc: "/media/ciu-general/azhar/azhar-03.jpeg",
-    imageAlt: "Azhar Canada college program registration poster",
+    dateLabel: "Azhar Canada College",
+    imageSrc: azharCanadaPosterImage,
+    imageAlt: "Azhar Canada College program registration poster",
     variant: "poster",
   },
   {
     id: "azhar-course-poster-04",
-    title: "Azhar Canada Course Offering",
+    title: "Azhar Canada College Course Offering",
     album: "Azhar Canada College",
     category: "azhar",
-    dateLabel: "Azhar Canada",
-    imageSrc: "/media/ciu-general/azhar/azhar-04.jpeg",
-    imageAlt: "Azhar Canada college educational program poster",
+    dateLabel: "Azhar Canada College",
+    imageSrc: azharCanadaPosterImage,
+    imageAlt: "Azhar Canada College educational program poster",
     variant: "poster",
   },
   {
     id: "azhar-course-poster-05",
-    title: "Azhar Canada Course Offering",
+    title: "Azhar Canada College Course Offering",
     album: "Azhar Canada College",
     category: "azhar",
-    dateLabel: "Azhar Canada",
-    imageSrc: "/media/ciu-general/azhar/azhar-05.jpeg",
-    imageAlt: "Azhar Canada college course registration poster",
+    dateLabel: "Azhar Canada College",
+    imageSrc: azharCanadaPosterImage,
+    imageAlt: "Azhar Canada College course registration poster",
     variant: "poster",
   },
 ];
@@ -100,7 +107,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Kids Program",
     category: "kids",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/ciu-programs/kids/kids-01.jpeg",
+    imageSrc: ciuProgramKidsImages.kids01,
     imageAlt: "Students studying at tables during a CIU kids program classroom session",
   },
   {
@@ -109,7 +116,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Kids Program",
     category: "kids",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/ciu-programs/kids/kids-02.jpeg",
+    imageSrc: ciuProgramKidsImages.kids02,
     imageAlt: "Children engaged in learning during a CIU kids program session",
   },
   {
@@ -118,7 +125,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Kids Program",
     category: "kids",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/ciu-programs/kids/kids-03.jpeg",
+    imageSrc: ciuProgramKidsImages.kids03,
     imageAlt: "Young students gathered during a CIU kids program at the centre",
   },
   {
@@ -127,7 +134,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Kids Program",
     category: "kids",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/ciu-programs/kids/kids-04.jpeg",
+    imageSrc: ciuProgramKidsImages.kids04,
     imageAlt: "Student portrait from the CIU kids program",
   },
   {
@@ -136,7 +143,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Weekend Programs",
     category: "ciu-programs",
     dateLabel: "September 2024",
-    imageSrc: "/media/ciu-general/ciu-programs/posters/poster-01.jpeg",
+    imageSrc: ciuProgramPosterImages.poster01,
     imageAlt: "CIU weekend school registration poster for grades 1 through 12",
     variant: "poster",
   },
@@ -146,7 +153,7 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Weekend Programs",
     category: "ciu-programs",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/ciu-programs/posters/poster-02.jpeg",
+    imageSrc: ciuProgramPosterImages.poster02,
     imageAlt: "CIU weekend school program details and schedule poster",
     variant: "poster",
   },
@@ -159,7 +166,7 @@ const volunteerPhotos: PhotoSeed[] = [
     album: "CIU Volunteer Initiatives",
     category: "volunteer",
     dateLabel: "CIU",
-    imageSrc: "/media/ciu-general/volunteer/volunteer-01.jpeg",
+    imageSrc: imagePlaceholder("/media/ciu-general/volunteer/volunteer-01.jpeg"),
     imageAlt: "CIU senior volunteers program poster — serving seniors in unity",
     variant: "poster",
   },
@@ -169,7 +176,7 @@ const volunteerPhotos: PhotoSeed[] = [
     album: "CIU Volunteer Initiatives",
     category: "volunteer",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/volunteer/volunteer-02.jpeg",
+    imageSrc: imagePlaceholder("/media/ciu-general/volunteer/volunteer-02.jpeg"),
     imageAlt: "CIU volunteers serving the community",
   },
   {
@@ -178,7 +185,7 @@ const volunteerPhotos: PhotoSeed[] = [
     album: "CIU Volunteer Initiatives",
     category: "volunteer",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/volunteer/volunteer-03.jpeg",
+    imageSrc: imagePlaceholder("/media/ciu-general/volunteer/volunteer-03.jpeg"),
     imageAlt: "CIU volunteer outreach and community engagement",
   },
 ];
@@ -190,7 +197,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "CIU",
-    imageSrc: "/media/ciu-general/general/photos/general-01.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-01.jpg"),
     imageAlt: "Canadian Islamic Union and Canadian Islamic Centre logo",
   },
   {
@@ -199,7 +206,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-02.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-02.jpg"),
     imageAlt: "CIU leadership meeting to discuss facility and community planning",
   },
   {
@@ -208,7 +215,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "ciu-programs",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-03.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-03.jpg"),
     imageAlt: "Families and students seated for a CIU weekend classroom session",
   },
   {
@@ -217,7 +224,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-04.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-04.jpg"),
     imageAlt: "Community members gathered at the Canadian Islamic Centre",
   },
   {
@@ -226,7 +233,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Seminars & Events",
     category: "events",
     dateLabel: "June 2024",
-    imageSrc: "/media/ciu-general/general/photos/general-05.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-05.jpg"),
     imageAlt: "Imam Ashraf presenting Marriage 101 Financial Independence at CIU",
   },
   {
@@ -235,7 +242,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-06.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-06.jpg"),
     imageAlt: "Community life at the Canadian Islamic Centre",
   },
   {
@@ -244,7 +251,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-07.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-07.jpg"),
     imageAlt: "Learning and gathering space at the Canadian Islamic Centre",
   },
   {
@@ -253,7 +260,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Seminars & Events",
     category: "events",
     dateLabel: "June 2024",
-    imageSrc: "/media/ciu-general/general/photos/general-08.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-08.jpg"),
     imageAlt: "Group photo from CIU Marriage 101 seminar with Imam Ashraf and community members",
   },
   {
@@ -262,7 +269,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-09.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-09.jpg"),
     imageAlt: "Community program moment at CIU",
   },
   {
@@ -271,7 +278,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-10.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-10.jpg"),
     imageAlt: "Community members at a CIU program",
   },
   {
@@ -280,7 +287,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-11.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-11.jpg"),
     imageAlt: "Community gathering at the Canadian Islamic Centre",
   },
   {
@@ -289,7 +296,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-12.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-12.jpg"),
     imageAlt: "Community life and programs at CIU",
   },
   {
@@ -298,7 +305,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "CIU",
-    imageSrc: "/media/ciu-general/general/photos/general-13.png",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-13.png"),
     imageAlt: "Canadian Islamic Union community graphic",
   },
   {
@@ -307,7 +314,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-14.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-14.jpg"),
     imageAlt: "Community members at the Canadian Islamic Centre",
   },
   {
@@ -316,7 +323,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-15.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-15.jpg"),
     imageAlt: "Community program at CIU",
   },
   {
@@ -325,7 +332,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-16.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-16.jpg"),
     imageAlt: "Community gathering and fellowship at CIU",
   },
   {
@@ -334,7 +341,7 @@ const generalCommunityPhotos: PhotoSeed[] = [
     album: "CIU Community Life",
     category: "general",
     dateLabel: "2024–2025",
-    imageSrc: "/media/ciu-general/general/photos/general-17.jpg",
+    imageSrc: imagePlaceholder("/media/ciu-general/general/photos/general-17.jpg"),
     imageAlt: "Community life at the Canadian Islamic Centre",
   },
 ];
@@ -347,10 +354,10 @@ export const ciuGeneralGalleryItems: PhotoSeed[] = [
 ];
 
 const kidsPosterPaths = [
-  "/media/ciu-general/ciu-programs/kids/kids-01.jpeg",
-  "/media/ciu-general/ciu-programs/kids/kids-02.jpeg",
-  "/media/ciu-general/ciu-programs/kids/kids-03.jpeg",
-  "/media/ciu-general/ciu-programs/kids/kids-04.jpeg",
+  ciuProgramKidsImages.kids01,
+  ciuProgramKidsImages.kids02,
+  ciuProgramKidsImages.kids03,
+  ciuProgramKidsImages.kids04,
 ];
 
 function titleCase(value: string) {
@@ -399,9 +406,9 @@ export const ciuGeneralVideoItems: VideoSeed[] = manifest.videos
   });
 
 export const ciuGeneralMediaImages = {
-  azharHero: "/media/ciu-general/azhar/azhar-02.jpeg",
-  ciuProgramsHero: "/media/ciu-general/ciu-programs/posters/poster-01.jpeg",
-  volunteerHero: "/media/ciu-general/volunteer/volunteer-01.jpeg",
-  kidsClassroom: "/media/ciu-general/ciu-programs/kids/kids-01.jpeg",
-  communitySeminar: "/media/ciu-general/general/photos/general-08.jpg",
+  azharHero: azharCanadaPosterImage,
+  ciuProgramsHero: ciuProgramPosterImages.poster01,
+  volunteerHero: imagePlaceholder("/media/ciu-general/volunteer/volunteer-01.jpeg"),
+  kidsClassroom: ciuProgramKidsImages.kids01,
+  communitySeminar: imagePlaceholder("/media/ciu-general/general/photos/general-08.jpg"),
 } as const;
