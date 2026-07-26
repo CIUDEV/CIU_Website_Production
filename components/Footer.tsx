@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Code2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import SocialIcon from "@/components/SocialIcon";
 import {
@@ -246,21 +247,64 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/15 py-5 text-sm text-white/85 sm:flex-row sm:gap-4 sm:py-6 sm:text-base">
-          <p>
-            © {new Date().getFullYear()} {copyright.organization}. All rights
-            reserved.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {copyright.quickLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-semibold no-underline transition hover:underline hover:underline-offset-4"
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="mt-2 overflow-hidden rounded-2xl border border-white/20 bg-brand-dark/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
+          <div
+            className="h-px bg-gradient-to-r from-transparent via-gold-light/60 to-transparent"
+            aria-hidden="true"
+          />
+
+          <div className="flex flex-col gap-5 px-4 py-5 sm:px-6 sm:py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+            <p className="text-center text-xs leading-relaxed tracking-wide text-white/80 sm:text-left sm:text-sm">
+              © {new Date().getFullYear()} {copyright.organization}. All rights
+              reserved.
+            </p>
+
+            {copyright.developerCredit ? (
+              <div className="flex justify-center lg:shrink-0">
+                <div className="group relative inline-flex items-center gap-2.5 rounded-full border border-gold-light/40 bg-white/10 px-4 py-2.5 shadow-lg shadow-black/10 backdrop-blur-md transition hover:border-gold-light/70 hover:bg-white/15 sm:gap-3 sm:px-5 sm:py-3">
+                  <span
+                    className="absolute inset-0 rounded-full bg-gold-gradient opacity-0 blur-md transition group-hover:opacity-25"
+                    aria-hidden="true"
+                  />
+                  <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-dark/80 ring-1 ring-gold-light/30">
+                    <Code2
+                      className="h-4 w-4 text-gold-light"
+                      strokeWidth={1.75}
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <span className="relative text-left leading-tight">
+                    <span className="block text-[0.65rem] font-semibold tracking-[0.22em] text-white/70 uppercase sm:text-xs">
+                      {copyright.developerCredit.prefix}
+                    </span>
+                    <span className="mt-0.5 block bg-gradient-to-r from-gold-light via-white to-gold-light bg-clip-text text-sm font-semibold tracking-tight text-transparent sm:text-base">
+                      {copyright.developerCredit.name}
+                    </span>
+                  </span>
+                </div>
+              </div>
+            ) : null}
+
+            <nav
+              aria-label="Footer quick links"
+              className="flex flex-wrap items-center justify-center gap-2 sm:justify-end lg:shrink-0"
+            >
+              {copyright.quickLinks.map((link, index) => (
+                <span key={link.href} className="inline-flex items-center gap-2">
+                  {index > 0 ? (
+                    <span className="text-white/35" aria-hidden="true">
+                      ·
+                    </span>
+                  ) : null}
+                  <Link
+                    href={link.href}
+                    className="rounded-full px-3 py-1.5 text-sm font-semibold text-white/90 no-underline transition hover:bg-white/10 hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </span>
+              ))}
+            </nav>
           </div>
         </div>
       </div>

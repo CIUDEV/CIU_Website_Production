@@ -88,6 +88,7 @@ Send a message → Contact page
 ### Copyright
 
 Canadian Islamic Union  
+Website by Eagles Development Team  
 Quick links: Donate · Contact · Membership  
 Back to top
 

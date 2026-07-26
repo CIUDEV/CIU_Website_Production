@@ -60,6 +60,10 @@ export const footerContent = {
   },
   copyright: {
     organization: "Canadian Islamic Union",
+    developerCredit: {
+      prefix: "Website by",
+      name: "Eagles Development Team",
+    },
     quickLinks: [
       { href: "/Donate", label: "Donate" },
       { href: "/Contact", label: "Contact" },
