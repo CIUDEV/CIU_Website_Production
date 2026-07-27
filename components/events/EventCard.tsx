@@ -5,6 +5,7 @@ import EventDateBlock from "@/components/events/EventDateBlock";
 import EventTag from "@/components/events/EventTag";
 import { homeBtnGhostClass, homeCardInteractiveClass } from "@/components/home/homeUi";
 import { categoryLabels, type EventItem } from "@/content/EventsContent";
+import { isExternalHref } from "@/lib/externalLink";
 
 export default function EventCard({ event }: { event: EventItem }) {
   return (
@@ -70,10 +71,22 @@ export default function EventCard({ event }: { event: EventItem }) {
           ))}
         </div>
 
-        <Link href={event.href} className={`${homeBtnGhostClass} mt-5`}>
-          {event.buttonLabel}
-          <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
-        </Link>
+        {isExternalHref(event.href) ? (
+          <a
+            href={event.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${homeBtnGhostClass} mt-5`}
+          >
+            {event.buttonLabel}
+            <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          </a>
+        ) : (
+          <Link href={event.href} className={`${homeBtnGhostClass} mt-5`}>
+            {event.buttonLabel}
+            <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          </Link>
+        )}
       </div>
     </article>
   );

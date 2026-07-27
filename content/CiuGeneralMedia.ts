@@ -143,18 +143,18 @@ const ciuProgramPhotos: PhotoSeed[] = [
     album: "CIU Weekend Programs",
     category: "ciu-programs",
     dateLabel: "September 2024",
-    imageSrc: ciuProgramPosterImages.poster01,
+    imageSrc: ciuProgramPosterImages.weekendClass,
     imageAlt: "CIU weekend school registration poster for grades 1 through 12",
     variant: "poster",
   },
   {
-    id: "ciu-weekend-school-details",
-    title: "Weekend School Details",
+    id: "ciu-quran-class-poster",
+    title: "CIU Quran Class",
     album: "CIU Weekend Programs",
     category: "ciu-programs",
-    dateLabel: "2024–2025",
-    imageSrc: ciuProgramPosterImages.poster02,
-    imageAlt: "CIU weekend school program details and schedule poster",
+    dateLabel: "Tuesday & Thursday",
+    imageSrc: ciuProgramPosterImages.quran,
+    imageAlt: "CIU Quran Class poster — Tuesday and Thursday evenings",
     variant: "poster",
   },
 ];
@@ -407,7 +407,7 @@ export const ciuGeneralVideoItems: VideoSeed[] = manifest.videos
 
 export const ciuGeneralMediaImages = {
   azharHero: azharCanadaPosterImage,
-  ciuProgramsHero: ciuProgramPosterImages.poster01,
+  ciuProgramsHero: ciuProgramPosterImages.weekendClass,
   volunteerHero: imagePlaceholder("/media/ciu-general/volunteer/volunteer-01.jpeg"),
   kidsClassroom: ciuProgramKidsImages.kids01,
   communitySeminar: imagePlaceholder("/media/ciu-general/general/photos/general-08.jpg"),

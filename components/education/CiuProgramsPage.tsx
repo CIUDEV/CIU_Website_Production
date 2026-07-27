@@ -5,17 +5,18 @@ import Link from "next/link";
 import SectionContainer from "@/components/home/SectionContainer";
 import SectionHeading from "@/components/home/SectionHeading";
 import {
+  homeBtnGhostClass,
   homeBtnOutlineClass,
-  homeBtnPrimaryClass,
   homeSectionClass,
 } from "@/components/home/homeUi";
 import MediaHero from "@/components/media/MediaHero";
 import { MotionItem, MotionSection, MotionStagger } from "@/components/motion";
 import { ciuProgramsContent } from "@/content/CiuProgramsContent";
+import { isExternalHref } from "@/lib/externalLink";
 import { ArrowUpRight, Check, ExternalLink, MapPin } from "lucide-react";
 
 export default function CiuProgramsPage() {
-  const { hero, overview, programs, posters, gallery, location, cta, postersHeading, postersSubheading, galleryHeading, gallerySubheading } =
+  const { hero, overview, posters, gallery, location, cta, postersHeading, postersSubheading, galleryHeading, gallerySubheading } =
     ciuProgramsContent;
 
   return (
@@ -50,8 +51,8 @@ export default function CiuProgramsPage() {
                 <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-surface shadow-premium-xl">
                   <div className="relative aspect-[4/5]">
                     <ZoomableImage
-                      src={programs[1].imageSrc}
-                      alt={programs[1].imageAlt}
+                      src={overview.imageSrc}
+                      alt={overview.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
@@ -64,39 +65,7 @@ export default function CiuProgramsPage() {
         </SectionContainer>
       </section>
 
-      <section className={`${homeSectionClass} border-y border-border/80 bg-surface`}>
-        <SectionContainer>
-          <MotionSection>
-            <SectionHeading heading="Our CIU-Hosted Programs" />
-          </MotionSection>
-          <MotionStagger className="mt-12 grid gap-6 lg:grid-cols-2">
-            {programs.map((program) => (
-              <MotionItem key={program.id}>
-                <article className="overflow-hidden rounded-3xl border border-border/80 bg-background shadow-premium">
-                  <div className="relative aspect-[16/10]">
-                    <ZoomableImage
-                      src={program.imageSrc}
-                      alt={program.imageAlt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6 sm:p-8">
-                    <h3 className="text-xl font-semibold text-foreground">{program.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-                      {program.description}
-                    </p>
-                    <p className="mt-4 text-sm font-medium text-brand">{program.schedule}</p>
-                  </div>
-                </article>
-              </MotionItem>
-            ))}
-          </MotionStagger>
-        </SectionContainer>
-      </section>
-
-      <section className={`${homeSectionClass} bg-section-warm`} id="registration">
+      <section className={`${homeSectionClass} border-y border-border/80 bg-section-warm`} id="registration">
         <SectionContainer>
           <MotionSection>
             <SectionHeading heading={postersHeading} subheading={postersSubheading} />
@@ -116,6 +85,15 @@ export default function CiuProgramsPage() {
                   </div>
                   <div className="border-t border-border/70 p-5">
                     <h3 className="text-base font-semibold text-foreground sm:text-lg">{poster.title}</h3>
+                    <a
+                      href={poster.registrationHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${homeBtnGhostClass} mt-4`}
+                    >
+                      {poster.buttonLabel}
+                      <ExternalLink className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+                    </a>
                   </div>
                 </article>
               </MotionItem>
@@ -201,9 +179,21 @@ export default function CiuProgramsPage() {
               {cta.subheading}
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-              <Link href={cta.primary.href} className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-7 py-3.5 text-sm font-semibold text-white shadow-premium transition hover:bg-gold-dark sm:px-8 sm:py-4 sm:text-base">
-                {cta.primary.label}
-              </Link>
+              {isExternalHref(cta.primary.href) ? (
+                <a
+                  href={cta.primary.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-7 py-3.5 text-sm font-semibold text-white shadow-premium transition hover:bg-gold-dark sm:px-8 sm:py-4 sm:text-base"
+                >
+                  {cta.primary.label}
+                  <ExternalLink className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+                </a>
+              ) : (
+                <Link href={cta.primary.href} className="inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-7 py-3.5 text-sm font-semibold text-white shadow-premium transition hover:bg-gold-dark sm:px-8 sm:py-4 sm:text-base">
+                  {cta.primary.label}
+                </Link>
+              )}
               <Link href={cta.secondary.href} className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 sm:px-8 sm:py-4 sm:text-base">
                 {cta.secondary.label}
               </Link>

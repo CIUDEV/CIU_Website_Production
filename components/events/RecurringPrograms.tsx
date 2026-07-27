@@ -7,6 +7,7 @@ import SectionHeading from "@/components/home/SectionHeading";
 import { homeCardInteractiveClass, homeSectionClass } from "@/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@/components/motion";
 import { recurringProgramsContent } from "@/content/EventsContent";
+import { isExternalHref } from "@/lib/externalLink";
 
 export default function RecurringPrograms() {
   const { id, label, heading, subheading, programs, note } = recurringProgramsContent;
@@ -35,13 +36,25 @@ export default function RecurringPrograms() {
                   <Users className="h-4 w-4 text-brand" strokeWidth={1.75} aria-hidden="true" />
                   {program.audience}
                 </p>
-                <Link
-                  href={program.href}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                >
-                  View Schedule
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
-                </Link>
+                {isExternalHref(program.href) ? (
+                  <a
+                    href={program.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  >
+                    {program.buttonLabel}
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+                  </a>
+                ) : (
+                  <Link
+                    href={program.href}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  >
+                    {program.buttonLabel}
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+                  </Link>
+                )}
               </article>
             </MotionItem>
           ))}

@@ -1,14 +1,15 @@
 "use client";
 
-import {
-  aosDefaults,
-  getAosDuration,
-  type AosScrollAnimation,
-} from "@/components/aos/config";
-import { useAosReady } from "@/components/aos/useAosReady";
+import { pickScrollAnimation, type AosScrollAnimation } from "@/components/aos/config";
 import { useIsMobile } from "@/components/motion/useSubtleMotion";
-import { useReducedScrollMotion } from "@/components/motion/useReducedScrollMotion";
-import { useAosRefresh } from "@/components/aos/useAosRefresh";
+import {
+  getScrollAnimationVariants,
+  mobileScrollViewport,
+  mobileSectionTransition,
+  scrollViewport,
+  sectionTransition,
+} from "@/components/motion/variants";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function MotionSection({
   children,
@@ -21,26 +22,26 @@ export default function MotionSection({
   delay?: number;
   animation?: AosScrollAnimation;
 }) {
-  const reduceMotion = useReducedScrollMotion();
+  const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
-  const aosReady = useAosReady();
-  const animate = aosReady && !reduceMotion;
-  useAosRefresh(animate);
 
-  if (!animate) {
+  if (reduceMotion) {
     return className ? <div className={className}>{children}</div> : <>{children}</>;
   }
 
   return (
-    <div
+    <motion.div
       className={className}
-      data-aos={animation}
-      data-aos-duration={getAosDuration(isMobile)}
-      data-aos-delay={delay}
-      data-aos-easing={aosDefaults.easing}
-      data-aos-once="true"
+      initial="hidden"
+      whileInView="visible"
+      viewport={isMobile ? mobileScrollViewport : scrollViewport}
+      variants={getScrollAnimationVariants(animation)}
+      transition={{
+        ...(isMobile ? mobileSectionTransition : sectionTransition),
+        delay: delay / 1000,
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

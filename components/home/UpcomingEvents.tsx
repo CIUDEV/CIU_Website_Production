@@ -12,6 +12,7 @@ import {
 } from "@/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@/components/motion";
 import { upcomingEventsContent } from "@/content/HomeContent";
+import { isExternalHref } from "@/lib/externalLink";
 
 export default function UpcomingEvents() {
   return (
@@ -53,10 +54,22 @@ export default function UpcomingEvents() {
                   <MapPinIcon />
                   {event.location}
                 </p>
-                <Link href={event.href} className={`${homeBtnGhostClass} mt-6`}>
-                  View Details
-                  <ArrowRightIcon />
-                </Link>
+                {isExternalHref(event.href) ? (
+                  <a
+                    href={event.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${homeBtnGhostClass} mt-6`}
+                  >
+                    {event.buttonLabel ?? "View Details"}
+                    <ArrowRightIcon />
+                  </a>
+                ) : (
+                  <Link href={event.href} className={`${homeBtnGhostClass} mt-6`}>
+                    {event.buttonLabel ?? "View Details"}
+                    <ArrowRightIcon />
+                  </Link>
+                )}
               </article>
             </MotionItem>
           ))}

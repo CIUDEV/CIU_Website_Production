@@ -40,31 +40,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-[data-aos] {
-  pointer-events: auto;
-  backface-visibility: hidden;
-}
-
-/* Last-resort: if AOS still misses elements after navigation, force them visible */
-html.aos-fallback [data-aos].aos-init:not(.aos-animate) {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-aos] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-@media (max-width: 767px) {
-  [data-aos] {
-    transform: translateZ(0);
-  }
-}
-
 /* iOS Safari zooms focused inputs below 16px — keep form controls readable without zoom */
 input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="button"]):not([type="submit"]),
 select,

@@ -4,7 +4,6 @@ import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeSectionClass } from "@/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@/components/motion";
-import { scheduleAosRefreshes } from "@/lib/aosRefresh";
 import {
   mediaGalleryItems,
   mediaImagesPageContent,
@@ -16,7 +15,7 @@ import {
 } from "@/content/MediaContent";
 import { ExternalLink, Film, Images } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 type MediaView = "photos" | "videos";
 
@@ -102,10 +101,6 @@ export default function MediaGalleryGrid() {
     mediaView === "photos"
       ? `${filteredPhotos.length} photo${filteredPhotos.length === 1 ? "" : "s"}`
       : `${mediaVideoItems.length} short${mediaVideoItems.length === 1 ? "" : "s"}`;
-
-  useEffect(() => {
-    scheduleAosRefreshes();
-  }, [mediaView, photoFilter]);
 
   return (
     <section className={`${homeSectionClass} bg-section-warm`}>

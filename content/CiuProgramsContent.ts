@@ -1,8 +1,10 @@
+import { programRegistrationFormUrl } from "@/content/RegistrationLinks";
+
 export const ciuProgramPosterImages = {
-  poster01:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028273/poster-01_ugmzpr.jpg",
-  poster02:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028278/poster-02_g3ngc1.jpg",
+  quran:
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Quran_otnkdt.png",
+  weekendClass:
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Weekend_Class_kody05.png",
 } as const;
 
 export const ciuProgramKidsImages = {
@@ -21,6 +23,8 @@ export type CiuProgramPoster = {
   title: string;
   imageSrc: string;
   imageAlt: string;
+  registrationHref: string;
+  buttonLabel: string;
 };
 
 export const ciuProgramsContent = {
@@ -30,57 +34,43 @@ export const ciuProgramsContent = {
     intro:
       "Weekend Quran classes and kids programs at the Canadian Islamic Centre — practical Islamic learning for children and families in a welcoming community setting.",
     imageSrc: ciuProgramKidsImages.kidsClassroom,
-    imageAlt: "CIU weekend school registration poster for grades 1 through 12",
+    imageAlt: "Islamic Arabic calligraphy stencils for Muhammad and Allah on a wooden surface",
   },
   overview: {
     label: "About CIU Programs",
     heading: "Weekend Quran & Kids Classes",
     paragraphs: [
-      "While Azhar Canada College delivers Al-Azhar accredited diploma and course offerings, CIU directly hosts weekend Quran classes and children's programs at the Canadian Islamic Centre in Mississauga.",
-      "These programs give young learners a chance to connect with Islam, build Quranic literacy, and grow alongside peers in a modern, nurturing environment rooted in community.",
+      "While Azhar Canada College delivers Al-Azhar accredited diploma and course offerings, CIU directly hosts evening Quran classes and weekend children's programs at the Canadian Islamic Centre in Mississauga.",
+      "These programs give learners of all ages a chance to connect with Islam, build Quranic literacy, and grow alongside peers in a modern, nurturing environment rooted in community.",
     ],
     highlights: [
-      "Weekend Quran classes for children and youth",
-      "Kids program sessions with hands-on learning",
+      "Evening Quran classes on Tuesday and Thursday",
+      "Weekend school for grades 1 through 12",
       "Programs hosted at the Canadian Islamic Centre",
       "Welcoming environment for families across the GTA",
     ],
+    imageSrc: ciuProgramKidsImages.kids01,
+    imageAlt: "Students studying at tables during a CIU kids program classroom session",
   },
-  programs: [
-    {
-      id: "weekend-quran",
-      title: "Weekend Quran Class",
-      description:
-        "Structured weekend sessions focused on Quranic reading, memorization support, and building a love for the Quran in a community classroom setting.",
-      schedule: "Saturday or Sunday · 11:00 AM – 2:00 PM",
-      imageSrc: ciuProgramKidsImages.kids03,
-      imageAlt: "Families and students seated for a CIU weekend classroom session",
-    },
-    {
-      id: "kids-program",
-      title: "Kids Program",
-      description:
-        "Interactive classes for children that combine Islamic learning, classroom activities, and community connection in age-appropriate sessions.",
-      schedule: "Weekend program sessions at the centre",
-      imageSrc: ciuProgramKidsImages.kids01,
-      imageAlt: "Students studying at tables during a CIU kids program classroom session",
-    },
-  ],
   postersHeading: "Registration & Program Details",
   postersSubheading:
-    "Browse CIU weekend school registration posters and program information for grades 1 through 12.",
+    "View the program posters below and register using the shared registration form.",
   posters: [
     {
-      id: "weekend-school-registration",
-      title: "Weekend School Registration",
-      imageSrc: ciuProgramPosterImages.poster01,
-      imageAlt: "CIU weekend school registration poster for grades 1 through 12",
+      id: "ciu-quran-class",
+      title: "CIU Quran Class",
+      imageSrc: ciuProgramPosterImages.quran,
+      imageAlt: "CIU Quran Class poster — Tuesday and Thursday evenings",
+      registrationHref: programRegistrationFormUrl,
+      buttonLabel: "Register Now",
     },
     {
-      id: "weekend-school-details",
-      title: "Weekend School Details",
-      imageSrc: ciuProgramPosterImages.poster02,
-      imageAlt: "CIU weekend school program details and schedule poster",
+      id: "ciu-weekend-kids-class",
+      title: "Weekend School Registration",
+      imageSrc: ciuProgramPosterImages.weekendClass,
+      imageAlt: "CIU weekend school registration poster for grades 1 through 12",
+      registrationHref: programRegistrationFormUrl,
+      buttonLabel: "Register Now",
     },
   ] satisfies CiuProgramPoster[],
   galleryHeading: "Kids Program in Action",
@@ -113,7 +103,7 @@ export const ciuProgramsContent = {
   ],
   location: {
     title: "Program Location",
-    body: "CIU weekend Quran and kids classes are held at the Canadian Islamic Centre in Mississauga.",
+    body: "CIU Quran and weekend school classes are held at the Canadian Islamic Centre in Mississauga.",
     addressLines: ["6185 Tomken Rd #6", "Mississauga, ON L5T 1X6, Canada"],
     mapHref: "https://maps.google.com/?q=6185+Tomken+Rd+Mississauga+ON",
     imageSrc: ciuProgramKidsImages.classroom,
@@ -121,12 +111,12 @@ export const ciuProgramsContent = {
   },
   cta: {
     label: "Get Started",
-    heading: "Register for CIU Weekend Programs",
+    heading: "Register for CIU Programs",
     subheading:
-      "Contact CIU to learn about weekend Quran classes, kids program registration, and upcoming session dates.",
+      "Use the registration form to sign up for evening Quran classes or weekend school for grades 1 through 12.",
     primary: {
-      label: "Contact CIU",
-      href: "/Contact",
+      label: "Register Now",
+      href: programRegistrationFormUrl,
     },
     secondary: {
       label: "Browse Azhar Canada College",

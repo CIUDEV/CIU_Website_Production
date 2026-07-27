@@ -1,4 +1,5 @@
 import { ciuProgramKidsImages } from "@/content/CiuProgramsContent";
+import { programRegistrationFormUrl } from "@/content/RegistrationLinks";
 
 export type EventCategory =
   | "education"
@@ -32,6 +33,7 @@ export type RecurringProgram = {
   time: string;
   audience: string;
   href: string;
+  buttonLabel: string;
 };
 
 export type PastEventItem = {
@@ -58,12 +60,13 @@ export type CalendarDemoEvent = {
 };
 
 // TODO: Replace placeholder dates, times, and locations with confirmed event data before publishing.
+
 export const eventsImages = {
   hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024108/Islamic_geometric_pattern_xws7o5.jpg",
   featured:
     "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785030702/WhatsApp_Image_2026-07-25_at_08.02.11_o9kgwz.jpg",
   quranClass:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024120/Open_Qur_an_on_wooden_stand_zsb2h8.png",
+    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Quran_otnkdt.png",
   partnership:
     "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021386/about-community_peqwp7.jpg",
   pastEvents: {
@@ -167,8 +170,8 @@ export const upcomingEvents: EventItem[] = [
     description:
       "Recurring evening Quran classes focused on recitation, tajweed, and guided study for learners of all levels.",
     tags: ["Recurring", "Education", "Evenings"],
-    href: "/Events#upcoming-events",
-    buttonLabel: "View Schedule",
+    href: programRegistrationFormUrl,
+    buttonLabel: "Register Now",
     image: eventsImages.quranClass,
     recurring: true,
   },
@@ -182,8 +185,8 @@ export const upcomingEvents: EventItem[] = [
     description:
       "Recurring weekend Quran classes and kids learning sessions hosted by CIU for grades 1 through 12.",
     tags: ["Recurring", "Kids", "Weekends"],
-    href: "/Education/ciu",
-    buttonLabel: "Learn More",
+    href: programRegistrationFormUrl,
+    buttonLabel: "Register Now",
     image: ciuProgramKidsImages.kids01,
     recurring: true,
   },
@@ -202,7 +205,8 @@ export const recurringProgramsContent = {
       frequency: "Every Tuesday & Thursday",
       time: "7:00 PM",
       audience: "All learners",
-      href: "/Events#upcoming-events",
+      href: programRegistrationFormUrl,
+      buttonLabel: "Register Now",
     },
     {
       id: "ciu-kids-weekend",
@@ -210,7 +214,8 @@ export const recurringProgramsContent = {
       frequency: "Every weekend",
       time: "10:00 AM – 2:00 PM",
       audience: "Grades 1 – 12",
-      href: "/Education/ciu",
+      href: programRegistrationFormUrl,
+      buttonLabel: "Register Now",
     },
   ] satisfies RecurringProgram[],
 };

@@ -28,7 +28,7 @@ export const educationHubContent = {
         "Weekend Quran classes and kids programs hosted directly by CIU at the Canadian Islamic Centre for children and families.",
       href: "/Education/ciu",
       buttonLabel: "Explore CIU Programs",
-      imageSrc: ciuProgramPosterImages.poster01,
+      imageSrc: ciuProgramPosterImages.weekendClass,
       imageAlt: "CIU weekend school registration poster",
     },
   ],
