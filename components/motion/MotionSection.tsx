@@ -2,11 +2,10 @@
 
 import { pickScrollAnimation, type AosScrollAnimation } from "@/components/aos/config";
 import { useIsMobile } from "@/components/motion/useSubtleMotion";
+import { useScrollReveal } from "@/components/motion/useScrollReveal";
 import {
   getScrollAnimationVariants,
-  mobileScrollViewport,
   mobileSectionTransition,
-  scrollViewport,
   sectionTransition,
 } from "@/components/motion/variants";
 import { motion, useReducedMotion } from "framer-motion";
@@ -24,6 +23,9 @@ export default function MotionSection({
 }) {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const { ref, isVisible } = useScrollReveal({
+    fallbackMs: isMobile ? 700 : 900,
+  });
 
   if (reduceMotion) {
     return className ? <div className={className}>{children}</div> : <>{children}</>;
@@ -31,10 +33,10 @@ export default function MotionSection({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={isMobile ? mobileScrollViewport : scrollViewport}
+      animate={isVisible ? "visible" : "hidden"}
       variants={getScrollAnimationVariants(animation)}
       transition={{
         ...(isMobile ? mobileSectionTransition : sectionTransition),

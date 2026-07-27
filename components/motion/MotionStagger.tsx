@@ -6,18 +6,18 @@ import {
   type AosScrollAnimation,
 } from "@/components/aos/config";
 import { useIsMobile } from "@/components/motion/useSubtleMotion";
+import { useScrollReveal } from "@/components/motion/useScrollReveal";
 import {
   getScrollAnimationVariants,
   getStaggerContainerVariants,
   itemTransition,
   mobileItemTransition,
-  mobileScrollViewport,
-  scrollViewport,
 } from "@/components/motion/variants";
 import { motion, useReducedMotion } from "framer-motion";
 import { Children, createContext, useContext, type ReactNode } from "react";
 
 const StaggerIndexContext = createContext(0);
+const InsideStaggerContext = createContext(false);
 
 export function MotionStagger({
   children,
@@ -28,6 +28,9 @@ export function MotionStagger({
 }) {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const { ref, isVisible } = useScrollReveal({
+    fallbackMs: isMobile ? 700 : 900,
+  });
   const items = Children.toArray(children);
 
   if (reduceMotion) {
@@ -36,16 +39,16 @@ export function MotionStagger({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       initial="hidden"
-      whileInView="visible"
-      viewport={isMobile ? mobileScrollViewport : scrollViewport}
+      animate={isVisible ? "visible" : "hidden"}
       variants={getStaggerContainerVariants(isMobile)}
     >
       {items.map((child, index) => (
-        <StaggerIndexContext.Provider key={index} value={index}>
-          {child}
-        </StaggerIndexContext.Provider>
+        <InsideStaggerContext.Provider key={index} value={true}>
+          <StaggerIndexContext.Provider value={index}>{child}</StaggerIndexContext.Provider>
+        </InsideStaggerContext.Provider>
       ))}
     </motion.div>
   );
@@ -64,10 +67,15 @@ export function MotionItem({
 }) {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const insideStagger = useContext(InsideStaggerContext);
   const staggerIndex = useContext(StaggerIndexContext);
   const resolvedAnimation = animation ?? pickScrollAnimation(staggerIndex, isMobile);
   const resolvedDelay =
     delay ?? staggerIndex * getAosStaggerStep(isMobile);
+  const { ref, isVisible } = useScrollReveal({
+    fallbackMs: isMobile ? 600 : 800,
+    amount: 0.01,
+  });
 
   if (reduceMotion) {
     return <div className={className}>{children}</div>;
@@ -75,7 +83,10 @@ export function MotionItem({
 
   return (
     <motion.div
+      ref={insideStagger ? undefined : ref}
       className={className}
+      initial="hidden"
+      animate={insideStagger ? undefined : isVisible ? "visible" : "hidden"}
       variants={getScrollAnimationVariants(resolvedAnimation)}
       transition={{
         ...(isMobile ? mobileItemTransition : itemTransition),

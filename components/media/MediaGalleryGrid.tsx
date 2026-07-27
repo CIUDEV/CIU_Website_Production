@@ -3,7 +3,6 @@
 import ZoomableImage from "@/components/lightbox/ZoomableImage";
 import SectionContainer from "@/components/home/SectionContainer";
 import { homeSectionClass } from "@/components/home/homeUi";
-import { MotionItem, MotionStagger } from "@/components/motion";
 import {
   mediaGalleryItems,
   mediaImagesPageContent,
@@ -28,8 +27,7 @@ function GalleryCard({ item }: { item: MediaGalleryItem }) {
   const isPoster = item.variant === "poster";
 
   return (
-    <MotionItem animation="fade-in" className="h-full">
-      <article
+    <article
         className={`group relative h-full overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl ${
           isPoster ? "aspect-[3/4]" : "aspect-square"
         }`}
@@ -50,15 +48,13 @@ function GalleryCard({ item }: { item: MediaGalleryItem }) {
         </p>
         <h3 className="mt-1 text-base font-semibold text-white sm:text-lg">{item.title}</h3>
       </div>
-      </article>
-    </MotionItem>
+    </article>
   );
 }
 
 function ShortCard({ item }: { item: MediaVideoItem }) {
   return (
-    <MotionItem animation="fade-in" className="h-full">
-      <article className="group h-full overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl">
+    <article className="group h-full overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium transition duration-500 hover:shadow-premium-xl">
       <div className="relative aspect-[9/16] w-full max-w-sm bg-black sm:max-w-none">
         <iframe
           src={item.embedSrc}
@@ -82,8 +78,7 @@ function ShortCard({ item }: { item: MediaVideoItem }) {
           <ExternalLink className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
         </Link>
       </div>
-      </article>
-    </MotionItem>
+    </article>
   );
 }
 
@@ -152,25 +147,28 @@ export default function MediaGalleryGrid() {
 
         {mediaView === "photos" ? (
           filteredPhotos.length > 0 ? (
-            <MotionStagger
-              key={photoFilter}
+            <div
+              key={`${mediaView}-${photoFilter}`}
               className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6"
             >
               {filteredPhotos.map((item) => (
                 <GalleryCard key={item.id} item={item} />
               ))}
-            </MotionStagger>
+            </div>
           ) : (
             <p className="mt-10 rounded-2xl border border-border/80 bg-surface px-5 py-8 text-center text-sm text-muted sm:text-base">
               No photos match this filter yet.
             </p>
           )
         ) : mediaVideoItems.length > 0 ? (
-          <MotionStagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div
+            key={mediaView}
+            className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          >
             {mediaVideoItems.map((item) => (
               <ShortCard key={item.id} item={item} />
             ))}
-          </MotionStagger>
+          </div>
         ) : (
           <p className="mt-10 rounded-2xl border border-border/80 bg-surface px-5 py-8 text-center text-sm text-muted sm:text-base">
             Shorts will appear here once added.
