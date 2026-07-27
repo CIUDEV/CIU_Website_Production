@@ -1,4 +1,3 @@
-import { ciuProgramKidsImages } from "@/content/CiuProgramsContent";
 import { programRegistrationFormUrl } from "@/content/RegistrationLinks";
 
 export type EventCategory =
@@ -187,7 +186,7 @@ export const upcomingEvents: EventItem[] = [
     tags: ["Recurring", "Kids", "Weekends"],
     href: programRegistrationFormUrl,
     buttonLabel: "Register Now",
-    image: ciuProgramKidsImages.kids01,
+    image: eventsImages.pastEvents.youthLeadership,
     recurring: true,
   },
 ];
