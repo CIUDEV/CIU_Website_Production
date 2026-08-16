@@ -9,8 +9,8 @@ export type EducationPoster = {
 };
 
 export const azharCanadaLinks = {
-  website: "https://azharcanada.groovemember.net/home",
-  studentPortal: "https://azharcanada.groovemember.net/login",
+  website: "https://azharcanadahub.groovemember.net/portal/m3Q6uCiQT2H1B4tI",
+  studentPortal: "https://azharcanadahub.groovemember.net/portal/m3Q6uCiQT2H1B4tI",
 } as const;
 
 export const educationContent = {
