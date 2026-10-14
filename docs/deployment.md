@@ -53,7 +53,7 @@ On the **Dev@ciucanada.ca** account, worker **`ciu-website-production`**:
 | --- | --- |
 | Git repository | `CIUDEV/CIU_Website_Production` |
 | Production branch | `main` |
-| Build command | `npm run cf:build` |
+| Build command | `npm run build` |
 | Deploy command | `npm run cf:deploy` |
 | Worker name in `wrangler.jsonc` | `ciu-website-production` |
 | Non-production builds | Disabled |
