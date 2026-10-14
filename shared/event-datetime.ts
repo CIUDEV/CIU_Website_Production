@@ -1,3 +1,20 @@
+export function todayDateIso(now = new Date()) {
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+export function isEventCompleted(
+  event: { date?: string; recurring?: boolean },
+  now = new Date()
+) {
+  if (event.recurring) return false;
+  const date = event.date?.trim() ?? "";
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  return date < todayDateIso(now);
+}
+
 export function formatEventDateLabel(date: string) {
   const match = date.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!match) return "";

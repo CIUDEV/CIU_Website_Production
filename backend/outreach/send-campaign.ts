@@ -1,3 +1,4 @@
+import { posterFromStoredImage } from "@backend/blob/upload";
 import { isEmailConfigured, isSqlConfigured } from "@backend/env";
 import { resolveAudiences } from "@backend/outreach/audience";
 import { denyOutreachSend, denyStaffAudience } from "@backend/outreach/policy";
@@ -71,12 +72,13 @@ export async function handleOutreachSend(input: {
   }
 
   const stored = await replaceOutreachRecipients(campaign.id, recipients);
+  const poster = input.poster ?? (await posterFromStoredImage(campaign.image));
   await setOutreachCampaignStatus(campaign.id, "sending");
 
   let sent = 0;
   try {
     await mapLimit(stored, SEND_CONCURRENCY, async (recipient) => {
-      const result = await deliverOne(campaign, recipient, input.poster);
+      const result = await deliverOne(campaign, recipient, poster);
       if (result === "sent") sent += 1;
     });
   } catch (error) {

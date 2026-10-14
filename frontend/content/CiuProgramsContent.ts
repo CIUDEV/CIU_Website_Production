@@ -104,8 +104,8 @@ export const ciuProgramsContent = {
   location: {
     title: "Program Location",
     body: "CIU Quran and weekend school classes are held at the Canadian Islamic Centre in Mississauga.",
-    addressLines: ["6185 Tomken Rd #6", "Mississauga, ON L5T 1X6, Canada"],
-    mapHref: "https://maps.google.com/?q=6185+Tomken+Rd+Mississauga+ON",
+    addressLines: ["6185 Tomken Rd #8", "Mississauga, ON L5T 1X6, Canada"],
+    mapHref: "https://maps.google.com/?q=6185+Tomken+Rd+%238+Mississauga+ON",
     imageSrc: ciuProgramKidsImages.classroom,
     imageAlt: "Families and students gathered for a CIU weekend program at the Canadian Islamic Centre",
   },

@@ -12,8 +12,10 @@ import {
   homeSectionClass,
 } from "@frontend/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@frontend/components/motion";
+import EventCompletedBadge from "@frontend/components/events/EventCompletedBadge";
 import { upcomingEventsContent } from "@frontend/content/HomeContent";
 import { isExternalHref } from "@frontend/lib/externalLink";
+import { isEventCompleted } from "@shared/event-datetime";
 
 export default function UpcomingEvents() {
   const events = usePublicEvents().slice(0, 3);
@@ -37,9 +39,12 @@ export default function UpcomingEvents() {
                   <div className="rounded-2xl bg-brand/10 p-3 text-brand shadow-sm">
                     <CalendarIcon className="h-5 w-5" />
                   </div>
-                  <span className="rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold tracking-wide text-gold-dark uppercase">
-                    {event.dateLabel}
-                  </span>
+                  <div className="flex flex-wrap items-center justify-end gap-2">
+                    {isEventCompleted(event) ? <EventCompletedBadge /> : null}
+                    <span className="rounded-full bg-gold/10 px-3 py-1 text-xs font-semibold tracking-wide text-gold-dark uppercase">
+                      {event.dateLabel}
+                    </span>
+                  </div>
                 </div>
 
                 <p className="mt-5 inline-flex items-center gap-1.5 text-sm text-muted sm:text-base">

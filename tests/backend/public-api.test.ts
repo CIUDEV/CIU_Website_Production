@@ -244,9 +244,11 @@ describe("public list endpoints", () => {
 
   it("returns only active announcements", async () => {
     const { GET } = await import("@backend/http/announcements");
-    const result = await bodyOf(await GET());
+    const response = await GET();
+    const result = await bodyOf(response);
     expect(result.status).toBe(200);
     expect(result.body).toEqual([{ id: "a1", message: "Live", active: true }]);
+    expect(response.headers.get("Cache-Control")).toContain("no-store");
   });
 
   it("returns the public events list", async () => {

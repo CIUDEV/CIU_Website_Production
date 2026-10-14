@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { ImagePlus, X } from "lucide-react";
 import { readPosterFile } from "@frontend/portal/poster-file";
+import { displayableImageSrc } from "@shared/blob-image";
 import { posterPreviewSrc, type PosterImageInput } from "@shared/poster-image";
 
 export default function PosterUpload({
@@ -21,7 +22,7 @@ export default function PosterUpload({
   onError: (message: string) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const preview = poster ? posterPreviewSrc(poster) : fallbackSrc || "";
+  const preview = poster ? posterPreviewSrc(poster) : fallbackSrc ? displayableImageSrc(fallbackSrc) : "";
 
   return (
     <div>

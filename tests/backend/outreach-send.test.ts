@@ -9,10 +9,15 @@ const setOutreachCampaignStatus = vi.fn();
 const updateOutreachRecipientDelivery = vi.fn();
 const resolveAudiences = vi.fn();
 const sendOutreachRecipientMail = vi.fn();
+const posterFromStoredImage = vi.fn();
 
 vi.mock("@backend/env", () => ({
   isSqlConfigured,
   isEmailConfigured,
+}));
+
+vi.mock("@backend/blob/upload", () => ({
+  posterFromStoredImage,
 }));
 
 vi.mock("@backend/outreach/store", () => ({
@@ -81,6 +86,7 @@ describe("handleOutreachSend", () => {
       preview: { audiences: ["quran", "kids"], uniqueCount: 2, countsByAudience: { quran: 1, kids: 1 } },
     });
     sendOutreachRecipientMail.mockReset().mockResolvedValue({ status: "sent" });
+    posterFromStoredImage.mockReset().mockResolvedValue(undefined);
     replaceOutreachRecipients.mockResolvedValue([
       recipient(),
       recipient({
@@ -153,6 +159,28 @@ describe("handleOutreachSend", () => {
       poster,
     });
     expect(sendOutreachRecipientMail.mock.calls[0]?.[2]).toEqual(poster);
+  });
+
+  it("embeds a saved marketing poster when the send body has no file", async () => {
+    const attached = {
+      name: "1-flyer.jpg",
+      contentType: "image/jpeg" as const,
+      contentInBase64: "eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eA==",
+    };
+    posterFromStoredImage.mockResolvedValue(attached);
+    getOutreachCampaign.mockResolvedValue(
+      campaign({ image: "https://ciublobprod.blob.core.windows.net/marketing/1-flyer.jpg" })
+    );
+    const { handleOutreachSend } = await import("@backend/outreach/send-campaign");
+    await handleOutreachSend({
+      campaignId: campaign().id,
+      actorId: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      actorRole: "superadmin",
+    });
+    expect(posterFromStoredImage).toHaveBeenCalledWith(
+      "https://ciublobprod.blob.core.windows.net/marketing/1-flyer.jpg"
+    );
+    expect(sendOutreachRecipientMail.mock.calls[0]?.[2]).toEqual(attached);
   });
 
   it("records a failed recipient without stopping the rest of the campaign", async () => {

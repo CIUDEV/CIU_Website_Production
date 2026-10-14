@@ -1,13 +1,17 @@
 import ZoomableImage from "@frontend/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
+import EventCompletedBadge from "@frontend/components/events/EventCompletedBadge";
 import EventDateBlock from "@frontend/components/events/EventDateBlock";
 import EventTag from "@frontend/components/events/EventTag";
 import { homeBtnGhostClass, homeCardInteractiveClass } from "@frontend/components/home/homeUi";
 import { categoryLabels, type EventItem } from "@frontend/content/EventsContent";
 import { isExternalHref } from "@frontend/lib/externalLink";
+import { isEventCompleted } from "@shared/event-datetime";
 
 export default function EventCard({ event }: { event: EventItem }) {
+  const completed = isEventCompleted(event);
+
   return (
     <article className={`group flex h-full flex-col overflow-hidden ${homeCardInteractiveClass}`}>
       {event.image ? (
@@ -20,10 +24,11 @@ export default function EventCard({ event }: { event: EventItem }) {
             className="object-cover transition duration-700 group-hover:scale-105"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="pointer-events-none absolute left-4 top-4">
+          <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
             <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand shadow-sm">
               {categoryLabels[event.category]}
             </span>
+            {completed ? <EventCompletedBadge /> : null}
           </div>
         </div>
       ) : (
@@ -31,9 +36,12 @@ export default function EventCard({ event }: { event: EventItem }) {
           <div className="flex items-start gap-4">
             <EventDateBlock dateLabel={event.dateLabel} compact />
             <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
-                {categoryLabels[event.category]}
-              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
+                  {categoryLabels[event.category]}
+                </p>
+                {completed ? <EventCompletedBadge /> : null}
+              </div>
               <h3 className="mt-1 text-lg font-semibold text-foreground">{event.title}</h3>
             </div>
           </div>

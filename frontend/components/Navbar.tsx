@@ -286,7 +286,7 @@ function MobileNavItem({
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ ticker }: { ticker?: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(
@@ -322,7 +322,7 @@ export default function Navbar() {
     <>
       <div className="sticky top-0 z-50">
         <TopBar compact={isScrolled} />
-        <AnnouncementTicker />
+        {ticker ?? <AnnouncementTicker />}
         <header
           className={`border-b border-border/80 bg-surface shadow-[0_1px_0_rgba(0,0,0,0.03),0_4px_24px_rgba(28,25,23,0.06)] transition-all duration-300 ease-out ${
             isScrolled ? "shadow-md" : ""

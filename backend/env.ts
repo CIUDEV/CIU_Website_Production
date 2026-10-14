@@ -51,6 +51,14 @@ export function isEmailConfigured() {
   return Boolean(acsEndpoint() && emailSender());
 }
 
+export function blobStorageEndpoint() {
+  return process.env.AZURE_STORAGE_BLOB_ENDPOINT?.trim().replace(/\/$/, "") ?? "";
+}
+
+export function isBlobStorageConfigured() {
+  return Boolean(blobStorageEndpoint());
+}
+
 export function portalBackendName() {
   if (isSqlConfigured()) return "sql" as const;
   if (isAzureConfigured()) return "azure-api" as const;

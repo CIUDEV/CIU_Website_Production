@@ -67,8 +67,19 @@ function deliveryFromRow(row: Row): OutreachDeliveryCounts {
   };
 }
 
-const campaignSelect = `
-  SELECT c.id, c.type, c.subject, c.content, c.status, c.audiences, c.eventId,
+let imageColumnReady: Promise<boolean> | undefined;
+
+export async function outreachCampaignsHaveImageColumn() {
+  imageColumnReady ??= query<{ n: number | null }>(
+    `SELECT COL_LENGTH('dbo.outreach_campaigns', 'image') AS n`
+  ).then((rows) => Boolean(rows[0]?.n));
+  return imageColumnReady;
+}
+
+function campaignSelect(hasImage: boolean) {
+  const imageExpr = hasImage ? "c.image" : "CAST(NULL AS NVARCHAR(1000)) AS image";
+  return `
+  SELECT c.id, c.type, c.subject, c.content, c.status, c.audiences, c.eventId, ${imageExpr},
          c.createdBy, c.sentBy, c.createdAt, c.updatedAt, c.sentAt,
          creator.displayName AS createdByName,
          creator.email AS createdByEmail,
@@ -93,6 +104,7 @@ const campaignSelect = `
     GROUP BY campaignId
   ) AS stats ON stats.campaignId = c.id
 `;
+}
 
 function mapCampaign(row: Row): OutreachCampaign {
   const type = asString(row.type);
@@ -105,6 +117,7 @@ function mapCampaign(row: Row): OutreachCampaign {
     status: isOutreachStatus(status) ? status : "draft",
     audiences: parseAudiences(row.audiences),
     eventId: optionalString(row.eventId),
+    image: optionalString(row.image),
     createdBy: asString(row.createdBy),
     createdByName: asString(row.createdByName) || "Unknown",
     createdByEmail: asString(row.createdByEmail),
@@ -133,15 +146,20 @@ function mapRecipient(row: Row): OutreachRecipient {
 }
 
 export async function listOutreachCampaigns() {
-  const rows = await query<Row>(`${campaignSelect} ORDER BY c.updatedAt DESC`);
+  const rows = await query<Row>(
+    `${campaignSelect(await outreachCampaignsHaveImageColumn())} ORDER BY c.updatedAt DESC`
+  );
   return rows.map(mapCampaign);
 }
 
 export async function getOutreachCampaign(id: string) {
   if (!isUuid(id)) return null;
-  const rows = await query<Row>(`${campaignSelect} WHERE c.id = @id`, (request) => {
-    request.input("id", sql.UniqueIdentifier, id);
-  });
+  const rows = await query<Row>(
+    `${campaignSelect(await outreachCampaignsHaveImageColumn())} WHERE c.id = @id`,
+    (request) => {
+      request.input("id", sql.UniqueIdentifier, id);
+    }
+  );
   return rows[0] ? mapCampaign(rows[0]) : null;
 }
 
@@ -151,18 +169,25 @@ export async function createOutreachCampaign(input: {
   content: string;
   audiences: OutreachAudienceId[];
   eventId?: string;
+  image?: string;
   createdBy: string;
 }) {
+  const hasImage = await outreachCampaignsHaveImageColumn();
   const rows = await query<Row>(
-    `INSERT INTO dbo.outreach_campaigns (type, subject, content, status, audiences, eventId, createdBy)
-     OUTPUT INSERTED.id
-     VALUES (@type, @subject, @content, 'draft', @audiences, @eventId, @createdBy)`,
+    hasImage
+      ? `INSERT INTO dbo.outreach_campaigns (type, subject, content, status, audiences, eventId, image, createdBy)
+         OUTPUT INSERTED.id
+         VALUES (@type, @subject, @content, 'draft', @audiences, @eventId, @image, @createdBy)`
+      : `INSERT INTO dbo.outreach_campaigns (type, subject, content, status, audiences, eventId, createdBy)
+         OUTPUT INSERTED.id
+         VALUES (@type, @subject, @content, 'draft', @audiences, @eventId, @createdBy)`,
     (request) => {
       request.input("type", sql.NVarChar(32), input.type);
       request.input("subject", sql.NVarChar(200), input.subject);
       request.input("content", sql.NVarChar(sql.MAX), input.content);
       request.input("audiences", sql.NVarChar(sql.MAX), JSON.stringify(input.audiences));
       request.input("eventId", sql.UniqueIdentifier, input.eventId && isUuid(input.eventId) ? input.eventId : null);
+      if (hasImage) request.input("image", sql.NVarChar(1000), input.image?.trim() || null);
       request.input("createdBy", sql.UniqueIdentifier, input.createdBy);
     }
   );
@@ -177,6 +202,7 @@ function emptyCampaign(input: {
   content: string;
   audiences: OutreachAudienceId[];
   eventId?: string;
+  image?: string;
   createdBy: string;
 }): OutreachCampaign {
   const now = new Date().toISOString();
@@ -188,6 +214,7 @@ function emptyCampaign(input: {
     status: "draft",
     audiences: input.audiences,
     eventId: input.eventId,
+    image: input.image,
     createdBy: input.createdBy,
     createdByName: "",
     createdByEmail: "",
@@ -205,19 +232,32 @@ export async function updateOutreachCampaign(
     content: string;
     audiences: OutreachAudienceId[];
     eventId?: string;
+    image?: string;
   }
 ) {
   if (!isUuid(id)) return null;
+  const hasImage = await outreachCampaignsHaveImageColumn();
   const rows = await query<Row>(
-    `UPDATE dbo.outreach_campaigns
-     SET type = @type,
-         subject = @subject,
-         content = @content,
-         audiences = @audiences,
-         eventId = @eventId,
-         updatedAt = SYSUTCDATETIME()
-     OUTPUT INSERTED.id
-     WHERE id = @id AND status = 'draft'`,
+    hasImage
+      ? `UPDATE dbo.outreach_campaigns
+         SET type = @type,
+             subject = @subject,
+             content = @content,
+             audiences = @audiences,
+             eventId = @eventId,
+             image = @image,
+             updatedAt = SYSUTCDATETIME()
+         OUTPUT INSERTED.id
+         WHERE id = @id AND status = 'draft'`
+      : `UPDATE dbo.outreach_campaigns
+         SET type = @type,
+             subject = @subject,
+             content = @content,
+             audiences = @audiences,
+             eventId = @eventId,
+             updatedAt = SYSUTCDATETIME()
+         OUTPUT INSERTED.id
+         WHERE id = @id AND status = 'draft'`,
     (request) => {
       request.input("id", sql.UniqueIdentifier, id);
       request.input("type", sql.NVarChar(32), input.type);
@@ -225,9 +265,26 @@ export async function updateOutreachCampaign(
       request.input("content", sql.NVarChar(sql.MAX), input.content);
       request.input("audiences", sql.NVarChar(sql.MAX), JSON.stringify(input.audiences));
       request.input("eventId", sql.UniqueIdentifier, input.eventId && isUuid(input.eventId) ? input.eventId : null);
+      if (hasImage) request.input("image", sql.NVarChar(1000), input.image?.trim() || null);
     }
   );
   if (!rows[0]) return null;
+  return getOutreachCampaign(id);
+}
+
+export async function setOutreachCampaignImage(id: string, image?: string) {
+  if (!isUuid(id)) return null;
+  if (!(await outreachCampaignsHaveImageColumn())) return getOutreachCampaign(id);
+  await query(
+    `UPDATE dbo.outreach_campaigns
+     SET image = @image,
+         updatedAt = SYSUTCDATETIME()
+     WHERE id = @id`,
+    (request) => {
+      request.input("id", sql.UniqueIdentifier, id);
+      request.input("image", sql.NVarChar(1000), image?.trim() || null);
+    }
+  );
   return getOutreachCampaign(id);
 }
 

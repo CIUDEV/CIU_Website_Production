@@ -7,6 +7,7 @@ import { AdminApiError, adminFetch } from "@frontend/portal/client";
 import { useAdminSession } from "@frontend/components/admin/AdminSessionContext";
 import PosterUpload from "@frontend/components/admin/PosterUpload";
 import { formInputClassName, formShellClassName } from "@frontend/lib/formStyles";
+import { displayableImageSrc } from "@shared/blob-image";
 import { posterPreviewSrc, type PosterImageInput } from "@shared/poster-image";
 import {
   OUTREACH_AUDIENCE_LABELS,
@@ -65,6 +66,7 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [poster, setPoster] = useState<PosterImageInput | null>(null);
+  const [imageUrl, setImageUrl] = useState(campaign?.image ?? "");
 
   useEffect(() => {
     adminFetch<{ audiences: AudienceOption[] }>("/api/admin/outreach/audiences")
@@ -81,6 +83,8 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
     content: draft.content,
     audiences: draft.audiences,
     eventId: draft.type === "event" ? draft.eventId : "",
+    poster,
+    image: imageUrl,
   });
 
   const toggleAudience = (id: OutreachAudienceId) => {
@@ -102,17 +106,21 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
         const updated = await adminFetch<OutreachCampaign>(`/api/admin/outreach/campaigns/${id}`, {
           method: "PATCH",
           body: JSON.stringify(payload()),
+          busy: poster ? "Saving draft and poster" : "Saving",
         });
         setDraft(draftFromCampaign(updated));
         setSavedId(updated.id);
+        setImageUrl(updated.image ?? imageUrl);
         return updated;
       }
       const created = await adminFetch<OutreachCampaign>("/api/admin/outreach/campaigns", {
         method: "POST",
         body: JSON.stringify(payload()),
+        busy: poster ? "Saving draft and poster" : "Saving",
       });
       setSavedId(created.id);
       setDraft(draftFromCampaign(created));
+      setImageUrl(created.image ?? imageUrl);
       return created;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save draft.");
@@ -160,6 +168,7 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
   };
 
   const confirmSend = async () => {
+    const posterToSend = poster;
     setSending(true);
     setError("");
     try {
@@ -167,7 +176,8 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
       if (!saved) return;
       await adminFetch(`/api/admin/outreach/campaigns/${saved.id}/send`, {
         method: "POST",
-        body: JSON.stringify(poster ? { poster } : {}),
+        body: JSON.stringify(posterToSend ? { poster: posterToSend } : {}),
+        busy: "Sending",
       });
       setConfirmOpen(false);
       router.replace(`/admin/outreach/${saved.id}`);
@@ -296,9 +306,13 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
 
             <PosterUpload
               label="Poster (optional)"
-              hint="Add a picture from this device to include in the email. It is not saved yet — blob storage comes later."
+              hint="Add a picture from this device to preview it here. Saving or sending stores it in the marketing folder in Azure Blob Storage."
               poster={poster}
-              onChange={setPoster}
+              fallbackSrc={imageUrl ? displayableImageSrc(imageUrl) : ""}
+              onChange={(next) => {
+                setPoster(next);
+                if (!next) setImageUrl("");
+              }}
               onError={setError}
             />
           </div>
@@ -307,10 +321,14 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
             <div className="rounded-2xl border border-border bg-background p-4">
               <p className="text-xs font-semibold tracking-[0.16em] text-brand uppercase">Preview</p>
               <p className="mt-2 text-sm font-semibold text-foreground">{draft.subject || "Subject"}</p>
-              {poster ? (
+              {poster || imageUrl ? (
                 <div className="mt-3 overflow-hidden rounded-xl border border-border bg-surface">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={posterPreviewSrc(poster)} alt="Poster preview" className="max-h-64 w-full object-contain" />
+                  <img
+                    src={poster ? posterPreviewSrc(poster) : displayableImageSrc(imageUrl)}
+                    alt="Poster preview"
+                    className="max-h-64 w-full object-contain"
+                  />
                 </div>
               ) : null}
               <div className="mt-3 max-h-80 overflow-auto whitespace-pre-wrap text-sm leading-relaxed text-muted">
@@ -391,7 +409,9 @@ export default function OutreachCampaignEditor({ campaign }: { campaign?: Outrea
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-muted">Poster</dt>
-                <dd className="font-medium text-foreground">{poster ? poster.name : "None"}</dd>
+                <dd className="font-medium text-foreground">
+                  {poster ? poster.name : imageUrl ? "Saved poster" : "None"}
+                </dd>
               </div>
             </dl>
             <p className="mt-4 text-sm text-muted">

@@ -1,3 +1,4 @@
+import { resolveImageFromBody } from "@backend/blob/resolve-image";
 import { getPortalBackend } from "@backend/stores/backend";
 import { parseEventInput } from "@backend/http/event-input";
 import { jsonError, jsonOk, recordHistory, requireAdmin } from "@backend/http/respond";
@@ -13,6 +14,12 @@ export async function PATCH(request: Request, { params }: Params) {
   const current = (await getPortalBackend().listEvents()).find((item) => item.id === id);
   if (!current) return jsonError("Event not found.", 404);
 
+  const image = await resolveImageFromBody({
+    folder: "event",
+    body,
+    existing: current.image,
+  });
+  if ("error" in image) return jsonError(image.error);
   const parsed = parseEventInput({
     title: body.title ?? current.title,
     category: body.category ?? current.category,
@@ -24,11 +31,12 @@ export async function PATCH(request: Request, { params }: Params) {
     tags: body.tags ?? current.tags,
     href: body.href ?? current.href,
     buttonLabel: body.buttonLabel ?? current.buttonLabel,
-    image: body.image ?? current.image,
+    image: image.image,
     recurring: body.recurring ?? current.recurring,
     featured: body.featured ?? current.featured,
   });
   if (typeof parsed === "string") return jsonError(parsed);
+  parsed.image = image.image;
   const updated = await getPortalBackend().updateEvent(id, parsed);
   if (!updated) return jsonError("Event not found.", 404);
   await recordHistory(request, {

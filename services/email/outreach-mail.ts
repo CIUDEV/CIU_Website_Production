@@ -1,5 +1,6 @@
 import { EMAIL_POSTER_CID, renderCiuEmail, siteUrl } from "@email/layout";
 import { isValidEmailAddress, sendMail } from "@email/send-mail";
+import { blobLocationFromUrl } from "@shared/blob-image";
 import { OUTREACH_TYPE_LABELS, type OutreachCampaign, type OutreachRecipient } from "@shared/outreach";
 import type { PosterImageInput } from "@shared/poster-image";
 
@@ -29,15 +30,25 @@ export function outreachEmailText(input: { displayName: string; content: string;
   ].join("\n");
 }
 
+function hostedPosterSrc(image?: string) {
+  if (!image) return undefined;
+  // Inboxes cannot load our private blob proxy. Blob posters must be CID attachments.
+  if (blobLocationFromUrl(image)) return undefined;
+  if (image.startsWith("https://") || image.startsWith("http://")) return image;
+  return undefined;
+}
+
 export function outreachEmailHtml(input: {
   displayName: string;
   subject: string;
   content: string;
   type: OutreachCampaign["type"];
   poster?: PosterImageInput;
+  image?: string;
 }) {
   const name = outreachGreetingName(input.displayName);
   const paragraphs = outreachParagraphs(input.content);
+  const hosted = hostedPosterSrc(input.image);
   return renderCiuEmail({
     preheader: paragraphs[0] ?? input.subject,
     eyebrow: OUTREACH_TYPE_LABELS[input.type],
@@ -45,14 +56,16 @@ export function outreachEmailHtml(input: {
     greeting: `Assalamu Alaikum ${name},`,
     heroImage: input.poster
       ? { src: `cid:${EMAIL_POSTER_CID}`, alt: input.poster.name || "Campaign poster" }
-      : undefined,
+      : hosted
+        ? { src: hosted, alt: "Campaign poster" }
+        : undefined,
     paragraphs: paragraphs.length ? paragraphs : [input.content.trim() || input.subject],
     cta: { href: siteUrl("/"), label: "Visit the CIU website" },
   });
 }
 
 export async function sendOutreachRecipientMail(
-  campaign: Pick<OutreachCampaign, "type" | "subject" | "content">,
+  campaign: Pick<OutreachCampaign, "type" | "subject" | "content" | "image">,
   recipient: Pick<OutreachRecipient, "email" | "displayName">,
   poster?: PosterImageInput
 ) {
@@ -66,7 +79,7 @@ export async function sendOutreachRecipientMail(
     text: outreachEmailText({
       displayName: recipient.displayName,
       content: campaign.content,
-      hasPoster: Boolean(poster),
+      hasPoster: Boolean(poster || campaign.image),
     }),
     html: outreachEmailHtml({
       displayName: recipient.displayName,
@@ -74,6 +87,7 @@ export async function sendOutreachRecipientMail(
       content: campaign.content,
       type: campaign.type,
       poster,
+      image: campaign.image,
     }),
     purpose: "outreach",
     attachments: poster

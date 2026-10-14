@@ -149,7 +149,16 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {copyright.organization}.{" "}
             <span className="text-gold-light/90">
-              {copyright.developerCredit.prefix} {copyright.developerCredit.name}.
+              {copyright.developerCredit.prefix}{" "}
+              <a
+                href={copyright.developerCredit.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-gold-light underline decoration-gold-light/40 underline-offset-4 transition hover:text-white hover:decoration-white"
+              >
+                {copyright.developerCredit.name}
+              </a>
+              .
             </span>
           </p>
           <Link

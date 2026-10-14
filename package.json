@@ -23,6 +23,7 @@
     "@azure/identity": "^4.13.3",
     "@azure/msal-browser": "^5.22.0",
     "@azure/msal-react": "^5.7.1",
+    "@azure/storage-blob": "^12.34.0",
     "@opennextjs/cloudflare": "^1.20.2",
     "aos": "^2.3.4",
     "framer-motion": "^12.42.2",

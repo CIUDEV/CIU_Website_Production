@@ -14,6 +14,7 @@ export type OutreachCampaignInput = {
   content: string;
   audiences: OutreachAudienceId[];
   eventId?: string;
+  image?: string;
 };
 
 export function parseOutreachCampaignInput(body: Record<string, unknown>): OutreachCampaignInput | string {

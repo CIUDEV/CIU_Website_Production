@@ -1,3 +1,4 @@
+import { resolveImageFromBody } from "@backend/blob/resolve-image";
 import { getPortalBackend } from "@backend/stores/backend";
 import { parseEventInput } from "@backend/http/event-input";
 import { jsonError, jsonOk, recordHistory, requireAdmin } from "@backend/http/respond";
@@ -15,6 +16,9 @@ export async function POST(request: Request) {
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
   const parsed = parseEventInput(body);
   if (typeof parsed === "string") return jsonError(parsed);
+  const image = await resolveImageFromBody({ folder: "event", body });
+  if ("error" in image) return jsonError(image.error);
+  parsed.image = image.image;
   const record = await getPortalBackend().createEvent(parsed);
   await recordHistory(request, {
     action: "created",

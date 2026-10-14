@@ -1,4 +1,5 @@
 import { requireAdminActor } from "@backend/auth/admin-auth";
+import { resolveImageFromBody } from "@backend/blob/resolve-image";
 import { isSqlConfigured } from "@backend/env";
 import { jsonError, jsonOk, recordHistory } from "@backend/http/respond";
 import { parseOutreachCampaignInput } from "@backend/outreach/input";
@@ -35,6 +36,8 @@ export async function POST(request: Request) {
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
   const parsed = parseOutreachCampaignInput(body);
   if (typeof parsed === "string") return jsonError(parsed);
+  const image = await resolveImageFromBody({ folder: "marketing", body });
+  if ("error" in image) return jsonError(image.error);
 
   const deniedStaff = denyStaffAudience(auth.actor.adminRole, parsed.audiences);
   if (deniedStaff) return jsonError(deniedStaff, 403);
@@ -42,6 +45,7 @@ export async function POST(request: Request) {
   try {
     const record = await createOutreachCampaign({
       ...parsed,
+      image: image.image,
       createdBy: auth.actor.id,
     });
     await recordHistory(request, {

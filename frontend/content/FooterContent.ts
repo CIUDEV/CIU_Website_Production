@@ -30,7 +30,7 @@ export const footerContent = {
     },
     visitUs: {
       heading: "Visit Us",
-      addressLines: ["6185 Tomken Rd #6", "Mississauga, ON L5T 1X6, Canada"],
+      addressLines: ["6185 Tomken Rd #8", "Mississauga, ON L5T 1X6, Canada"],
       phone: "905-266-4135",
       phoneHref: "tel:9052664135",
       email: "info@ciucanada.ca",
@@ -49,7 +49,8 @@ export const footerContent = {
     organization: "Canadian Islamic Union",
     developerCredit: {
       prefix: "Website by",
-      name: "Eagles Development Team",
+      name: "Degaz Technologies",
+      href: "https://eaglesdevelopmentteam.com/",
     },
   },
   staffLogin: {

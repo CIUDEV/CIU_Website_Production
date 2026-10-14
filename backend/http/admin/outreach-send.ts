@@ -1,7 +1,9 @@
 import { requireAdminActor } from "@backend/auth/admin-auth";
+import { resolveImageFromBody } from "@backend/blob/resolve-image";
 import { jsonError, jsonOk, recordHistory } from "@backend/http/respond";
 import { handleOutreachSend } from "@backend/outreach/send-campaign";
 import { outreachSqlMessage } from "@backend/outreach/sql";
+import { setOutreachCampaignImage } from "@backend/outreach/store";
 import { parsePosterImage } from "@shared/poster-image";
 
 
@@ -15,9 +17,14 @@ export async function POST(request: Request, context: Context) {
   const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
   const poster = parsePosterImage(body.poster);
   if (typeof poster === "string") return jsonError(poster);
+  const image = await resolveImageFromBody({ folder: "marketing", body });
+  if ("error" in image) return jsonError(image.error);
 
   const { id } = await context.params;
   try {
+    if (image.image) {
+      await setOutreachCampaignImage(id, image.image);
+    }
     const result = await handleOutreachSend({
       campaignId: id,
       actorId: auth.actor.id,

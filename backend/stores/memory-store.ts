@@ -1,4 +1,3 @@
-import { announcementContent } from "@frontend/content/AnnouncementContent";
 import { upcomingEvents } from "@frontend/content/EventsContent";
 import type {
   Announcement,
@@ -26,13 +25,7 @@ function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
 
-const announcements: Announcement[] = announcementContent.items.map((message, index) => ({
-  id: `announcement-${index + 1}`,
-  message,
-  active: true,
-  createdAt: nowIso(),
-  updatedAt: nowIso(),
-}));
+const announcements: Announcement[] = [];
 
 const events: PortalEvent[] = upcomingEvents.map((event) => ({
   ...event,

@@ -1,3 +1,4 @@
+import { persistableImageUrl } from "@shared/blob-image";
 import { buildEventSchedule, toTimeInputValue } from "@shared/event-datetime";
 import { readString } from "@shared/read-string";
 import type { PortalEventCategory, PortalEventInput } from "@shared/types";
@@ -45,14 +46,9 @@ export function parseEventInput(body: Record<string, unknown>): PortalEventInput
     tags,
     href,
     buttonLabel: readString(body.buttonLabel) || "View Details",
-    image: persistableEventImage(readString(body.image)),
+    image: persistableImageUrl(readString(body.image)),
     recurring: Boolean(body.recurring),
     featured: Boolean(body.featured),
   };
 }
 
-function persistableEventImage(value: string) {
-  const image = value.trim();
-  if (!image || image.startsWith("data:") || image.length > 1000) return undefined;
-  return image;
-}

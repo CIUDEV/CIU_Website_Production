@@ -18,7 +18,7 @@ export const contactContent = {
     full: topBarContent.address,
     mapsUrl: topBarContent.mapsUrl,
     mapEmbedUrl:
-      "https://maps.google.com/maps?q=6185+Tomken+Rd+%236,+Mississauga,+ON+L5T+1X6,+Canada&output=embed",
+      "https://maps.google.com/maps?q=6185+Tomken+Rd+%238,+Mississauga,+ON+L5T+1X6,+Canada&output=embed",
   },
   phone: {
     label: "Phone",

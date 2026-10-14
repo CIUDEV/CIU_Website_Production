@@ -50,4 +50,17 @@ describe("outreach email copy", () => {
     expect(html).toContain("cid:ciu-poster");
     expect(html).toContain("picnic.jpg");
   });
+
+  it("does not point inboxes at the private blob proxy", () => {
+    const html = outreachEmailHtml({
+      displayName: "Amina",
+      subject: "Community picnic",
+      content: "Join us Saturday.",
+      type: "marketing",
+      image: "https://ciublobprod.blob.core.windows.net/marketing/1-flyer.jpg",
+    });
+    expect(html).not.toContain("/api/media/");
+    expect(html).not.toContain("cid:ciu-poster");
+    expect(html).not.toContain("ciublobprod.blob.core.windows.net");
+  });
 });

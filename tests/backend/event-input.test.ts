@@ -4,6 +4,7 @@ import {
   buildEventSchedule,
   formatEventDateLabel,
   fromTimeInputValue,
+  isEventCompleted,
   toTimeInputValue,
 } from "@shared/event-datetime";
 
@@ -33,6 +34,16 @@ describe("event datetime helpers", () => {
   it("rejects an invalid date or start time", () => {
     expect(buildEventSchedule("bad", "19:00")).toEqual({ error: "Choose a valid date." });
     expect(buildEventSchedule("2026-09-19", "nope")).toEqual({ error: "Choose a valid start time." });
+  });
+
+  it("marks a dated event completed after its day has passed", () => {
+    const now = new Date(2026, 9, 13);
+    expect(isEventCompleted({ date: "2026-08-23" }, now)).toBe(true);
+    expect(isEventCompleted({ date: "2026-10-13" }, now)).toBe(false);
+    expect(isEventCompleted({ date: "2026-10-14" }, now)).toBe(false);
+    expect(isEventCompleted({ date: "2026-08-23", recurring: true }, now)).toBe(false);
+    expect(isEventCompleted({ recurring: true }, now)).toBe(false);
+    expect(isEventCompleted({}, now)).toBe(false);
   });
 });
 
@@ -77,9 +88,14 @@ describe("parseEventInput", () => {
     expect(parseEventInput({ ...validBody, category: "party" })).toBe("Choose a valid event category.");
   });
 
-  it("keeps an existing image URL and drops a device data URL until blob storage is ready", () => {
-    expect(parseEventInput({ ...validBody, image: "https://res.cloudinary.com/ciu/poster.jpg" })).toMatchObject({
-      image: "https://res.cloudinary.com/ciu/poster.jpg",
+  it("keeps a stored image URL and drops a device data URL", () => {
+    expect(
+      parseEventInput({
+        ...validBody,
+        image: "https://ciublobprod.blob.core.windows.net/event/picnic.jpg",
+      })
+    ).toMatchObject({
+      image: "https://ciublobprod.blob.core.windows.net/event/picnic.jpg",
     });
     expect(parseEventInput({ ...validBody, image: "data:image/png;base64,aaaa" })).toMatchObject({
       image: undefined,

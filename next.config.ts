@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["mssql", "@azure/identity", "@azure/communication-email"],
+  serverExternalPackages: ["mssql", "@azure/identity", "@azure/communication-email", "@azure/storage-blob"],
   transpilePackages: ["@azure/msal-browser", "@azure/msal-react"],
   async rewrites() {
     return [

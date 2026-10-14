@@ -12,7 +12,9 @@ import {
   homeSectionClass,
 } from "@frontend/components/home/homeUi";
 import { MotionItem, MotionStagger } from "@frontend/components/motion";
+import EventCompletedBadge from "@frontend/components/events/EventCompletedBadge";
 import { featuredEventContent } from "@frontend/content/EventsContent";
+import { isEventCompleted } from "@shared/event-datetime";
 
 export default function FeaturedEvent() {
   const selected = featuredEvent(usePublicEvents());
@@ -65,7 +67,10 @@ export default function FeaturedEvent() {
           </MotionItem>
 
           <MotionItem className="p-6 sm:p-8 lg:p-10">
-            <p className="text-xs font-semibold tracking-[0.2em] text-brand uppercase">{label}</p>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-xs font-semibold tracking-[0.2em] text-brand uppercase">{label}</p>
+              {selected && isEventCompleted(selected) ? <EventCompletedBadge /> : null}
+            </div>
             <div className="gold-accent-bar mt-4" aria-hidden="true" />
             <h2 className="mt-5 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               {title}

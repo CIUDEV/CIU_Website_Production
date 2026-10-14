@@ -69,7 +69,7 @@ Use this checklist when proofreading. Mark each item as confirmed or note the co
 
 ## Contact information (confirm all correct)
 
-- [ ] Address: 6185 Tomken Rd #6, Mississauga, ON L5T 1X6
+- [ ] Address: 6185 Tomken Rd #8, Mississauga, ON L5T 1X6
 - [ ] Phone: 905-266-4135
 - [ ] Email: info@ciucanada.ca
 - [ ] Donations: Canadianislamicunion@gmail.com

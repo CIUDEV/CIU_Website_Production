@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import AdminAccessDenied from "@frontend/components/admin/AdminAccessDenied";
 import { AdminAuthStatus } from "@frontend/components/admin/AdminAuthStatus";
+import { AdminBusyProvider } from "@frontend/components/admin/AdminBusyOverlay";
 import { AdminSessionProvider } from "@frontend/components/admin/AdminSessionContext";
 import AdminSessionTimeout from "@frontend/components/admin/AdminSessionTimeout";
 import AdminShell from "@frontend/components/admin/AdminShell";
@@ -238,28 +239,23 @@ export default function AdminAuthProvider({ children }: { children: React.ReactN
     };
   }, []);
 
-  if (available === false) {
-    return (
+  const content =
+    available === false ? (
       <AdminAuthStatus
         title="Sign-in isn’t available right now"
         description="Please try again later, or contact a CIU administrator for help."
       />
-    );
-  }
-
-  if (!instance) {
-    return (
+    ) : !instance ? (
       <AdminAuthStatus
         title="Signing you in"
         description="Starting Microsoft sign-in."
         progress={10}
       />
+    ) : (
+      <MsalProvider instance={instance}>
+        <AdminAuthGate>{children}</AdminAuthGate>
+      </MsalProvider>
     );
-  }
 
-  return (
-    <MsalProvider instance={instance}>
-      <AdminAuthGate>{children}</AdminAuthGate>
-    </MsalProvider>
-  );
+  return <AdminBusyProvider>{content}</AdminBusyProvider>;
 }

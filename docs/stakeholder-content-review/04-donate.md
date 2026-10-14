@@ -67,11 +67,11 @@
 
 **Cheque**  
 Make cheques payable to Canadian Islamic Union and mail them to our office address.  
-Address: 6185 Tomken Rd #6, Mississauga, ON L5T 1X6, Canada
+Address: 6185 Tomken Rd #8, Mississauga, ON L5T 1X6, Canada
 
 **In Person**  
 Visit the masjid during operating hours to give in person. Our team can answer questions about designated giving.  
-Address: 6185 Tomken Rd #6, Mississauga, ON L5T 1X6, Canada
+Address: 6185 Tomken Rd #8, Mississauga, ON L5T 1X6, Canada
 
 **Monthly or Major Gifts**  
 Interested in recurring support or a larger contribution? Contact us to arrange a plan that works for you.  

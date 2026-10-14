@@ -1,5 +1,5 @@
 import { getPortalBackend } from "@backend/stores/backend";
-import { isAzureConfigured, isSqlConfigured, portalBackendName } from "@backend/env";
+import { isAzureConfigured, isSqlConfigured, portalBackendName, sqlDatabase } from "@backend/env";
 import { jsonOk, requireAdmin } from "@backend/http/respond";
 import { listOutreachCampaigns } from "@backend/outreach/store";
 import { listMembers, listNewsletter, listVolunteers } from "@backend/sql/sql-store";
@@ -33,6 +33,7 @@ export async function GET(request: Request) {
   return jsonOk({
     backend: portalBackendName(),
     sqlConnected: isSqlConfigured(),
+    sqlDatabase: isSqlConfigured() ? sqlDatabase() : "",
     azureConnected: isAzureConfigured(),
     counts: {
       announcements: announcements.length,

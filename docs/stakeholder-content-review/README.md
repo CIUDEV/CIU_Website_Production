@@ -21,7 +21,7 @@ Plain-text copies of all website copy for proofreading. **No code** — only hea
 |---|---|
 | **Organization** | Canadian Islamic Union (CIU) |
 | **Tagline** | The One Big Family |
-| **Address** | 6185 Tomken Rd #6, Mississauga, ON L5T 1X6, Canada |
+| **Address** | 6185 Tomken Rd #8, Mississauga, ON L5T 1X6, Canada |
 | **Phone** | 905-266-4135 |
 | **Email** | info@ciucanada.ca |
 | **Donations email** | Canadianislamicunion@gmail.com |

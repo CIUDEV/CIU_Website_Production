@@ -35,8 +35,8 @@ function MarqueeTrack({ items }: { items: string[] }) {
   );
 }
 
-export default function AnnouncementTicker() {
-  const [items, setItems] = useState(announcementContent.items);
+export default function AnnouncementTicker({ initialItems = [] }: { initialItems?: string[] }) {
+  const [items, setItems] = useState<string[]>(initialItems);
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -48,14 +48,28 @@ export default function AnnouncementTicker() {
   }, []);
 
   useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
+
+  useEffect(() => {
     let cancelled = false;
-    fetch("/api/announcements")
-      .then((response) => (response.ok ? response.json() : null))
-      .then((data: Announcement[] | null) => {
-        if (cancelled || !Array.isArray(data) || data.length === 0) return;
-        setItems(data.map((item) => item.message));
-      })
-      .catch(() => undefined);
+
+    async function load() {
+      for (let attempt = 1; attempt <= 3 && !cancelled; attempt += 1) {
+        try {
+          const response = await fetch("/api/announcements", { cache: "no-store" });
+          if (!response.ok) throw new Error("Announcements are unavailable.");
+          const data = (await response.json()) as Announcement[];
+          if (cancelled || !Array.isArray(data)) return;
+          setItems(data.map((item) => item.message).filter(Boolean));
+          return;
+        } catch {
+          await new Promise((resolve) => setTimeout(resolve, 400 * attempt));
+        }
+      }
+    }
+
+    void load();
     return () => {
       cancelled = true;
     };

@@ -53,12 +53,12 @@ Our programs go beyond theory. We equip students with practical tools to live th
 ## Our Location
 
 **Title:** Our Location  
-**Body:** Our facility is conveniently located at 6185 Tomken Rd, Mississauga, ON L5T 1X6, in a vibrant and accessible part of the city.
+**Body:** Our facility is conveniently located at 6185 Tomken Rd #8, Mississauga, ON L5T 1X6, in a vibrant and accessible part of the city.
 
 Just minutes from major roads like Courtneypark Drive East and Britannia Road East, our centre is surrounded by key landmarks and amenities, including restaurants and business hubs. With ample parking and a welcoming environment, it's ideal for learning, connection, and community.
 
 **Address:**  
-6185 Tomken Rd #6  
+6185 Tomken Rd #8  
 Mississauga, ON L5T 1X6, Canada
 
 ---

@@ -69,7 +69,7 @@ Interactive classes for children that combine Islamic learning, classroom activi
 **Body:** CIU weekend Quran and kids classes are held at the Canadian Islamic Centre in Mississauga.
 
 **Address:**  
-6185 Tomken Rd #6  
+6185 Tomken Rd #8  
 Mississauga, ON L5T 1X6, Canada
 
 ---

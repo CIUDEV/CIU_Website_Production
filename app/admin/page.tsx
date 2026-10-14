@@ -11,6 +11,7 @@ import { adminFetch } from "@frontend/portal/client";
 type Overview = {
   backend?: "sql" | "azure-api" | "memory";
   sqlConnected?: boolean;
+  sqlDatabase?: string;
   azureConnected: boolean;
   counts: {
     announcements: number;
@@ -69,7 +70,7 @@ export default function AdminOverviewPage() {
       {overview ? (
         <p className="mb-6 rounded-2xl border border-brand/20 bg-brand/10 px-4 py-3 text-sm text-foreground xl:text-base">
           {overview.sqlConnected
-            ? "Connected to Azure SQL (ciu-db-dev)."
+            ? `Connected to Azure SQL (${overview.sqlDatabase || "configured"}).`
             : overview.azureConnected
               ? "Connected to Azure API."
               : "Using the local adapter until Azure SQL is configured. Run `az login` locally. Data can reset on deploy."}

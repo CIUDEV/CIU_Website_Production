@@ -11,7 +11,7 @@
 ## Contact details
 
 ### Visit Us
-6185 Tomken Rd #6  
+6185 Tomken Rd #8  
 Mississauga, ON L5T 1X6, Canada
 
 ### Phone

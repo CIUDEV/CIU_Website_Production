@@ -6,6 +6,7 @@ import {
   cloudinaryLightboxPreview,
   isCloudinaryUrl,
 } from "@frontend/lib/cloudinary";
+import { displayableImageSrc } from "@shared/blob-image";
 import Image, { type ImageProps, type StaticImageData } from "next/image";
 
 export type ZoomableImageProps = ImageProps & {
@@ -14,7 +15,7 @@ export type ZoomableImageProps = ImageProps & {
 };
 
 function resolveSrc(src: ImageProps["src"]): string {
-  if (typeof src === "string") return src;
+  if (typeof src === "string") return displayableImageSrc(src);
   return (src as StaticImageData).src;
 }
 
@@ -39,9 +40,11 @@ export default function ZoomableImage({
   quality = 90,
   ...props
 }: ZoomableImageProps) {
-  if (!zoomable || !src) {
+  const resolvedSrc = typeof src === "string" ? displayableImageSrc(src) : src;
+
+  if (!zoomable || !resolvedSrc) {
     return (
-      <Image className={className} alt={alt} src={src} fill={fill} quality={quality} {...props} />
+      <Image className={className} alt={alt} src={resolvedSrc} fill={fill} quality={quality} {...props} />
     );
   }
 
@@ -49,7 +52,7 @@ export default function ZoomableImage({
     <Image
       className={`${className}${className.includes("pointer-events") ? "" : " pointer-events-none"}`}
       alt={alt}
-      src={src}
+      src={resolvedSrc}
       fill={fill}
       quality={quality}
       {...props}

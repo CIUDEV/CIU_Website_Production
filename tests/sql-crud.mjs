@@ -122,6 +122,37 @@ async function main() {
     if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No user row updated.");
   });
 
+  let staffSessionId;
+  const sessionsTable = await scalar(pool, `SELECT OBJECT_ID('dbo.staff_sessions', 'U') AS objectId`);
+  if (!sessionsTable?.objectId) {
+    record("staff_sessions", "skip", true, "run 017_create_staff_sessions.sql");
+  } else {
+    await runOp("staff_sessions", "create", async () => {
+      const row = await scalar(
+        pool,
+        `INSERT INTO dbo.staff_sessions (userId, expiresAt)
+         OUTPUT INSERTED.id
+         VALUES (@userId, DATEADD(hour, 8, SYSUTCDATETIME()))`,
+        (request) => request.input("userId", sql.UniqueIdentifier, userId)
+      );
+      staffSessionId = row.id;
+    });
+    await runOp("staff_sessions", "read", async () => {
+      const row = await scalar(pool, `SELECT id FROM dbo.staff_sessions WHERE id = @id`, (request) => {
+        request.input("id", sql.UniqueIdentifier, staffSessionId);
+      });
+      if (!row) throw new Error("Inserted staff session not found.");
+    });
+    await runOp("staff_sessions", "update", async () => {
+      const result = await exec(
+        pool,
+        `UPDATE dbo.staff_sessions SET lastSeenAt = SYSUTCDATETIME() WHERE id = @id`,
+        (request) => request.input("id", sql.UniqueIdentifier, staffSessionId)
+      );
+      if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No staff session row updated.");
+    });
+  }
+
   let announcementId;
   await runOp("announcements", "create", async () => {
     const row = await scalar(
@@ -435,12 +466,13 @@ async function main() {
     await runOp("outreach_additional", "create", async () => {
       const row = await scalar(
         pool,
-        `INSERT INTO dbo.outreach_additional (fullName, email, notes, createdBy)
+        `INSERT INTO dbo.outreach_additional (fullName, email, phone, notes, createdBy)
          OUTPUT INSERTED.id
-         VALUES (@fullName, @email, @notes, @createdBy)`,
+         VALUES (@fullName, @email, @phone, @notes, @createdBy)`,
         (request) => {
           request.input("fullName", sql.NVarChar(200), tag);
           request.input("email", sql.NVarChar(256), `${tag}@additional.test`);
+          request.input("phone", sql.NVarChar(40), "905-555-0140");
           request.input("notes", sql.NVarChar(500), "CRUD test additional audience");
           request.input("createdBy", sql.UniqueIdentifier, userId);
         }
@@ -463,6 +495,44 @@ async function main() {
         }
       );
       if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No additional person row updated.");
+    });
+  }
+
+  let outreachTemplateId;
+  const templatesTable = await scalar(pool, `SELECT OBJECT_ID('dbo.outreach_templates', 'U') AS objectId`);
+  if (!templatesTable?.objectId) {
+    record("outreach_templates", "skip", true, "table not present");
+  } else {
+    await runOp("outreach_templates", "create", async () => {
+      const row = await scalar(
+        pool,
+        `INSERT INTO dbo.outreach_templates (type, name, subject, content)
+         OUTPUT INSERTED.id
+         VALUES ('general', @name, @subject, @content)`,
+        (request) => {
+          request.input("name", sql.NVarChar(120), tag);
+          request.input("subject", sql.NVarChar(200), tag);
+          request.input("content", sql.NVarChar(sql.MAX), "CRUD test template");
+        }
+      );
+      outreachTemplateId = row.id;
+    });
+    await runOp("outreach_templates", "read", async () => {
+      const row = await scalar(pool, `SELECT id FROM dbo.outreach_templates WHERE id = @id`, (request) => {
+        request.input("id", sql.UniqueIdentifier, outreachTemplateId);
+      });
+      if (!row) throw new Error("Inserted outreach template not found.");
+    });
+    await runOp("outreach_templates", "update", async () => {
+      const result = await exec(
+        pool,
+        `UPDATE dbo.outreach_templates SET name = @name WHERE id = @id`,
+        (request) => {
+          request.input("id", sql.UniqueIdentifier, outreachTemplateId);
+          request.input("name", sql.NVarChar(120), `${tag}-updated`);
+        }
+      );
+      if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No outreach template row updated.");
     });
   }
 
@@ -506,6 +576,14 @@ async function main() {
     });
     if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No history row deleted.");
   });
+  if (outreachTemplateId) {
+    await runOp("outreach_templates", "delete", async () => {
+      const result = await exec(pool, `DELETE FROM dbo.outreach_templates WHERE id = @id`, (request) => {
+        request.input("id", sql.UniqueIdentifier, outreachTemplateId);
+      });
+      if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No outreach template row deleted.");
+    });
+  }
   if (outreachAdditionalId) {
     await runOp("outreach_additional", "delete", async () => {
       const result = await exec(pool, `DELETE FROM dbo.outreach_additional WHERE id = @id`, (request) => {
@@ -562,6 +640,14 @@ async function main() {
     });
     if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No event row deleted.");
   });
+  if (staffSessionId) {
+    await runOp("staff_sessions", "delete", async () => {
+      const result = await exec(pool, `DELETE FROM dbo.staff_sessions WHERE id = @id`, (request) => {
+        request.input("id", sql.UniqueIdentifier, staffSessionId);
+      });
+      if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("No staff session row deleted.");
+    });
+  }
   await runOp("announcements", "delete", async () => {
     const result = await exec(pool, `DELETE FROM dbo.announcements WHERE id = @id`, (request) => {
       request.input("id", sql.UniqueIdentifier, announcementId);
@@ -578,19 +664,6 @@ async function main() {
   const baseUrl = process.env.CRUD_API_BASE ?? "http://localhost:3000";
   console.log(`\nTesting HTTP endpoints on ${baseUrl}\n`);
 
-  async function postJson(path, body) {
-    const response = await fetch(`${baseUrl}${path}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error(`${response.status} ${payload.error || JSON.stringify(payload)}`);
-    }
-    return payload;
-  }
-
   async function getJson(path) {
     const response = await fetch(`${baseUrl}${path}`);
     const payload = await response.json().catch(() => ({}));
@@ -600,9 +673,6 @@ async function main() {
     return payload;
   }
 
-  const httpTag = `${tag}-http`;
-  const httpIds = {};
-
   await runOp("/api/events", "read", async () => {
     const payload = await getJson("/api/events");
     if (!Array.isArray(payload)) throw new Error("Events endpoint did not return a list.");
@@ -611,90 +681,12 @@ async function main() {
     const payload = await getJson("/api/announcements");
     if (!Array.isArray(payload)) throw new Error("Announcements endpoint did not return a list.");
   });
-  await runOp("/api/members", "create", async () => {
-    const payload = await postJson("/api/members", {
-      fullName: httpTag,
-      email: `${httpTag}@member.test`,
-      membershipType: "individual",
-      emailTopics: ["events"],
-      agreement: true,
-      source: "membership",
-    });
-    httpIds.member = payload.id;
-  });
-  await runOp("/api/volunteers", "create", async () => {
-    const payload = await postJson("/api/volunteers", {
-      fullName: httpTag,
-      email: `${httpTag}@volunteer.test`,
-      phone: "905-555-0199",
-      ageGroup: "adult",
-      roles: ["admin-support"],
-      availability: "flexible",
-      agreement: true,
-    });
-    httpIds.volunteer = payload.id;
-  });
-  await runOp("/api/newsletter", "create", async () => {
-    const payload = await postJson("/api/newsletter", {
-      fullName: httpTag,
-      email: `${httpTag}@newsletter.test`,
-      source: "events",
-      agreement: true,
-    });
-    httpIds.newsletter = payload.id;
-  });
-  await runOp("/api/contact", "create", async () => {
-    const payload = await postJson("/api/contact", {
-      firstName: "Test",
-      surname: "User",
-      email: `${httpTag}@contact.test`,
-      phone: "905-555-0188",
-      subject: httpTag,
-      message: "HTTP CRUD test",
-    });
-    httpIds.contact = payload.id;
-  });
-  await runOp("/api/registrations", "create", async () => {
-    const payload = await postJson("/api/registrations", {
-      program: "quran",
-      studentName: httpTag,
-      email: `${httpTag}@reg.test`,
-      phone: "416-555-0177",
-      notes: "HTTP CRUD test",
-    });
-    httpIds.registration = payload.id;
-  });
-
-  await runOp("/api/members", "delete", async () => {
-    const result = await exec(pool, `DELETE FROM dbo.members WHERE email = @email`, (request) => {
-      request.input("email", sql.NVarChar(256), `${httpTag}@member.test`);
-    });
-    if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("HTTP member row not cleaned up.");
-  });
-  await runOp("/api/volunteers", "delete", async () => {
-    const result = await exec(pool, `DELETE FROM dbo.volunteers WHERE email = @email`, (request) => {
-      request.input("email", sql.NVarChar(256), `${httpTag}@volunteer.test`);
-    });
-    if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("HTTP volunteer row not cleaned up.");
-  });
-  await runOp("/api/newsletter", "delete", async () => {
-    const result = await exec(pool, `DELETE FROM dbo.newsletter WHERE email = @email`, (request) => {
-      request.input("email", sql.NVarChar(256), `${httpTag}@newsletter.test`);
-    });
-    if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("HTTP newsletter row not cleaned up.");
-  });
-  await runOp("/api/contact", "delete", async () => {
-    const result = await exec(pool, `DELETE FROM dbo.contacts WHERE email = @email`, (request) => {
-      request.input("email", sql.NVarChar(256), `${httpTag}@contact.test`);
-    });
-    if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("HTTP contact row not cleaned up.");
-  });
-  await runOp("/api/registrations", "delete", async () => {
-    const result = await exec(pool, `DELETE FROM dbo.registrations WHERE email = @email`, (request) => {
-      request.input("email", sql.NVarChar(256), `${httpTag}@reg.test`);
-    });
-    if ((result.rowsAffected[0] ?? 0) !== 1) throw new Error("HTTP registration row not cleaned up.");
-  });
+  record(
+    "form-http",
+    "skip",
+    true,
+    "skipped POST /api/contact|members|volunteers|newsletter|registrations so ACS does not send live mail"
+  );
 
   await pool.close();
 

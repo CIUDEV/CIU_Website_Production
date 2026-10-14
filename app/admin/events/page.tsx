@@ -7,7 +7,7 @@ import AdminEmptyState from "@frontend/components/admin/AdminEmptyState";
 import AdminPageHeader from "@frontend/components/admin/AdminPageHeader";
 import { adminFetch, formatDateTime } from "@frontend/portal/client";
 import { useAdminTable } from "@frontend/portal/use-admin-table";
-import { parseStoredEventTime } from "@shared/event-datetime";
+import { isEventCompleted, parseStoredEventTime } from "@shared/event-datetime";
 import PosterUpload from "@frontend/components/admin/PosterUpload";
 import { formInputClassName } from "@frontend/lib/formStyles";
 import type { PosterImageInput } from "@shared/poster-image";
@@ -115,17 +115,20 @@ export default function AdminEventsPage() {
       ...form,
       startTime: form.startTime,
       tags: form.tags.split(",").map((tag) => tag.trim()).filter(Boolean),
+      poster,
     };
     try {
       if (editingId) {
         await adminFetch(`/api/admin/events/${editingId}`, {
           method: "PATCH",
           body: JSON.stringify(payload),
+          busy: poster ? "Saving event and poster" : "Saving",
         });
       } else {
         await adminFetch("/api/admin/events", {
           method: "POST",
           body: JSON.stringify(payload),
+          busy: poster ? "Saving event and poster" : "Saving",
         });
       }
       closeForm();
@@ -241,7 +244,7 @@ export default function AdminEventsPage() {
           <div className="md:col-span-2">
             <PosterUpload
               label="Poster (optional)"
-              hint="Upload a picture from this device to preview it here. It will be saved when blob storage is ready."
+              hint="Upload a picture from this device to preview it here. Saving the event stores it in Azure Blob Storage and uses that link on the public site."
               poster={poster}
               fallbackSrc={form.image}
               onChange={(next) => {
@@ -303,9 +306,13 @@ export default function AdminEventsPage() {
                     <td className="px-4 py-3">
                       <p className="font-medium text-foreground">{item.title}</p>
                       <p className="text-muted">{item.location}</p>
-                      {item.featured || item.recurring ? (
+                      {item.featured || item.recurring || isEventCompleted(item) ? (
                         <p className="mt-1 text-xs text-brand">
-                          {[item.featured ? "Featured" : null, item.recurring ? "Recurring" : null]
+                          {[
+                            item.featured ? "Featured" : null,
+                            item.recurring ? "Recurring" : null,
+                            isEventCompleted(item) ? "Completed" : null,
+                          ]
                             .filter(Boolean)
                             .join(" · ")}
                         </p>

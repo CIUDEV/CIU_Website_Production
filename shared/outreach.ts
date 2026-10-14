@@ -83,6 +83,7 @@ export type OutreachCampaign = {
   status: OutreachStatus;
   audiences: OutreachAudienceId[];
   eventId?: string;
+  image?: string;
   createdBy: string;
   createdByName: string;
   createdByEmail: string;
