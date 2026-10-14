@@ -211,3 +211,31 @@ export function canDeactivateAdmin(actor: AdminRole | null, target: AdminRole | 
 export function adminRoleLabel(role: string) {
   return isAdminRole(role) ? ADMIN_ROLE_LABELS[role] : role;
 }
+
+const ADMIN_ROLE_RANK: Record<AdminRole, number> = {
+  regularadmin: 0,
+  intermediateadmin: 1,
+  superadmin: 2,
+};
+
+export type StaffAccessChangeAction = "added" | "promoted" | "demoted" | "deactivated" | "restored";
+
+export function adminRoleChangeAction(
+  from: string | null | undefined,
+  to: string | null | undefined
+): "promoted" | "demoted" | null {
+  if (!isAdminRole(from) || !isAdminRole(to) || from === to) return null;
+  return ADMIN_ROLE_RANK[to] > ADMIN_ROLE_RANK[from] ? "promoted" : "demoted";
+}
+
+export function adminActiveChangeAction(
+  from: boolean,
+  to: boolean
+): "deactivated" | "restored" | null {
+  if (from === to) return null;
+  return to ? "restored" : "deactivated";
+}
+
+export function adminAccountStatusLabel(isActive: boolean) {
+  return isActive ? "Active" : "Deactivated";
+}

@@ -725,6 +725,16 @@ export async function listStaffUsers() {
   return rows.map(mapStaffUser);
 }
 
+export async function listActiveSuperAdmins() {
+  const rows = await query<Row>(
+    `SELECT ${staffUserColumns}
+     FROM dbo.users
+     WHERE role = 'superadmin' AND isActive = 1
+     ORDER BY displayName ASC`
+  );
+  return rows.map(mapStaffUser);
+}
+
 export async function getStaffUserByEmail(email: string) {
   const normalized = email.trim().toLowerCase();
   if (!normalized) return null;

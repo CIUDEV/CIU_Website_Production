@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   actorCapabilities,
+  adminActiveChangeAction,
+  adminRoleChangeAction,
   adminRoleLabel,
   canChangeAdminRole,
   canDeactivateAdmin,
@@ -38,6 +40,13 @@ describe("admin role helpers", () => {
     expect(flagsForRole("regularadmin")).toEqual({ isOwner: false, canManageAdmins: false });
     expect(actorCapabilities("intermediateadmin").creatableRoles).toEqual(["regularadmin"]);
     expect(adminRoleLabel("regularadmin")).toBe("Regular admin");
+    expect(adminRoleChangeAction("regularadmin", "intermediateadmin")).toBe("promoted");
+    expect(adminRoleChangeAction("intermediateadmin", "regularadmin")).toBe("demoted");
+    expect(adminRoleChangeAction("regularadmin", "regularadmin")).toBeNull();
+    expect(adminRoleChangeAction("superadmin", "regularadmin")).toBe("demoted");
+    expect(adminActiveChangeAction(true, false)).toBe("deactivated");
+    expect(adminActiveChangeAction(false, true)).toBe("restored");
+    expect(adminActiveChangeAction(true, true)).toBeNull();
   });
 });
 

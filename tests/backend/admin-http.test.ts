@@ -11,6 +11,7 @@ const listStaffUsers = vi.fn();
 const createStaffUser = vi.fn();
 const getStaffUserById = vi.fn();
 const updateStaffUserAccess = vi.fn();
+const sendStaffAccessChangeEmails = vi.fn();
 const listMembers = vi.fn();
 const listVolunteers = vi.fn();
 const listNewsletter = vi.fn();
@@ -109,6 +110,10 @@ vi.mock("@backend/sql/sql-store", () => ({
   listNewsletter,
 }));
 
+vi.mock("@email/staff-access-mail", () => ({
+  sendStaffAccessChangeEmails,
+}));
+
 vi.mock("@backend/outreach/store", () => ({
   listOutreachCampaigns,
   createOutreachCampaign,
@@ -182,6 +187,7 @@ describe("admin HTTP handlers", () => {
     createStaffUser.mockReset().mockResolvedValue(staff({ displayName: "New Staff" }));
     getStaffUserById.mockReset();
     updateStaffUserAccess.mockReset();
+    sendStaffAccessChangeEmails.mockReset().mockResolvedValue(undefined);
     listMembers.mockReset().mockResolvedValue([{ id: "m1" }]);
     listVolunteers.mockReset().mockResolvedValue([{ id: "v1" }, { id: "v2" }]);
     listNewsletter.mockReset().mockResolvedValue([]);
@@ -318,6 +324,13 @@ describe("admin HTTP handlers", () => {
       )
     );
     expect(created.status).toBe(201);
+    expect(sendStaffAccessChangeEmails).toHaveBeenCalledWith(
+      expect.objectContaining({
+        action: "added",
+        target: expect.objectContaining({ displayName: "New Staff" }),
+        nextRole: "regularadmin",
+      })
+    );
 
     getStaffUserById.mockResolvedValueOnce(staff({ id: actor("superadmin").id, role: "superadmin" }));
     const selfDemote = await read(
@@ -336,6 +349,63 @@ describe("admin HTTP handlers", () => {
     );
     expect(deactivated.status).toBe(200);
     expect(deactivated.body.isActive).toBe(false);
+    expect(sendStaffAccessChangeEmails).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        action: "deactivated",
+        previousActive: true,
+        nextActive: false,
+        nextRole: "regularadmin",
+      })
+    );
+    expect(sendStaffAccessChangeEmails).toHaveBeenCalledTimes(2);
+
+    getStaffUserById.mockResolvedValueOnce(staff({ isActive: false }));
+    updateStaffUserAccess.mockResolvedValueOnce(staff({ isActive: true }));
+    const restored = await read(
+      await usersId.PATCH(jsonRequest("http://localhost/api/admin/users/x", "PATCH", { isActive: true }), {
+        params: Promise.resolve({ id: staff().id }),
+      })
+    );
+    expect(restored.status).toBe(200);
+    expect(sendStaffAccessChangeEmails).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        action: "restored",
+        previousActive: false,
+        nextActive: true,
+      })
+    );
+
+    getStaffUserById.mockResolvedValueOnce(staff({ role: "regularadmin" }));
+    updateStaffUserAccess.mockResolvedValueOnce(staff({ role: "intermediateadmin", canManageAdmins: true }));
+    const promoted = await read(
+      await usersId.PATCH(jsonRequest("http://localhost/api/admin/users/x", "PATCH", { role: "intermediateadmin" }), {
+        params: Promise.resolve({ id: staff().id }),
+      })
+    );
+    expect(promoted.status).toBe(200);
+    expect(sendStaffAccessChangeEmails).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        action: "promoted",
+        previousRole: "regularadmin",
+        nextRole: "intermediateadmin",
+      })
+    );
+
+    getStaffUserById.mockResolvedValueOnce(staff({ role: "intermediateadmin", canManageAdmins: true }));
+    updateStaffUserAccess.mockResolvedValueOnce(staff({ role: "regularadmin" }));
+    const demoted = await read(
+      await usersId.PATCH(jsonRequest("http://localhost/api/admin/users/x", "PATCH", { role: "regularadmin" }), {
+        params: Promise.resolve({ id: staff().id }),
+      })
+    );
+    expect(demoted.status).toBe(200);
+    expect(sendStaffAccessChangeEmails).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        action: "demoted",
+        previousRole: "intermediateadmin",
+        nextRole: "regularadmin",
+      })
+    );
   });
 
   it("blocks regular admins from creating outreach campaigns", async () => {

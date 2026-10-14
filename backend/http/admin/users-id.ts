@@ -1,6 +1,13 @@
 import { requireAdminActor } from "@backend/auth/admin-auth";
 import { denyUpdateAdmin } from "@backend/auth/admin-policy";
-import { isCreatableAdminRole, requestedCreateRole, resolveAdminRole } from "@shared/admin-roles";
+import {
+  adminActiveChangeAction,
+  adminRoleChangeAction,
+  isCreatableAdminRole,
+  requestedCreateRole,
+  resolveAdminRole,
+} from "@shared/admin-roles";
+import { sendStaffAccessChangeEmails } from "@email/staff-access-mail";
 import { jsonError, jsonOk, recordHistory, requireAdmin } from "@backend/http/respond";
 import { getStaffUserById, updateStaffUserAccess } from "@backend/sql/sql-store";
 
@@ -53,6 +60,33 @@ export async function PATCH(request: Request, { params }: Params) {
           : `${updated.isActive ? "Restored" : "Deactivated"} admin: ${updated.displayName} (${updated.email})`,
       entityId: updated.id,
     });
+
+    const actor = { email: auth.actor.email, displayName: auth.actor.displayName };
+    const person = { email: updated.email, displayName: updated.displayName };
+    const accessChange = adminRoleChangeAction(targetRole, updated.role);
+    if (accessChange) {
+      await sendStaffAccessChangeEmails({
+        action: accessChange,
+        actor,
+        target: person,
+        previousRole: targetRole,
+        nextRole: updated.role,
+        occurredAt: updated.updatedAt,
+      });
+    }
+
+    const activeChange = adminActiveChangeAction(target.isActive, updated.isActive);
+    if (activeChange) {
+      await sendStaffAccessChangeEmails({
+        action: activeChange,
+        actor,
+        target: person,
+        nextRole: updated.role,
+        previousActive: target.isActive,
+        nextActive: updated.isActive,
+        occurredAt: updated.updatedAt,
+      });
+    }
 
     return jsonOk(updated);
   } catch (error) {

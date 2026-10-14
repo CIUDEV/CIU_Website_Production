@@ -7,7 +7,8 @@ import { attachmentsForHtml, type InlineEmailAttachment } from "@email/inline-lo
 export type EmailPurpose =
   | "form-internal"
   | "form-confirmation"
-  | "outreach";
+  | "outreach"
+  | "staff-access";
 
 export type SendMailInput = {
   to: string | string[];

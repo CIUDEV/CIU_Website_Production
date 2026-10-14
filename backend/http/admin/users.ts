@@ -1,6 +1,7 @@
 import { actorCapabilities, requireAdminActor } from "@backend/auth/admin-auth";
 import { canViewAdmins, isCreatableAdminRole, requestedCreateRole } from "@shared/admin-roles";
 import { denyCreateAdmin } from "@backend/auth/admin-policy";
+import { sendStaffAccessChangeEmails } from "@email/staff-access-mail";
 import { jsonError, jsonOk, readString, recordHistory, requireAdmin } from "@backend/http/respond";
 import { createStaffUser, listStaffUsers } from "@backend/sql/sql-store";
 
@@ -60,6 +61,14 @@ export async function POST(request: Request) {
       area: "users",
       summary: `Added ${record.role}: ${record.displayName} (${record.email})`,
       entityId: record.id,
+    });
+
+    await sendStaffAccessChangeEmails({
+      action: "added",
+      actor: { email: auth.actor.email, displayName: auth.actor.displayName },
+      target: { email: record.email, displayName: record.displayName },
+      nextRole: record.role,
+      occurredAt: record.createdAt,
     });
 
     return jsonOk(record, 201);
