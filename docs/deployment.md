@@ -55,6 +55,7 @@ On the **Dev@ciucanada.ca** account, worker **`ciu-website-production`**:
 | Production branch | `main` |
 | Build command | `npm run cf:build` |
 | Deploy command | `npm run cf:deploy` |
+| Worker name in `wrangler.jsonc` | `ciu-website-production` |
 | Non-production builds | Disabled |
 
 Disconnect the old personal Cloudflare worker from `Fuwad2000/CIU` if you do not want that account deploying too.
