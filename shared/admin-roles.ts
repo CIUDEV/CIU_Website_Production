@@ -104,8 +104,8 @@ export const ADMIN_ROLE_ACCESS: Record<AdminRole, AdminAccessAreaId[]> = {
   ],
 };
 
-export function isAdminRole(value: string): value is AdminRole {
-  return ADMIN_ROLES.includes(value as AdminRole);
+export function isAdminRole(value: unknown): value is AdminRole {
+  return typeof value === "string" && ADMIN_ROLES.includes(value as AdminRole);
 }
 
 export function isCreatableAdminRole(value: string): value is CreatableAdminRole {
