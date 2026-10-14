@@ -7,7 +7,7 @@ export const educationHubContent = {
     heading: "Islamic Learning at CIU",
     intro:
       "CIU supports two complementary education paths — Azhar Canada College programs and CIU-hosted weekend Quran and kids classes at the Canadian Islamic Centre.",
-    imageSrc: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024108/Islamic_geometric_pattern_xws7o5.jpg",
+    imageSrc: "https://res.cloudinary.com/b98znxsw/image/upload/Islamic_geometric_pattern_xws7o5.jpg",
     imageAlt: "Students learning during a CIU education program at the centre",
   },
   cards: [

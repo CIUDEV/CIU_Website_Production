@@ -4,21 +4,22 @@ import Image from "next/image";
 import { useEffect, type ReactNode } from "react";
 import AdminBrandMark from "@frontend/components/admin/AdminBrandMark";
 import AdminThemeToggle from "@frontend/components/admin/AdminThemeToggle";
+import { ciuProgramKidsImages } from "@frontend/content/CiuProgramsContent";
 import { applyAdminTheme, readStoredAdminTheme } from "@frontend/portal/admin-theme";
 
 const heroImage =
-  "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021386/about-community_peqwp7.jpg";
+  "https://res.cloudinary.com/b98znxsw/image/upload/about-community_peqwp7.jpg";
 const mosaicImages = [
   {
-    src: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+    src: "https://res.cloudinary.com/b98znxsw/image/upload/home_hero1_xnh8ra.png",
     alt: "Community gathering at CIU",
   },
   {
-    src: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028168/kids-01_oldgl7.jpg",
+    src: ciuProgramKidsImages.kids01,
     alt: "Children in a CIU class",
   },
   {
-    src: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020760/IMG_4997_plqf9s.jpg",
+    src: "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4997_plqf9s.jpg",
     alt: "Families gathering at CIU",
   },
 ];

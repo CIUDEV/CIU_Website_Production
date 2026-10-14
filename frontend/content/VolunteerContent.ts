@@ -2,10 +2,10 @@ export const volunteerImages = {
   highSchool:
     "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785031540/volunteer-03_m0szvo.jpg",
   volunteersNeeded:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
+    "https://res.cloudinary.com/b98znxsw/image/upload/home_hero4_j6vzhr.png",
   seniorVolunteers:
     "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785031529/volunteer-01_sxhauf.jpg",
-  hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024115/Mosque_dome_interior_with_sunlight_bgmw0n.jpg",
+  hero: "https://res.cloudinary.com/b98znxsw/image/upload/Mosque_dome_interior_with_sunlight_bgmw0n.jpg",
 } as const;
 
 export type VolunteerAgeGroup = "high-school" | "adult" | "senior";
@@ -57,6 +57,7 @@ export const volunteerContent = {
         "General volunteer roles at the centre — outreach, program setup, family events, facility care, and day-to-day community support.",
       imageSrc: volunteerImages.volunteersNeeded,
       imageAlt: "CIU community members serving together",
+      variant: "photo" as const,
     },
     {
       id: "senior-volunteers",
@@ -65,6 +66,7 @@ export const volunteerContent = {
         "Enthusiastic, social seniors who want to give back through community engagement, event support, and sharing wisdom with younger generations.",
       imageSrc: volunteerImages.seniorVolunteers,
       imageAlt: "CIU senior volunteers program poster — serving seniors in unity",
+      variant: "poster" as const,
     },
     {
       id: "program-support",
@@ -73,6 +75,7 @@ export const volunteerContent = {
         "Students completing required volunteer hours through admin support, mentoring, event coordination, and program assistance.",
       imageSrc: volunteerImages.highSchool,
       imageAlt: "High school volunteer hours poster — complete 40 hours with Azhar Canada and CIU",
+      variant: "poster" as const,
     },
   ],
   form: {

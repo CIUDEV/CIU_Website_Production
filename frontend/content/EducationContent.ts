@@ -1,5 +1,5 @@
 export const azharCanadaPosterImage =
-  "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785027340/azhar-02_jwdxt3.jpg";
+  "https://res.cloudinary.com/b98znxsw/image/upload/azhar-02_jwdxt3.jpg";
 
 export type EducationPoster = {
   id: string;

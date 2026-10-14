@@ -36,7 +36,7 @@ export const familyCounselingContent = {
     role: "Islamic Scholar · CIU Family Services",
     bio: "Sheikh Ashraf serves the community through education, spiritual guidance, and family counseling. He has led programs such as Marriage 101 workshops and regularly supports families seeking clarity on marital matters, parenting, disputes, and Islamic rulings related to the home.",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020763/IMG_4183_cbaw7s.jpg",
+      "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4183_cbaw7s.jpg",
     imageAlt: "Sheikh Ashraf leading a Marriage 101 seminar for families at CIU",
   },
   services: {
@@ -159,21 +159,21 @@ export const familyCounselingContent = {
         id: "marriage-101-workshop",
         title: "Marriage 101 Workshop",
         imageSrc:
-          "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020768/IMG_4181_sneyrn.jpg",
+          "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4181_sneyrn.jpg",
         imageAlt: "Sheikh Ashraf presenting the Marriage 101 Financial Independence workshop at CIU",
       },
       {
         id: "marriage-101-celebration",
         title: "Marriage 101 Celebration",
         imageSrc:
-          "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020767/IMG_4221_mskggk.jpg",
+          "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4221_mskggk.jpg",
         imageAlt: "Guests and speakers at a Marriage 101 workshop at the Canadian Islamic Centre",
       },
       {
         id: "family-seminar",
         title: "Family Seminar",
         imageSrc:
-          "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020763/IMG_4183_cbaw7s.jpg",
+          "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4183_cbaw7s.jpg",
         imageAlt: "Sheikh Ashraf leading a Marriage 101 seminar for families at CIU",
       },
     ],

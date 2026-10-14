@@ -42,7 +42,7 @@ export const aboutContent = {
     intro:
       "The Canadian Islamic Union is a registered charity organization serving Muslim families across Canada through education, mentorship, and community support. Our work is guided by faith and dedicated to the benefit of our community.",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024097/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
+      "https://res.cloudinary.com/b98znxsw/image/upload/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
     imageAlt: "Interior view of ornate mosque domes with Islamic architecture",
     image: {
       label: "CIU Community",
@@ -80,7 +80,7 @@ export const aboutContent = {
       label: "Our Story",
       caption: "CIU scholars and community leaders serving together.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024113/Mosque_silhouette_at_sunset_rcvswj.avif",
+        "https://res.cloudinary.com/b98znxsw/image/upload/Mosque_silhouette_at_sunset_rcvswj.avif",
       imageAlt: "Mosque silhouette at sunset",
       imagePosition: "center center",
       imageFit: "cover" as const,
@@ -113,7 +113,7 @@ export const aboutContent = {
       label: "Faith & Service",
       caption: "Spiritual devotion and compassionate service at the heart of our mission.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024118/muslim-woman-prayer-having-worship-praying-with-hands-open-doing-dua-allah-sunset_606562-445_aj3yif.avif",
+        "https://res.cloudinary.com/b98znxsw/image/upload/muslim-woman-prayer-having-worship-praying-with-hands-open-doing-dua-allah-sunset_606562-445_aj3yif.avif",
       imageAlt: "Muslim woman in dua with hands raised at sunset",
       imagePosition: "center center",
       imageFit: "cover" as const,
@@ -165,7 +165,7 @@ export const aboutContent = {
       label: "Our Values",
       caption: "Faith and devotion at the heart of our community.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024101/devout-muslim-man-in-traditional-attire-praying-with-tasbih-beads-on-a-red-mat-inside-a-mosque-photo_woaih2.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/devout-muslim-man-in-traditional-attire-praying-with-tasbih-beads-on-a-red-mat-inside-a-mosque-photo_woaih2.jpg",
       imageAlt: "Muslim man in traditional attire praying inside a mosque",
       imagePosition: "center center",
       imageFit: "cover" as const,
@@ -211,7 +211,7 @@ export const aboutContent = {
       label: "What We Do",
       caption: "Islamic education, youth programs, and community service in action.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020530/home_hero2_mgconp.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero2_mgconp.png",
       imageAlt: "Collage of CIU students, teachers, and community education programs",
       imageFit: "cover" as const,
     },
@@ -236,7 +236,7 @@ export const aboutContent = {
       label: "Azhar Canada College",
       caption: "Al-Azhar accredited programs at the Canadian Islamic Centre.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785025487/azharposter_ytmxei.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/azharposter_ytmxei.png",
       imageAlt: "Azhar Canada College educational programs overview poster",
       imageFit: "cover" as const,
     },
@@ -252,7 +252,7 @@ export const aboutContent = {
       label: "Our Community",
       caption: "Community members gathered at the CIU centre for learning and fellowship.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero1_xnh8ra.png",
       imageAlt: "Community members gathered at tables in the CIU hall for an educational event",
       imagePosition: "center center",
       imageFit: "cover" as const,
@@ -294,7 +294,7 @@ export const aboutContent = {
       label: "Our Impact",
       caption: "Learning rooted in the Qur'an and authentic Islamic education.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024120/Open_Qur_an_on_wooden_stand_zsb2h8.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/Open_Qur_an_on_wooden_stand_zsb2h8.png",
       imageAlt: "Open Qur'an on a wooden stand",
       imageFit: "cover" as const,
     },
@@ -310,7 +310,7 @@ export const aboutContent = {
       label: "Looking Ahead",
       caption: "Muslim families and community members gathered outdoors for prayer and fellowship.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020567/home_hero3_p38cwf.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero3_p38cwf.png",
       imageAlt: "Community members gathered outdoors for prayer in a park setting",
       imagePosition: "center center",
       imageFit: "cover" as const,

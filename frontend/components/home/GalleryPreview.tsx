@@ -20,6 +20,7 @@ const layoutByIndex = [
   "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
   "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
   "min-h-[160px] sm:min-h-[180px] lg:col-span-4 lg:row-span-1 lg:min-h-0",
+  "min-h-[160px] sm:min-h-[180px] lg:col-span-12 lg:row-span-1 lg:min-h-[220px]",
 ];
 
 function GalleryTile({

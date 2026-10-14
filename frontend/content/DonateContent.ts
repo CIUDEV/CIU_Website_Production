@@ -24,7 +24,7 @@ export const donateContent = {
       "Your generosity helps CIU deliver Islamic education, family support, community programs, and charitable outreach across the GTA. Every gift, large or small, strengthens the work we do together as one community.",
     badge: "Registered Charity Organization",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024097/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
+      "https://res.cloudinary.com/b98znxsw/image/upload/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
     imageAlt: "Interior view of domes and arches in the Blue Mosque, Istanbul",
   },
   impact: {

@@ -56,28 +56,31 @@ export default function VolunteerPage() {
               subheading={opportunitiesSection.subheading}
             />
           </MotionSection>
-          <MotionStagger className="mt-12 grid gap-6 lg:grid-cols-3">
-            {opportunities.map((item) => (
-              <MotionItem key={item.id}>
-                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/80 bg-background shadow-premium">
-                  <div className="relative aspect-[3/4] bg-section-warm">
-                    <ZoomableImage
-                      src={item.imageSrc}
-                      alt={item.imageAlt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-contain p-3"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col border-t border-border/70 p-6">
-                    <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted sm:text-base">
-                      {item.description}
-                    </p>
-                  </div>
-                </article>
-              </MotionItem>
-            ))}
+          <MotionStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {opportunities.map((item) => {
+              const isPoster = item.variant === "poster";
+              return (
+                <MotionItem key={item.id}>
+                  <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/80 bg-background shadow-premium">
+                    <div className={`relative aspect-[3/4] ${isPoster ? "bg-white" : "bg-section-warm"}`}>
+                      <ZoomableImage
+                        src={item.imageSrc}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                        className={isPoster ? "object-contain" : "object-cover"}
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col border-t border-border/70 p-6">
+                      <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted sm:text-base">
+                        {item.description}
+                      </p>
+                    </div>
+                  </article>
+                </MotionItem>
+              );
+            })}
           </MotionStagger>
         </SectionContainer>
       </section>

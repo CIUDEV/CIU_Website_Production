@@ -17,7 +17,7 @@ export const prayerTimesPageContent = {
     heading: "Prayer Times",
     intro:
       "View daily, weekly, monthly, and yearly iqamah times for CIU in Mississauga based on the published CIU prayer calendar.",
-    imageSrc: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024097/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
+    imageSrc: "https://res.cloudinary.com/b98znxsw/image/upload/10216818-Interior-view-of-domes-in-Blue-Mosque-Istanbul-Turkey_h0iswz.jpg",
     imageAlt: "Community member performing prayer in the musalla at CIU",
   },
   today: {

@@ -74,13 +74,13 @@ export default function CiuProgramsPage() {
             {posters.map((poster) => (
               <MotionItem key={poster.id}>
                 <article className="overflow-hidden rounded-3xl border border-border/80 bg-surface shadow-premium">
-                  <div className="relative aspect-[3/4] bg-background">
+                  <div className="relative aspect-[4/3] bg-background">
                     <ZoomableImage
                       src={poster.imageSrc}
                       alt={poster.imageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-contain p-3"
+                      className={poster.id === "ciu-quran-class" ? "object-cover" : "object-contain p-3"}
                     />
                   </div>
                   <div className="border-t border-border/70 p-5">
@@ -114,7 +114,7 @@ export default function CiuProgramsPage() {
           <MotionSection>
             <SectionHeading heading={galleryHeading} subheading={gallerySubheading} />
           </MotionSection>
-          <MotionStagger className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+          <MotionStagger className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:gap-6">
             {gallery.map((item) => (
               <MotionItem key={item.id} className="relative aspect-square overflow-hidden rounded-3xl border border-border/80 shadow-premium">
                 <ZoomableImage

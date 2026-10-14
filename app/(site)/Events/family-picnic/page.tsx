@@ -1,9 +1,11 @@
 import ZoomableImage from "@frontend/components/lightbox/ZoomableImage";
 import Link from "next/link";
 import { Clock, MapPin } from "lucide-react";
+import EventPhotoGallery from "@frontend/components/events/EventPhotoGallery";
 import SectionContainer from "@frontend/components/home/SectionContainer";
-import { homeBtnPrimaryClass, homeSectionClass } from "@frontend/components/home/homeUi";
-import { featuredEventContent } from "@frontend/content/EventsContent";
+import SectionHeading from "@frontend/components/home/SectionHeading";
+import { homeBtnOutlineClass, homeBtnPrimaryClass, homeSectionClass } from "@frontend/components/home/homeUi";
+import { featuredEventContent, picnicEventGallery } from "@frontend/content/EventsContent";
 
 export default function FamilyPicnicPage() {
   const { title, dateLabel, time, location, description, chips, primaryButton, imageSrc, imageAlt, note } =
@@ -12,7 +14,7 @@ export default function FamilyPicnicPage() {
   return (
     <div className={`${homeSectionClass} bg-background`}>
       <SectionContainer>
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           <p className="text-xs font-semibold tracking-[0.2em] text-brand uppercase">Special Event</p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">{title}</h1>
 
@@ -27,14 +29,14 @@ export default function FamilyPicnicPage() {
             </p>
           </div>
 
-          <div className="relative mt-8 aspect-[3/4] overflow-hidden rounded-3xl border border-border/80 bg-section-warm shadow-premium-lg sm:aspect-[4/5]">
+          <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-3xl border border-border/80 bg-section-warm shadow-premium-lg">
             <ZoomableImage
               src={imageSrc}
               alt={imageAlt}
               fill
               priority
-              sizes="(max-width: 896px) 100vw, 896px"
-              className="object-contain p-4"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              className="object-cover"
             />
           </div>
 
@@ -53,9 +55,19 @@ export default function FamilyPicnicPage() {
 
           <p className="mt-6 text-sm leading-relaxed text-muted">{note}</p>
 
-          <Link href={primaryButton.href} className={`${homeBtnPrimaryClass} mt-8 inline-flex`}>
-            {primaryButton.label}
-          </Link>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link href={primaryButton.href} className={`${homeBtnPrimaryClass} inline-flex`}>
+              {primaryButton.label}
+            </Link>
+            <Link href="/Events/sport-event" className={`${homeBtnOutlineClass} inline-flex`}>
+              View Sports Photos
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <SectionHeading heading="Picnic Photos" subheading="Moments from CIU family picnic and outdoor gathering." />
+          <EventPhotoGallery items={picnicEventGallery} />
         </div>
       </SectionContainer>
     </div>

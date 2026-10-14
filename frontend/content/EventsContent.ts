@@ -1,4 +1,5 @@
 import { kidsRegistrationHref, quranRegistrationHref } from "@frontend/content/RegistrationLinks";
+import { ciuProgramKidsImages, ciuProgramPosterImages } from "@frontend/content/CiuProgramsContent";
 
 export type EventCategory =
   | "education"
@@ -58,29 +59,90 @@ export type CalendarDemoEvent = {
   time: string;
 };
 
-// TODO: Replace placeholder dates, times, and locations with confirmed event data before publishing.
+const ciuImage = (name: string) =>
+  `https://res.cloudinary.com/b98znxsw/image/upload/${name}`;
+
+export const ciuEventPhotos = {
+  picnicBlanket: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.10.jpg"),
+  parkPicnic: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.10_4.jpg"),
+  volleyball: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.10_3.jpg"),
+  treeFriends: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.10_2.jpg"),
+  treeClimb: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.10_1.jpg"),
+  badminton: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.09.jpg"),
+  kidsSoccer: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.09_3.jpg"),
+  soccerPass: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.09_2.jpg"),
+  soccerPlay: ciuImage("WhatsApp_Image_2026-09-15_at_17.11.09_1.jpg"),
+} as const;
+
+export const picnicEventGallery = [
+  {
+    id: "picnic-blanket",
+    imageSrc: ciuEventPhotos.picnicBlanket,
+    imageAlt: "Youth sitting on picnic blankets sharing food at a CIU family picnic",
+  },
+  {
+    id: "park-picnic",
+    imageSrc: ciuEventPhotos.parkPicnic,
+    imageAlt: "Families gathered on picnic sheets in the park at a CIU community event",
+  },
+  {
+    id: "tree-friends",
+    imageSrc: ciuEventPhotos.treeFriends,
+    imageAlt: "Two children standing together by a tree at a CIU outdoor event",
+  },
+  {
+    id: "tree-climb",
+    imageSrc: ciuEventPhotos.treeClimb,
+    imageAlt: "A child climbing a tree during a CIU family picnic",
+  },
+  {
+    id: "picnic-volleyball",
+    imageSrc: ciuEventPhotos.volleyball,
+    imageAlt: "A student giving a thumbs up during volleyball at a CIU outdoor event",
+  },
+] as const;
+
+export const sportsEventGallery = [
+  {
+    id: "volleyball",
+    imageSrc: ciuEventPhotos.volleyball,
+    imageAlt: "A student giving a thumbs up during volleyball at a CIU sports event",
+  },
+  {
+    id: "badminton",
+    imageSrc: ciuEventPhotos.badminton,
+    imageAlt: "Community members playing badminton at a CIU outdoor sports event",
+  },
+  {
+    id: "kids-soccer",
+    imageSrc: ciuEventPhotos.kidsSoccer,
+    imageAlt: "Youth playing soccer near a volleyball net at a CIU sports event",
+  },
+  {
+    id: "soccer-pass",
+    imageSrc: ciuEventPhotos.soccerPass,
+    imageAlt: "Community members playing soccer at a CIU sports event",
+  },
+  {
+    id: "soccer-play",
+    imageSrc: ciuEventPhotos.soccerPlay,
+    imageAlt: "Community members competing in a soccer game at a CIU sports event",
+  },
+] as const;
 
 export const eventsImages = {
-  hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024108/Islamic_geometric_pattern_xws7o5.jpg",
-  featured:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785030702/WhatsApp_Image_2026-07-25_at_08.02.11_o9kgwz.jpg",
-  quranClass:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Quran_otnkdt.png",
+  hero: ciuEventPhotos.parkPicnic,
+  featured: ciuEventPhotos.picnicBlanket,
+  quranClass: ciuProgramPosterImages.quran,
   partnership:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021386/about-community_peqwp7.jpg",
+    "https://res.cloudinary.com/b98znxsw/image/upload/about-community_peqwp7.jpg",
   pastEvents: {
-    communityWelcome:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
-    youthLeadership:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028168/kids-01_oldgl7.jpg",
-    familyLearningDay:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020761/IMG_4982_ate0hm.jpg",
-    educationWorkshop:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020773/IMG_5023_qukbdo.jpg",
-    volunteerOutreach:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
-    communityHalaqah:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020764/IMG_7460_doasia.jpg",
+    communityWelcome: ciuEventPhotos.parkPicnic,
+    youthLeadership: ciuEventPhotos.volleyball,
+    familyLearningDay: ciuEventPhotos.picnicBlanket,
+    educationWorkshop: ciuEventPhotos.treeFriends,
+    volunteerOutreach: ciuEventPhotos.soccerPlay,
+    communityHalaqah: ciuEventPhotos.badminton,
   },
 } as const;
 
@@ -93,7 +155,7 @@ export const eventsHeroContent = {
   primaryButton: { label: "View Upcoming Events", href: "#upcoming-events" },
   secondaryButton: { label: "Contact the Events Team", href: "/Contact" },
   imageSrc: eventsImages.hero,
-  imageAlt: "Muslim families and community members gathered for fellowship",
+  imageAlt: "Families gathered in the park at a CIU community picnic",
 };
 
 export const eventAnnouncementContent = {
@@ -115,7 +177,7 @@ export const featuredEventContent = {
   secondaryButton: { label: "View Details", href: "/Events/family-picnic" },
   note: "Bring a dish to share for the potluck. More details will be shared closer to the event date.",
   imageSrc: eventsImages.featured,
-  imageAlt: "One Big Family Picnic event poster for August 23 at Chinguacousy Park",
+  imageAlt: "Youth sharing a meal on picnic blankets at the CIU family picnic",
 };
 
 export const eventFilterCategories = [
@@ -186,7 +248,7 @@ export const upcomingEvents: EventItem[] = [
     tags: ["Recurring", "Kids", "Weekends"],
     href: kidsRegistrationHref,
     buttonLabel: "Register Now",
-    image: eventsImages.pastEvents.youthLeadership,
+    image: ciuProgramKidsImages.kids01,
     recurring: true,
   },
 ];
@@ -259,58 +321,71 @@ export const pastEventsContent = {
   subheading:
     "A look back at previous classes, gatherings, workshops, and community initiatives.",
   viewGalleryLabel: "View Event Gallery",
-  viewGalleryHref: "#past-events",
+  viewGalleryHref: "/Events/family-picnic",
   items: [
     {
       id: "past-1",
-      title: "Community Welcome Gathering",
-      dateLabel: "Spring 2026",
-      category: "Community",
-      imageSrc: eventsImages.pastEvents.communityWelcome,
-      imageAlt: "Community members seated during a seminar at CIU",
-    },
-    {
-      id: "past-2",
-      title: "Youth Leadership Session",
-      dateLabel: "Summer 2026",
-      category: "Youth",
-      imageSrc: eventsImages.pastEvents.youthLeadership,
-      imageAlt: "Young student at a CIU community celebration",
-    },
-    {
-      id: "past-3",
-      title: "Family Learning Day",
+      title: "Family Picnic",
       dateLabel: "Summer 2026",
       category: "Family",
       imageSrc: eventsImages.pastEvents.familyLearningDay,
-      imageAlt: "Families gathered in the community centre multipurpose hall",
+      imageAlt: "Youth sitting on picnic blankets sharing food at a CIU family picnic",
+    },
+    {
+      id: "past-2",
+      title: "Community Picnic",
+      dateLabel: "Summer 2026",
+      category: "Community",
+      imageSrc: eventsImages.pastEvents.communityWelcome,
+      imageAlt: "Families gathered on picnic sheets in the park at a CIU community event",
+    },
+    {
+      id: "past-3",
+      title: "Community Volleyball",
+      dateLabel: "Summer 2026",
+      category: "Youth",
+      imageSrc: eventsImages.pastEvents.youthLeadership,
+      imageAlt: "A student giving a thumbs up during volleyball at a CIU sports event",
     },
     {
       id: "past-4",
-      title: "Islamic Education Workshop",
-      dateLabel: "2026",
-      category: "Education",
+      title: "Afternoon at the Park",
+      dateLabel: "Summer 2026",
+      category: "Family",
       imageSrc: eventsImages.pastEvents.educationWorkshop,
-      imageAlt: "Community learning workshop with students taking notes",
+      imageAlt: "Two children standing together by a tree at a CIU outdoor event",
     },
     {
       id: "past-5",
-      title: "Volunteer Outreach Initiative",
-      dateLabel: "2026",
-      category: "Volunteer",
+      title: "Community Soccer",
+      dateLabel: "Summer 2026",
+      category: "Community",
       imageSrc: eventsImages.pastEvents.volunteerOutreach,
-      imageAlt: "Community members serving together at a CIU volunteer outreach event",
+      imageAlt: "Community members competing in a soccer game at a CIU sports event",
     },
     {
       id: "past-6",
-      title: "Community Halaqah Series",
-      dateLabel: "2026",
-      category: "Spiritual",
+      title: "Park Badminton",
+      dateLabel: "Summer 2026",
+      category: "Community",
       imageSrc: eventsImages.pastEvents.communityHalaqah,
-      imageAlt: "Guest speaker addressing the community at a lecture event",
+      imageAlt: "Community members playing badminton at a CIU outdoor sports event",
     },
   ] satisfies PastEventItem[],
 };
+
+export const sportEventContent = {
+  label: "SPORTS & OUTDOORS",
+  heading: "Sport Event",
+  intro:
+    "CIU community sports days bring families together for soccer, volleyball, badminton, and outdoor games at the park.",
+  imageSrc: ciuEventPhotos.volleyball,
+  imageAlt: "A student giving a thumbs up during volleyball at a CIU sports event",
+  galleryHeading: "Sports Day Photos",
+  gallerySubheading: "Soccer, volleyball, badminton, and outdoor games from CIU community sports events.",
+  gallery: sportsEventGallery,
+  picnicLink: { label: "View Family Picnic", href: "/Events/family-picnic" },
+} as const;
 
 export const hostEventContent = {
   id: "host-event",

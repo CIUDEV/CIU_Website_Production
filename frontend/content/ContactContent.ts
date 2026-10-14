@@ -9,7 +9,7 @@ export const contactContent = {
     intro:
       "Reach out with questions about programs, services, membership, events, or community support. Our team will respond as soon as possible.",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024106/Islamic_archway_zmhiqr.jpg",
+      "https://res.cloudinary.com/b98znxsw/image/upload/Islamic_archway_zmhiqr.jpg",
     imageAlt: "Ornate Islamic archway with warm sunlight at the Canadian Islamic Centre",
   },
   address: {

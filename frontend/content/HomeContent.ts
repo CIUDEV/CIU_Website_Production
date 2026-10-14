@@ -1,4 +1,6 @@
 import { imagePlaceholder } from "./imagePlaceholder";
+import { ciuProgramKidsImages } from "./CiuProgramsContent";
+import { ciuEventPhotos } from "./EventsContent";
 import { kidsRegistrationHref, quranRegistrationHref } from "./RegistrationLinks";
 
 /** @deprecated Use imagePlaceholder from ./imagePlaceholder */
@@ -60,7 +62,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: "welcome",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+      "https://res.cloudinary.com/b98znxsw/image/upload/home_hero1_xnh8ra.png",
     imageAlt: "Community members gathered at tables in the CIU hall for an educational event",
     label: "السلام عليكم",
     heading: "Canadian Islamic Union",
@@ -79,7 +81,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: "education",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020530/home_hero2_mgconp.png",
+      "https://res.cloudinary.com/b98znxsw/image/upload/home_hero2_mgconp.png",
     imageAlt: "Collage of CIU students and teachers engaged in Islamic education",
     label: "EDUCATION",
     heading: "Education Rooted in Faith",
@@ -93,7 +95,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: "families",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020567/home_hero3_p38cwf.png",
+      "https://res.cloudinary.com/b98znxsw/image/upload/home_hero3_p38cwf.png",
     imageAlt: "Muslim families and community members gathered outdoors for prayer and fellowship",
     label: "COMMUNITY",
     heading: "Stronger Families. Stronger Communities.",
@@ -107,7 +109,7 @@ export const heroSlides: HeroSlide[] = [
   {
     id: "volunteers",
     imageSrc:
-      "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
+      "https://res.cloudinary.com/b98znxsw/image/upload/home_hero4_j6vzhr.png",
     imageAlt: "CIU volunteers serving the community through donations, education, and outreach",
     label: "VOLUNTEER",
     heading: "Serve. Connect. Make an Impact.",
@@ -122,8 +124,8 @@ export const heroSlides: HeroSlide[] = [
 
 export const aboutPreviewContent = {
   imageSrc:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021386/about-community_peqwp7.jpg",
-  imageAlt: "Diverse community members attending a learning workshop at CIU",
+    "https://res.cloudinary.com/b98znxsw/image/upload/WhatsApp_Image_2026-09-28_at_16.18.49.jpg",
+  imageAlt: "Community members in a CIU class with an instructor at the centre",
   label: "WHO WE ARE",
   heading: "Faith, Knowledge and Community",
   paragraphs: [
@@ -175,7 +177,7 @@ export const featuredProgramsContent = {
       description:
         "Al-Azhar accredited Islamic education for children, youth, adults, and families — online and in person.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785025487/azharposter_ytmxei.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/azharposter_ytmxei.png",
       imageAlt: "Teacher instructing students in an Arabic language and Islamic studies session",
       href: "/Education",
     },
@@ -183,9 +185,8 @@ export const featuredProgramsContent = {
       title: "CIU Kids Program",
       description:
         "Weekend Quran classes and kids programs hosted by CIU at the Canadian Islamic Centre.",
-      imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785021564/Children_learning_Qur_an_x8eosu.webp",
-      imageAlt: "Students studying during a CIU kids program classroom session",
+      imageSrc: ciuProgramKidsImages.kids01,
+      imageAlt: "Two students in the CIU kids program smiling during class",
       href: "/Education/ciu",
     },
     {
@@ -193,7 +194,7 @@ export const featuredProgramsContent = {
       description:
         "Supporting families through education, religious consultation, marriage guidance, and community resources.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero1_xnh8ra.png",
       imageAlt: "Families and children gathered in the CIU community centre",
       href: "/Services/family-counseling",
     },
@@ -202,7 +203,7 @@ export const featuredProgramsContent = {
       description:
         "Bringing people together through charitable activities, outreach, volunteering, and collaborative initiatives.",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero4_j6vzhr.png",
       imageAlt: "Guest speaker addressing the community at a CIU lecture event",
       href: "/Projects",
     },
@@ -288,66 +289,70 @@ export const galleryContent = {
     "A glimpse into our classes, programs, gatherings, volunteer initiatives, and community events.",
   items: [
     {
+      title: "Welcome to the Centre",
+      label: "Our Home",
+      imageSrc:
+        "https://res.cloudinary.com/b98znxsw/image/upload/WhatsApp_Image_2026-09-28_at_21.33.57.jpg",
+      imageAlt: "Welcome wall and reception table at the Canadian Islamic Centre",
+    },
+    {
       title: "Outdoor Prayer & Fellowship",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020567/home_hero3_p38cwf.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero3_p38cwf.png",
       imageAlt: "Muslim families and community members gathered outdoors for prayer and fellowship",
     },
     {
       title: "Family Picnic",
-      imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020760/IMG_4997_plqf9s.jpg",
-      imageAlt:
-        "Families enjoying an outdoor picnic with food and fellowship at CIU",
+      imageSrc: ciuEventPhotos.picnicBlanket,
+      imageAlt: "Youth sitting on picnic blankets sharing food at a CIU family picnic",
     },
     {
       title: "Lakeside Gathering",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020760/IMG_4985_jkx33s.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4985_jkx33s.jpg",
       imageAlt:
         "Members gathered on the grass by the lake for prayer, conversation, and fellowship",
     },
     {
       title: "Centre Gathering",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020442/home_hero1_xnh8ra.png",
+        "https://res.cloudinary.com/b98znxsw/image/upload/home_hero1_xnh8ra.png",
       imageAlt: "Members gathered at tables in the CIU hall for an educational event",
     },
     {
       title: "Marriage 101 Workshop",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020768/IMG_4181_sneyrn.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4181_sneyrn.jpg",
       imageAlt: "Imam Ashraf presenting the Marriage 101 Financial Independence workshop at CIU",
     },
     {
       title: "Marriage 101 Celebration",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020767/IMG_4221_mskggk.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4221_mskggk.jpg",
       imageAlt:
         "Guests and speakers at a Marriage 101 workshop at the Canadian Islamic Centre",
     },
     {
       title: "Family Workshops",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020763/IMG_4183_cbaw7s.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4183_cbaw7s.jpg",
       imageAlt: "Imam Ashraf leading a Marriage 101 seminar for families at CIU",
     },
     {
       title: "Brothers Halaqah",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020764/IMG_7460_doasia.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/IMG_7460_doasia.jpg",
       imageAlt: "Members seated in a circle for an Islamic learning session",
     },
     {
-      title: "Outdoor Programs",
-      imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020761/IMG_4982_ate0hm.jpg",
-      imageAlt: "Members gathered outdoors in a park for a CIU program",
+      title: "Community Sports",
+      imageSrc: ciuEventPhotos.volleyball,
+      imageAlt: "A student giving a thumbs up during volleyball at a CIU sports event",
     },
     {
       title: "Leadership Planning",
       imageSrc:
-        "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020767/8307EB33-C56E-4C8C-9216-0AF04C185E50_no0njo.jpg",
+        "https://res.cloudinary.com/b98znxsw/image/upload/8307EB33-C56E-4C8C-9216-0AF04C185E50_no0njo.jpg",
       imageAlt: "CIU leadership reviewing centre planning documents and site maps",
     },
   ] satisfies GalleryItem[],

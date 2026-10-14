@@ -1,21 +1,26 @@
 import { kidsRegistrationHref, programRegistrationFormUrl, quranRegistrationHref } from "@frontend/content/RegistrationLinks";
 
+const ciuImage = (name: string) =>
+  `https://res.cloudinary.com/b98znxsw/image/upload/${name}`;
+
 export const ciuProgramPosterImages = {
-  quran:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Quran_otnkdt.png",
+  quran: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.11.jpg"),
   weekendClass:
     "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785118836/CIU_Weekend_Class_kody05.png",
 } as const;
 
 export const ciuProgramKidsImages = {
-  kids01: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028168/kids-01_oldgl7.jpg",
-  kids02: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028172/kids-02_j3nuxm.jpg",
-  kids03: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028176/kids-03_vjaaof.jpg",
-  kids04: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785028180/kids-04_oulpfn.jpg",
-  kidsClassroom: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785024103/Islamic_Arabic_calligraphy_ed7v65.webp",
+  kids01: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.11_1.jpg"),
+  kids02: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10.jpg"),
+  kids03: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_5.jpg"),
+  kids04: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_4.jpg"),
+  kids05: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_3.jpg"),
+  kids06: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_2.jpg"),
+  kids07: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_1.jpg"),
+  kidsClassroom: ciuImage("WhatsApp_Image_2026-09-15_at_17.10.10_2.jpg"),
   /** Community classroom session — program location section */
   classroom:
-    "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020769/AA684D23-C680-4CF2-9EC4-6EE9C152005C_vhdyyd.jpg",
+    "https://res.cloudinary.com/b98znxsw/image/upload/AA684D23-C680-4CF2-9EC4-6EE9C152005C_vhdyyd.jpg",
 } as const;
 
 export type CiuProgramPoster = {
@@ -34,7 +39,7 @@ export const ciuProgramsContent = {
     intro:
       "Weekend Quran classes and kids programs at the Canadian Islamic Centre — practical Islamic learning for children and families in a welcoming community setting.",
     imageSrc: ciuProgramKidsImages.kidsClassroom,
-    imageAlt: "Islamic Arabic calligraphy stencils for Muhammad and Allah on a wooden surface",
+    imageAlt: "Students gathered for a CIU class at the Canadian Islamic Centre",
   },
   overview: {
     label: "About CIU Programs",
@@ -50,7 +55,7 @@ export const ciuProgramsContent = {
       "Welcoming environment for families across the GTA",
     ],
     imageSrc: ciuProgramKidsImages.kids01,
-    imageAlt: "Students studying at tables during a CIU kids program classroom session",
+    imageAlt: "Two students in the CIU kids program smiling during class",
   },
   postersHeading: "Registration & Program Details",
   postersSubheading:
@@ -60,7 +65,7 @@ export const ciuProgramsContent = {
       id: "ciu-quran-class",
       title: "CIU Quran Class",
       imageSrc: ciuProgramPosterImages.quran,
-      imageAlt: "CIU Quran Class poster — Tuesday and Thursday evenings",
+      imageAlt: "Students studying Quran together in the CIU classroom",
       registrationHref: quranRegistrationHref,
       buttonLabel: "Register Now",
     },
@@ -80,25 +85,43 @@ export const ciuProgramsContent = {
       id: "kids-01",
       title: "Classroom Session",
       imageSrc: ciuProgramKidsImages.kids01,
-      imageAlt: "Students studying at tables during a CIU kids program classroom session",
+      imageAlt: "Two students in the CIU kids program smiling during class",
     },
     {
       id: "kids-02",
-      title: "Learning Activity",
+      title: "Learning Together",
       imageSrc: ciuProgramKidsImages.kids02,
-      imageAlt: "Children engaged in learning during a CIU kids program session",
+      imageAlt: "Two boys seated together during a CIU kids program session",
     },
     {
       id: "kids-03",
-      title: "Program Gathering",
+      title: "Weekend Class",
       imageSrc: ciuProgramKidsImages.kids03,
-      imageAlt: "Young students gathered during a CIU kids program at the centre",
+      imageAlt: "Boys at classroom tables during a CIU kids program",
     },
     {
       id: "kids-04",
-      title: "Student Portrait",
+      title: "Art Activity",
       imageSrc: ciuProgramKidsImages.kids04,
-      imageAlt: "Student portrait from the CIU kids program",
+      imageAlt: "Two girls coloring during a CIU kids program activity",
+    },
+    {
+      id: "kids-05",
+      title: "Table Time",
+      imageSrc: ciuProgramKidsImages.kids05,
+      imageAlt: "Two students talking together at a CIU kids program table",
+    },
+    {
+      id: "kids-06",
+      title: "Classroom Gathering",
+      imageSrc: ciuProgramKidsImages.kids06,
+      imageAlt: "Students and teacher gathered around tables in a CIU class",
+    },
+    {
+      id: "kids-07",
+      title: "Classmates",
+      imageSrc: ciuProgramKidsImages.kids07,
+      imageAlt: "Students smiling together during a CIU kids program class",
     },
   ],
   location: {

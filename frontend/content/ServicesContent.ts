@@ -37,9 +37,9 @@ export type ProcessStep = {
 
 // TODO: Replace placeholder image paths with approved CIU community photography (.jpg) when available.
 export const servicesImages = {
-  hero: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785030221/808x539_cmsv2_2883e9de-478d-5d08-a5a5-3d972b40d482-8858204_swh0kh.webp",
-  communitySupport: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020581/home_hero4_j6vzhr.png",
-  familyServices: "https://res.cloudinary.com/dpcnwntmv/image/upload/v1785020761/IMG_4982_ate0hm.jpg",
+  hero: "https://res.cloudinary.com/b98znxsw/image/upload/808x539_cmsv2_2883e9de-478d-5d08-a5a5-3d972b40d482-8858204_swh0kh.webp",
+  communitySupport: "https://res.cloudinary.com/b98znxsw/image/upload/home_hero4_j6vzhr.png",
+  familyServices: "https://res.cloudinary.com/b98znxsw/image/upload/IMG_4982_ate0hm.jpg",
   alAzharAcademy: azharCanadaPosterImage,
 } as const;
 

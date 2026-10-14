@@ -28,6 +28,8 @@ export const navLinks: NavItem[] = [
     label: "Events",
     children: [
       { href: "/Events#upcoming-events", label: "Upcoming Events" },
+      { href: "/Events/family-picnic", label: "Family Picnic" },
+      { href: "/Events/sport-event", label: "Sport Event" },
       { href: "/Events#recurring-programs", label: "Recurring Programs" },
       { href: "/Events#event-calendar", label: "Event Calendar" },
       { href: "/Events#past-events", label: "Past Events" },
