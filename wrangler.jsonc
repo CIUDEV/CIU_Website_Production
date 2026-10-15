@@ -21,6 +21,7 @@
     "ENTRA_API_SCOPE": "api://eafee8b7-5c7d-403e-a893-6228ec4e48c5/access_as_user",
     "ENTRA_PORTAL_CLIENT_ID": "93d5cc19-6d13-47e8-92d1-3f109358b692",
     "ENTRA_TENANT_ID": "ea18b4bf-5a29-4855-bb3e-71dba5095a75",
+    "SQL_API_ORIGIN": "https://ciu-beta.vercel.app",
     "SQL_DATABASE": "ciu-db-prod",
     "SQL_ENCRYPT": "true",
     "SQL_PORT": "1433",

@@ -34,6 +34,8 @@ That will:
 
 CIU Cloudflare (`ciu-website-production`) builds from **CIUDEV `main`** and goes live.
 
+Azure SQL cannot open a TDS/TCP session from a Cloudflare Worker. That is why `/api/announcements` and the staff portal fail on `www.ciucanada.ca` even when env vars and the SQL firewall are correct. The Cloudflare build sets `SQL_API_ORIGIN=https://ciu-beta.vercel.app` so `/api/*` is served by the Vercel Node app, which already talks to Azure SQL. Do not set `SQL_API_ORIGIN` on Vercel.
+
 Manual equivalent:
 
 ```bash

@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf:build": "npm rebuild esbuild sharp unrs-resolver workerd && opennextjs-cloudflare build",
+    "preview": "SQL_API_ORIGIN=https://ciu-beta.vercel.app opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "SQL_API_ORIGIN=https://ciu-beta.vercel.app opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:build": "SQL_API_ORIGIN=https://ciu-beta.vercel.app npm rebuild esbuild sharp unrs-resolver workerd && SQL_API_ORIGIN=https://ciu-beta.vercel.app opennextjs-cloudflare build",
     "cf:deploy": "opennextjs-cloudflare deploy",
     "release": "bash scripts/release-to-ciu.sh",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"

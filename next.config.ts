@@ -1,15 +1,21 @@
 import type { NextConfig } from "next";
+import { resolveSqlApiOrigin, sqlApiRewrites } from "./backend/http/sql-api-origin";
+
+const sqlApiOrigin = resolveSqlApiOrigin();
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["mssql", "@azure/identity", "@azure/communication-email", "@azure/storage-blob"],
   transpilePackages: ["@azure/msal-browser", "@azure/msal-react"],
   async rewrites() {
-    return [
-      {
-        source: "/favicon.ico",
-        destination: "/icon",
-      },
-    ];
+    return {
+      beforeFiles: [
+        ...sqlApiRewrites(sqlApiOrigin),
+        {
+          source: "/favicon.ico",
+          destination: "/icon",
+        },
+      ],
+    };
   },
   images: {
     loader: "custom",
