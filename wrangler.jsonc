@@ -11,6 +11,21 @@
   "observability": {
     "enabled": true
   },
+  "vars": {
+    "AZURE_CLIENT_ID": "f1a9767b-6482-4cbe-a987-77ad1d6cf05f",
+    "AZURE_COMMUNICATION_SERVICES_ENDPOINT": "https://ciu-acs-prod.canada.communication.azure.com",
+    "AZURE_EMAIL_SENDER": "donotreply@ciucanada.ca",
+    "AZURE_STORAGE_BLOB_ENDPOINT": "https://ciublobprod.blob.core.windows.net",
+    "AZURE_TENANT_ID": "ea18b4bf-5a29-4855-bb3e-71dba5095a75",
+    "ENTRA_API_CLIENT_ID": "eafee8b7-5c7d-403e-a893-6228ec4e48c5",
+    "ENTRA_API_SCOPE": "api://eafee8b7-5c7d-403e-a893-6228ec4e48c5/access_as_user",
+    "ENTRA_PORTAL_CLIENT_ID": "93d5cc19-6d13-47e8-92d1-3f109358b692",
+    "ENTRA_TENANT_ID": "ea18b4bf-5a29-4855-bb3e-71dba5095a75",
+    "SQL_DATABASE": "ciu-db-prod",
+    "SQL_ENCRYPT": "true",
+    "SQL_PORT": "1433",
+    "SQL_SERVER": "ciu-sql-prod.database.windows.net"
+  },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
