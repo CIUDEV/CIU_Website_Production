@@ -1,5 +1,7 @@
-import { DefaultAzureCredential } from "@azure/identity";
+import type { TokenCredential } from "@azure/identity";
 import sql from "mssql";
+import { applyCloudflareRuntimeEnv } from "@backend/cloudflare-runtime-env";
+import { createSqlCredential } from "@backend/db/sql-credential";
 import { isSqlConnectivityError } from "@backend/db/sql-unavailable";
 import { sqlDatabase, sqlEncrypt, sqlPort, sqlServer } from "@backend/env";
 
@@ -9,7 +11,7 @@ const CONNECT_TIMEOUT_MS = 30_000;
 const CONNECT_ATTEMPTS = 3;
 
 type GlobalSql = {
-  ciuSqlCredential?: DefaultAzureCredential;
+  ciuSqlCredential?: TokenCredential;
   ciuSqlPool?: sql.ConnectionPool;
   ciuSqlConnecting?: Promise<sql.ConnectionPool>;
   ciuSqlTokenExpiresOn?: number;
@@ -18,11 +20,13 @@ type GlobalSql = {
 const globalSql = globalThis as typeof globalThis & GlobalSql;
 
 function credential() {
-  globalSql.ciuSqlCredential ??= new DefaultAzureCredential();
+  globalSql.ciuSqlCredential ??= createSqlCredential();
   return globalSql.ciuSqlCredential;
 }
 
 async function azureSqlAccessToken() {
+  await applyCloudflareRuntimeEnv();
+  globalSql.ciuSqlCredential = createSqlCredential();
   const token = await credential().getToken(AZURE_SQL_SCOPE);
   if (!token?.token) {
     throw new Error(

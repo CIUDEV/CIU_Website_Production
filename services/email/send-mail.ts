@@ -1,5 +1,7 @@
 import { EmailClient, type EmailMessage } from "@azure/communication-email";
-import { DefaultAzureCredential } from "@azure/identity";
+import type { TokenCredential } from "@azure/identity";
+import { applyCloudflareRuntimeEnv } from "@backend/cloudflare-runtime-env";
+import { createSqlCredential } from "@backend/db/sql-credential";
 import { acsEndpoint, emailSender } from "@backend/env";
 import { EmailConfigError, EmailValidationError } from "@email/errors";
 import { attachmentsForHtml, type InlineEmailAttachment } from "@email/inline-logo";
@@ -40,7 +42,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type GlobalEmail = {
   ciuEmailClient?: EmailClient;
-  ciuEmailCredential?: DefaultAzureCredential;
+  ciuEmailCredential?: TokenCredential;
   ciuEmailTransport?: EmailTransport;
 };
 
@@ -86,7 +88,7 @@ function normalizeRecipients(to: string | string[]) {
 }
 
 function getAcsClient(endpoint: string) {
-  globalEmail.ciuEmailCredential ??= new DefaultAzureCredential();
+  globalEmail.ciuEmailCredential ??= createSqlCredential();
   globalEmail.ciuEmailClient ??= new EmailClient(endpoint, globalEmail.ciuEmailCredential);
   return globalEmail.ciuEmailClient;
 }
@@ -99,6 +101,7 @@ async function sendWithAcs(message: {
   text?: string;
   attachments?: InlineEmailAttachment[];
 }): Promise<SendMailResult> {
+  await applyCloudflareRuntimeEnv();
   const { endpoint } = requireConfig();
   const content =
     message.html && message.text

@@ -1,3 +1,4 @@
+import { applyCloudflareRuntimeEnv } from "@backend/cloudflare-runtime-env";
 import { actorCapabilities } from "@shared/admin-roles";
 import type { AdminMe } from "@shared/admin-me";
 import { authorizeStoredAdmin } from "@backend/auth/admin-policy";
@@ -47,6 +48,7 @@ export function toAdminMe(actor: AdminActor): AdminMe {
 
 async function authenticateAdminRequestUncached(request: Request): Promise<AuthResult> {
   try {
+    await applyCloudflareRuntimeEnv();
     const identity = await identityFromRequest(request);
     if (!isSqlConfigured()) {
       return { error: jsonError("Azure SQL is not configured. Set SQL_SERVER and SQL_DATABASE.", 503) };

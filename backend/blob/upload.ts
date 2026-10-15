@@ -1,5 +1,7 @@
 import { BlobServiceClient } from "@azure/storage-blob";
-import { DefaultAzureCredential } from "@azure/identity";
+import type { TokenCredential } from "@azure/identity";
+import { applyCloudflareRuntimeEnv } from "@backend/cloudflare-runtime-env";
+import { createSqlCredential } from "@backend/db/sql-credential";
 import { blobStorageEndpoint, isBlobStorageConfigured } from "@backend/env";
 import { BlobConfigError } from "@backend/blob/errors";
 import {
@@ -26,7 +28,7 @@ export type BlobUploader = (input: {
 export type BlobDownloader = (url: string) => Promise<PosterImageInput | undefined>;
 
 type GlobalBlob = {
-  ciuBlobCredential?: DefaultAzureCredential;
+  ciuBlobCredential?: TokenCredential;
   ciuBlobClient?: BlobServiceClient;
   ciuBlobUploader?: BlobUploader;
   ciuBlobDownloader?: BlobDownloader;
@@ -62,7 +64,7 @@ function requireEndpoint() {
 
 export function getBlobServiceClient() {
   const endpoint = requireEndpoint();
-  globalBlob.ciuBlobCredential ??= new DefaultAzureCredential();
+  globalBlob.ciuBlobCredential ??= createSqlCredential();
   globalBlob.ciuBlobClient ??= new BlobServiceClient(endpoint, globalBlob.ciuBlobCredential);
   return { endpoint, service: globalBlob.ciuBlobClient };
 }
@@ -73,6 +75,7 @@ async function uploadWithAzure(input: {
   contentType: string;
   bytes: Uint8Array;
 }) {
+  await applyCloudflareRuntimeEnv();
   const { endpoint, service } = getBlobServiceClient();
   const container = service.getContainerClient(input.folder);
   await container.createIfNotExists();
@@ -117,6 +120,7 @@ export async function posterFromStoredImage(url?: string): Promise<PosterImageIn
   if (globalBlob.ciuBlobDownloader) {
     return globalBlob.ciuBlobDownloader(image);
   }
+  await applyCloudflareRuntimeEnv();
   const location = blobLocationFromUrl(image);
   if (!location || !isBlobStorageConfigured()) return undefined;
   try {
